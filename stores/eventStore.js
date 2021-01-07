@@ -24,6 +24,8 @@ class EventStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  //fetch events
 } //end class
 
 const eventStore = new EventStore();
