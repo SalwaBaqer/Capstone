@@ -4,12 +4,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 //components
 import List from "./components/events/List";
+import AddNewEventScreen from "./screens/AddNewEventScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>my event</Text>
       <List />
+      <AddNewEventScreen />
       <StatusBar style="auto" />
     </View>
   );

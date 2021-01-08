@@ -4,7 +4,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //react-native
-import { Text, View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Title } from "react-native-paper";
 
 //styles
