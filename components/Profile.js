@@ -1,9 +1,10 @@
-import React from "react";
-
 //Libraries
+import React from "react";
 import { observer } from "mobx-react";
-import { Spinner, Text } from "native-base";
+import { Spinner } from "native-base";
 
+//Components
+import EditProfileButton from "./buttons/EditProfileButton";
 //Stores
 import authStore from "../stores/authStore";
 import profileStore from "../stores/profileStore";
@@ -17,16 +18,18 @@ import {
 } from "../styles";
 
 const Profile = () => {
-  if (!authStore.user) return <Spinner />;
   profileStore.getProfileById(authStore.user.id);
+
   if (profileStore.loading) return <Spinner />;
+
+  const myProfile = profileStore.profiles;
+
   return (
     <ProfileWrapper>
-      <ProfileImage source={{ uri: profileStore.profile.image }} />
-      <ProfileUsernameStyled>
-        {profileStore.profile.username}
-      </ProfileUsernameStyled>
-      <ProfileBio>{profileStore.profile.bio}</ProfileBio>
+      <EditProfileButton />
+      <ProfileImage source={{ uri: myProfile.image }} />
+      <ProfileUsernameStyled>{myProfile.username}</ProfileUsernameStyled>
+      <ProfileBio>{myProfile.bio}</ProfileBio>
     </ProfileWrapper>
   );
 };

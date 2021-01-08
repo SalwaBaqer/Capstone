@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Icon, Button } from "native-base";
 
 export const theme = {
   Maincolor: "#FF5A5F", // redish main font color
@@ -38,6 +39,13 @@ export const ProfileBio = styled.Text`
   margin-right: auto;
   margin-left: auto;
   margin-top: 10px;
+`;
+
+//Edit Button
+export const EditProfileButtonStyled = styled(Icon)`
+  color: ${({ theme }) => theme.blueish};
+  padding-left: 20px;
+  margin-bottom: 10px;
 `;
 
 //Signin && Signup Styling

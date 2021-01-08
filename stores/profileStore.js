@@ -1,12 +1,13 @@
 //Libraries
 import { makeAutoObservable } from "mobx";
+import { runInAction } from "mobx";
 
 //Stores
 import instance from "./instance";
 
 class ProfileStore {
+  userProfile = null;
   profiles = [];
-  profile = null;
   loading = true;
 
   constructor() {
@@ -16,10 +17,25 @@ class ProfileStore {
   getProfileById = async (userId) => {
     try {
       const response = await instance.get(`/profiles/${userId}`);
-      this.profile = response.data;
-      this.loading = false;
+      runInAction(() => {
+        this.profiles = response.data;
+        this.loading = false;
+      });
     } catch (error) {
       console.error("Profilestore -> fetchProfiles -> error", error);
+    }
+  };
+
+  updateProfile = async (updatedProfile) => {
+    try {
+      const formData = new FormData();
+      for (const key in updatedProfile)
+        formData.append(key, updatedProfile[key]);
+      await instance.put("/profiles", formData);
+      const profile = this.userProfile;
+      for (const key in profile) profile[key] = updatedProfile[key];
+    } catch (error) {
+      console.error("ProfileStore -> updateProfile -> error", error);
     }
   };
 }
