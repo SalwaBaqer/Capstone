@@ -26,6 +26,17 @@ class EventStore {
   }
 
   //fetch events
+
+  //add event
+
+  //add trip
+  addEvent = async (newEvent) => {
+    try {
+      this.trips.push(newEvent);
+    } catch (error) {
+      console.error("eventStore --> addevent", error);
+    }
+  }; //end add trip
 } //end class
 
 const eventStore = new EventStore();
