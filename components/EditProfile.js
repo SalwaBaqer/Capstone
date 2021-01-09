@@ -17,12 +17,13 @@ import {
   AuthButtonText,
 } from "../styles";
 
-const EditProfile = ({ navigation }) => {
+const EditProfile = ({ navigation, route }) => {
   const [profile, setProfile] = useState({
-    image: "",
-    username: "",
-    bio: "",
+    image: route.params?.oldProfile.image,
+    username: route.params?.oldProfile.username,
+    bio: route.params?.oldProfile.bio,
   });
+  console.log(route.params);
 
   const handleSubmit = async () => {
     await profileStore.updateProfile(profile);
@@ -71,25 +72,17 @@ const EditProfile = ({ navigation }) => {
     <AuthContainer>
       <AuthTitle>Edit Profile</AuthTitle>
       <AuthTextInput
-        onChangeText={(username) => setProfile({ ...profile, username })}
-        placeholder="Username"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
-      />
-      <AuthTextInput
         onChangeText={(bio) => setProfile({ ...profile, bio })}
-        placeholder="Bio"
+        value={profile.bio}
         placeholderTextColor="#A6AEC1"
         autoCapitalize="none"
       />
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {profile.image ? (
+      {profile.image && (
         <Image
           source={{ uri: profile.image.uri }}
           style={{ width: 200, height: 200 }}
         />
-      ) : (
-        <></>
       )}
       <AuthButton onPress={handleSubmit}>
         <AuthButtonText>Update profile</AuthButtonText>
