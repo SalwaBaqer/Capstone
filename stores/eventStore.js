@@ -52,7 +52,7 @@ class EventStore {
   //delete event no integration
   deleteEvent = async (eventId) => {
     try {
-      const response = await instance.delete(`/events/${eventId}`); //check with moh the route in the be recieve an event why??
+      // const response = await instance.delete(`/events/${eventId}`); //check with moh the route in the be recieve an event why??
       this.events = this.events.filter((event) => event.id != eventId);
     } catch (error) {
       console.error("eventStore --> deleteevent", error);
