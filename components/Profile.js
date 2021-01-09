@@ -5,6 +5,7 @@ import { Spinner } from "native-base";
 
 //Components
 import EditProfileButton from "./buttons/EditProfileButton";
+
 //Stores
 import authStore from "../stores/authStore";
 import profileStore from "../stores/profileStore";
@@ -28,7 +29,7 @@ const Profile = () => {
     <ProfileWrapper>
       <EditProfileButton oldProfile={myProfile} />
       <ProfileImage source={{ uri: myProfile.image }} />
-      <ProfileUsernameStyled>{myProfile.username}</ProfileUsernameStyled>
+      <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
       <ProfileBio>{myProfile.bio}</ProfileBio>
     </ProfileWrapper>
   );
