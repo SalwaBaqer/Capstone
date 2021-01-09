@@ -7,6 +7,11 @@ export const InputField = styled.TextInput`
   border-bottom-width: 1;
 `;
 
+export const LabelStyled = styled.Text`
+  margin-top: 2%;
+  margin-bottom: 1%;
+`;
+
 export const ButtonStyled = styled.TouchableOpacity`
   margin-top: 2%;
   margin-right: auto;
@@ -20,6 +25,5 @@ export const ButtonStyled = styled.TouchableOpacity`
 `;
 
 export const TextButtonStyled = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
 `;

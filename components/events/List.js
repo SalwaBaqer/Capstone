@@ -19,13 +19,7 @@ const List = () => {
   const mylist = eventStore.events.map((event) => <Item event={event} />);
   console.log(mylist);
 
-  return (
-    <>
-      {/* <AddButtonStyled type="Ionicons" name="add-circle-outline" /> */}
-      <Title onPress={() => handleAdd}>Add</Title>
-      {mylist}
-    </>
-  );
+  return <>{mylist}</>;
 };
 
 export default observer(List);
