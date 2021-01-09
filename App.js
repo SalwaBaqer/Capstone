@@ -1,14 +1,22 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
-//styles
-import { Container } from "./styles";
-//components
-import List from "./components/events/List";
+//Components
+import RootNavigator from "./components/navigation";
+
+//Styles
+import { ThemeProvider } from "styled-components";
+import { theme, Container } from "./styles";
 
 export default function App() {
   return (
     <Container>
-      <List />
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </ThemeProvider>
+      <StatusBar style="auto" />
     </Container>
   );
 }
