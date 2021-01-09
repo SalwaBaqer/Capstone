@@ -92,4 +92,10 @@ export const AuthButtonText = styled.Text`
 export const AuthOther = styled.Text`
   color: ${({ theme }) => theme.blackish};
   margin-top: 15px;
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
 `;
