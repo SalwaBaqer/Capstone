@@ -1,53 +1,101 @@
 //react
-import { Label, View } from "native-base";
+import { View } from "native-base";
 import React, { useState } from "react";
 
 //react-native
-import { Text, Picker } from "react-native";
+import { Switch } from "react-native";
+
+//dropdown menu
+import DropDownPicker from "react-native-dropdown-picker";
 
 //stores
 import eventStore from "../stores/eventStore";
 
 //styles
-import { InputField, ButtonStyled, TextButtonStyled } from "./styles";
+import {
+  InputField,
+  ButtonStyled,
+  TextButtonStyled,
+  LabelStyled,
+} from "./styles";
 
 const AddNewEventScreen = () => {
+  //event state
   const [event, setEvent] = useState({
-    name: "",
     label: "",
     date: "",
     image: "",
-    IsPrivate: "true",
+    name: "",
+    IsPrivate: true,
     tag: "",
   });
+
+  //toggle switch state
+  const [isEnabled, setIsEnabled] = useState(true);
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    setEvent({ ...event, IsPrivate: isEnabled });
+  };
+
+  //handle add
+  const handleAdd = () => {
+    eventStore.addEvent(event);
+  };
   return (
     <View>
-      <Text>Add new Event:</Text>
-      <Label>Title</Label>
-      <InputField autoCapitalize="none" multiline="true" />
+      <LabelStyled>Private</LabelStyled>
+      <Switch
+        trackColor={{ false: "#767577", true: "#3492eb" }}
+        thumbColor={event.IsPrivate ? "#f0f7fc" : "#f4f3f4"}
+        value={event.IsPrivate}
+        onValueChange={toggleSwitch}
+      />
 
-      <Label>Label</Label>
-      <View>
-        <Picker
-          selectedValue={event.label}
-          style={{ height: 50, width: 150 }}
-          onValueChange={(itemValue) => setEvent(itemValue)}
-        >
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker>
-      </View>
+      <LabelStyled>Title</LabelStyled>
+      <InputField
+        autoCapitalize="none"
+        multiline="true"
+        onChangeText={(value) => setEvent({ ...event, name: value })}
+      />
 
-      {/* <Label>Date</Label>
-      <InputField autoCapitalize="none" multiline="true" />
+      <LabelStyled>Label</LabelStyled>
+      <DropDownPicker
+        items={[
+          { label: "Exercise", value: "Exercise" },
+          { label: "Fun", value: "Fun" },
+          { label: "Food", value: "Food" },
+          { label: "Social", value: "Social" },
+          { label: "Madetation", value: "Madetation" },
+          { label: "Therapy", value: "Therapy" },
+          { label: "Travel", value: "Travel" },
+          { label: "Technology", value: "Technology" },
+          { label: "Work", value: "Work" },
+        ]}
+        defaultValue="Work"
+        containerStyle={{ height: 40 }}
+        onChangeItem={(item) => setEvent({ ...event, label: item.value })}
+      />
 
-      <Label>Tag</Label>
-      <InputField autoCapitalize="none" multiline="true" />
+      <LabelStyled>Date</LabelStyled>
+      <InputField
+        autoCapitalize="none"
+        onChangeText={(value) => setEvent({ ...event, date: value })}
+      />
 
-      <Label>Private</Label>
-      <InputField autoCapitalize="none" multiline="true" /> */}
+      <LabelStyled>Tag</LabelStyled>
+      <InputField
+        autoCapitalize="none"
+        onChangeText={(value) => setEvent({ ...event, tag: value })}
+      />
+
+      <LabelStyled>Image</LabelStyled>
+      <InputField
+        autoCapitalize="none"
+        onChangeText={(value) => setEvent({ ...event, image: value })}
+      />
+
       <ButtonStyled>
-        <TextButtonStyled>Add</TextButtonStyled>
+        <TextButtonStyled onPress={handleAdd}>Add</TextButtonStyled>
       </ButtonStyled>
     </View>
   );
