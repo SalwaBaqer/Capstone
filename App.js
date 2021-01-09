@@ -16,7 +16,6 @@ export default function App() {
           <RootNavigator />
         </NavigationContainer>
       </ThemeProvider>
-      <StatusBar style="auto" />
     </Container>
   );
 }

@@ -26,7 +26,7 @@ const Profile = () => {
 
   return (
     <ProfileWrapper>
-      <EditProfileButton />
+      <EditProfileButton oldProfile={myProfile} />
       <ProfileImage source={{ uri: myProfile.image }} />
       <ProfileUsernameStyled>{myProfile.username}</ProfileUsernameStyled>
       <ProfileBio>{myProfile.bio}</ProfileBio>
