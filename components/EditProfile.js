@@ -85,7 +85,7 @@ const EditProfile = ({ navigation, route }) => {
         />
       )}
       <AuthButton onPress={handleSubmit}>
-        <AuthButtonText>Update profile</AuthButtonText>
+        <AuthButtonText>Done</AuthButtonText>
       </AuthButton>
     </AuthContainer>
   );

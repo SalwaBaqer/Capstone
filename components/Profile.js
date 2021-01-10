@@ -5,6 +5,7 @@ import { Spinner } from "native-base";
 
 //Components
 import EditProfileButton from "./buttons/EditProfileButton";
+import MySchedule from "./MySchedule";
 
 //Stores
 import authStore from "../stores/authStore";
@@ -26,12 +27,15 @@ const Profile = () => {
   const myProfile = profileStore.profiles;
 
   return (
-    <ProfileWrapper>
-      <EditProfileButton oldProfile={myProfile} />
-      <ProfileImage source={{ uri: myProfile.image }} />
-      <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
-      <ProfileBio>{myProfile.bio}</ProfileBio>
-    </ProfileWrapper>
+    <>
+      <ProfileWrapper style={{ marginBottom: 20 }}>
+        <EditProfileButton oldProfile={myProfile} />
+        <ProfileImage source={{ uri: myProfile.image }} />
+        <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
+        <ProfileBio>{myProfile.bio}</ProfileBio>
+      </ProfileWrapper>
+      <MySchedule />
+    </>
   );
 };
 

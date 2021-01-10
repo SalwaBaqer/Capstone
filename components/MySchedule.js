@@ -5,6 +5,9 @@ import { Agenda } from "react-native-calendars";
 import { Card, Avatar } from "react-native-paper";
 import { Text } from "native-base";
 
+//Stores
+import authStore from "../stores/authStore";
+
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split("T")[0];
@@ -50,7 +53,7 @@ const MySchedule = () => {
               }}
             >
               <Text>{item.name}</Text>
-              <Avatar.Text label="J" />
+              <Avatar.Image source={{ uri: authStore.user.image }} />
             </View>
           </Card.Content>
         </Card>
@@ -63,7 +66,10 @@ const MySchedule = () => {
       <Agenda
         items={items}
         loadItemsForMonth={loadItems}
-        selected={"2017-05-16"}
+        pastScrollRange={1}
+        futureScrollRange={13}
+        minDate={"2021-01-01"}
+        maxDate={"2021-12-31"}
         renderItem={renderItem}
       />
     </View>
