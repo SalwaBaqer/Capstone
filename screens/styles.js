@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
 
 export const InputField = styled.TextInput`
-  height: 50;
+  height: 40;
   width: 400;
   border-color: gray;
   border-bottom-width: 1;
+  margin-bottom: 10;
 `;
 
 export const LabelStyled = styled.Text`

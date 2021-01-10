@@ -16,8 +16,8 @@ export const ProfileWrapper = styled.View`
 `;
 
 export const ProfileImage = styled.Image`
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   margin-right: auto;
   margin-left: auto;
   border-radius: 100px;
