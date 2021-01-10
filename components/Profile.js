@@ -6,6 +6,7 @@ import { Spinner } from "native-base";
 //Components
 import EditProfileButton from "./buttons/EditProfileButton";
 import MySchedule from "./MySchedule";
+import List from "./events/List";
 
 //Stores
 import authStore from "../stores/authStore";
@@ -34,7 +35,8 @@ const Profile = () => {
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
         <ProfileBio>{myProfile.bio}</ProfileBio>
       </ProfileWrapper>
-      <MySchedule />
+      {/* <MySchedule /> */}
+      <List />
     </>
   );
 };

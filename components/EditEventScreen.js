@@ -19,15 +19,23 @@ import {
   LabelStyled,
 } from "./styles";
 
-const EditEventScreen = (event) => {
+const EditEventScreen = ({ navigation, route }) => {
   //event state
+  const oldevent = {
+    label: "event.label",
+    date: "event.date",
+    image: "event.image",
+    name: "event.name",
+    IsPrivate: true,
+    tag: "event.tag",
+  };
   const [event, setEvent] = useState({
-    label: event.label,
-    date: event.date,
-    image: event.image,
-    name: event.name,
-    IsPrivate: event.IsPrivate,
-    tag: event.tag,
+    label: oldevent.label,
+    date: oldevent.date,
+    image: oldevent.image,
+    name: oldevent.name,
+    IsPrivate: oldevent.IsPrivate,
+    tag: oldevent.tag,
   });
 
   //toggle switch state
@@ -38,7 +46,7 @@ const EditEventScreen = (event) => {
   };
 
   //handle edit
-  const handleAdd = () => {
+  const handleEdit = () => {
     eventStore.editEvent(event);
   };
   return (
@@ -55,6 +63,7 @@ const EditEventScreen = (event) => {
       <InputField
         autoCapitalize="none"
         multiline="true"
+        value={event.name}
         onChangeText={(value) => setEvent({ ...event, name: value })}
       />
 
@@ -71,7 +80,7 @@ const EditEventScreen = (event) => {
           { label: "Technology", value: "Technology" },
           { label: "Work", value: "Work" },
         ]}
-        defaultValue="Work"
+        defaultValue={event.label}
         containerStyle={{ height: 40 }}
         onChangeItem={(item) => setEvent({ ...event, label: item.value })}
       />
@@ -85,6 +94,7 @@ const EditEventScreen = (event) => {
       <LabelStyled>Tag</LabelStyled>
       <InputField
         autoCapitalize="none"
+        value={event.tag}
         onChangeText={(value) => setEvent({ ...event, tag: value })}
       />
 
@@ -95,7 +105,7 @@ const EditEventScreen = (event) => {
       />
 
       <ButtonStyled>
-        <TextButtonStyled onPress={handleAdd}>Add</TextButtonStyled>
+        <TextButtonStyled onPress={handleEdit}>Edit</TextButtonStyled>
       </ButtonStyled>
     </View>
   );

@@ -1,34 +1,15 @@
-// import instance from './instance'
+import instance from "./instance";
 import { makeAutoObservable } from "mobx";
 
 class EventStore {
-  events = [
-    {
-      id: 1,
-      name: "drink coffee",
-      label: "Fun",
-      date: "3-1-2021",
-      image: "",
-      IsPrivate: "true",
-      tag: "null",
-    },
-    {
-      id: 2,
-      name: "running",
-      label: "exercise",
-      date: "1-1-2021",
-      image: "",
-      IsPrivate: "false",
-      tag: "null",
-    },
-  ];
+  events = [];
   loading = true;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  //fetch events no integration
+  //fetch events
   fetchEvents = async () => {
     try {
       const response = await instance.get("/events");
@@ -39,27 +20,30 @@ class EventStore {
     }
   }; //end fetch events
 
-  //add event no integration
+  //add event
   addEvent = async (newEvent) => {
     try {
-      const response = await instance.post("/events", newEvent);
+      const formData = new FormData();
+      for (const key in newEvent) formData.append(key, newEvent[key]);
+
+      const response = await instance.post("/events", formData);
       this.events.push(response.data);
     } catch (error) {
       console.error("eventStore --> addevent", error);
     }
   }; //end add event
 
-  //delete event no integration
+  //delete event
   deleteEvent = async (eventId) => {
     try {
-      // const response = await instance.delete(`/events/${eventId}`); //check with moh the route in the be recieve an event why??
+      const response = await instance.delete(`/events/${eventId}`);
       this.events = this.events.filter((event) => event.id != eventId);
     } catch (error) {
       console.error("eventStore --> deleteevent", error);
     }
   }; //end delete event
 
-  //edit event no integration
+  //edit event
   editEvent = async (updatedEvent) => {
     try {
       const response = await instance.delete(
@@ -75,5 +59,5 @@ class EventStore {
 } //end class
 
 const eventStore = new EventStore();
-// eventStore.fetchEvents(); uncomment after merging the BE
+eventStore.fetchEvents();
 export default eventStore;

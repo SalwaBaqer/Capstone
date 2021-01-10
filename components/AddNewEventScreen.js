@@ -26,14 +26,14 @@ import {
   LabelStyled,
 } from "./styles";
 
-const AddNewEventScreen = () => {
+const AddNewEventScreen = ({ navigation }) => {
   //event state
   const [event, setEvent] = useState({
     label: "",
     date: "",
     image: "",
     name: "",
-    IsPrivate: true,
+    isPrivate: true,
     tag: "",
   });
 
@@ -47,6 +47,7 @@ const AddNewEventScreen = () => {
   //handle add
   const handleAdd = () => {
     eventStore.addEvent(event);
+    // navigation.navigate("ProfileScreen");
   };
 
   useEffect(() => {
@@ -129,7 +130,7 @@ const AddNewEventScreen = () => {
         onDayPress={(value) => {
           setEvent({
             ...event,
-            date: value,
+            date: value.dateString, //***it was value but i added .dateString cuz of BE datatype issue*** BY SAlWA
           }),
             console.log("selected day", value);
         }}

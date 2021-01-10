@@ -23,7 +23,7 @@ const Item = ({ event }) => {
 
   const handleEdit = () => {
     setMenu(true);
-    //navigate to edit screen
+    // navigation.navigate("EditEventScreen");
   };
 
   const handleDelete = () => {
