@@ -26,7 +26,7 @@ const ProfileStackScreen = () => {
           headerBackTitleVisible: null,
         }}
       />
-      {/* <ProfileStack.Screen name="EditEventScreen" component={EditEventScreen} /> */}
+      <ProfileStack.Screen name="EditEventScreen" component={EditEventScreen} />
     </ProfileStack.Navigator>
   );
 };

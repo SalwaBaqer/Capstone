@@ -26,6 +26,7 @@ import {
 } from "../styles";
 
 const Profile = ({ navigation }) => {
+
   if (!authStore.user) return <Spinner />;
   profileStore.getProfileById(authStore.user.id);
 
@@ -50,7 +51,7 @@ const Profile = ({ navigation }) => {
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
       {/* <MySchedule /> */}
-      <List />
+      <List navigation={navigation} />
     </>
   );
 };
