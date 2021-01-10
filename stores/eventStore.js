@@ -25,9 +25,9 @@ class EventStore {
     try {
       const formData = new FormData();
       for (const key in newEvent) formData.append(key, newEvent[key]);
-
       const response = await instance.post("/events", formData);
       this.events.push(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("eventStore --> addevent", error);
     }
@@ -46,7 +46,7 @@ class EventStore {
   //edit event
   editEvent = async (updatedEvent) => {
     try {
-      const response = await instance.delete(
+      const response = await instance.put(
         `/events/${updatedEvent.id}`,
         updatedEvent
       );

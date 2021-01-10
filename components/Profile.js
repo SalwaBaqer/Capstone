@@ -20,7 +20,7 @@ import {
   ProfileBio,
 } from "../styles";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   profileStore.getProfileById(authStore.user.id);
 
   if (profileStore.loading) return <Spinner />;
@@ -36,7 +36,7 @@ const Profile = () => {
         <ProfileBio>{myProfile.bio}</ProfileBio>
       </ProfileWrapper>
       {/* <MySchedule /> */}
-      <List />
+      <List navigation={navigation} />
     </>
   );
 };

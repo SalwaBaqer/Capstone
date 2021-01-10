@@ -34,7 +34,7 @@ const AddNewEventScreen = ({ navigation }) => {
     image: "",
     name: "",
     isPrivate: true,
-    tag: "",
+    // tag: "",
   });
 
   //toggle switch state
@@ -47,7 +47,7 @@ const AddNewEventScreen = ({ navigation }) => {
   //handle add
   const handleAdd = () => {
     eventStore.addEvent(event);
-    // navigation.navigate("ProfileScreen");
+    // navigation.navigate("Profile");
   };
 
   useEffect(() => {
@@ -200,11 +200,11 @@ const AddNewEventScreen = ({ navigation }) => {
           textDayHeaderFontSize: 16,
         }}
       />
-      <LabelStyled>Tag</LabelStyled>
+      {/* <LabelStyled>Tag</LabelStyled>
       <InputField
         autoCapitalize="none"
         onChangeText={(value) => setEvent({ ...event, tag: value })}
-      />
+      /> */}
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <Text>
         {event.image && (

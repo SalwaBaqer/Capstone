@@ -18,12 +18,12 @@ import {
   TextStyled,
 } from "./styles";
 
-const Item = ({ event }) => {
+const Item = ({ event, navigation }) => {
   const [menu, setMenu] = useState(true);
 
   const handleEdit = () => {
     setMenu(true);
-    // navigation.navigate("EditEventScreen");
+    navigation.navigate("EditEventScreen", { oldEvent: event });
   };
 
   const handleDelete = () => {
