@@ -26,7 +26,7 @@ const Signup = ({ navigation }) => {
 
   const handleSubmit = async () => {
     await authStore.signup(user);
-    if (authStore.user) console.log("Signed Up!");
+    if (authStore.user) navigation.replace("MyTabs");
   };
   return (
     <AuthContainer>
