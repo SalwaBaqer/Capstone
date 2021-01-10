@@ -33,6 +33,15 @@ export const ProfileUsernameStyled = styled.Text`
   margin-top: 10px;
 `;
 
+export const NumberOfFriendsStyled = styled.Text`
+  color: ${({ theme }) => theme.blackish};
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+`;
+
 export const ProfileBio = styled.Text`
   color: ${({ theme }) => theme.blackish};
   font-weight: bold;

@@ -1,5 +1,6 @@
 //Libraries
 import React from "react";
+import { Text } from "react-native";
 import { observer } from "mobx-react";
 import { Left, Right, Spinner, Item } from "native-base";
 
@@ -20,6 +21,7 @@ import {
   ProfileImage,
   ProfileUsernameStyled,
   ProfileBio,
+  NumberOfFriendsStyled,
 } from "../styles";
 
 const Profile = ({ navigation }) => {
@@ -44,6 +46,7 @@ const Profile = ({ navigation }) => {
         <ProfileImage source={{ uri: myProfile.image }} />
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
         <ProfileBio>{myProfile.bio}</ProfileBio>
+        <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
       <MySchedule />
     </>

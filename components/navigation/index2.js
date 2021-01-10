@@ -9,6 +9,7 @@ import { theme } from "../../styles";
 //Components
 import AddNewEventScreen from "../../screens/AddNewEventScreen";
 import ProfileStackScreen from "../Stacks/ProfileStackScreen";
+import ExploreStackScreen from "../Stacks/ExploreStackScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +20,7 @@ const MyTabs = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Explorer") {
+          if (route.name === "Explore") {
             iconName = focused ? "search" : "search-outline";
           } else if (route.name === "AddNewEventScreen") {
             iconName = focused ? "add" : "add";
@@ -37,6 +38,7 @@ const MyTabs = () => {
         },
       }}
     >
+      <Tab.Screen name="Explore" component={ExploreStackScreen} />
       <Tab.Screen
         name="AddNewEventScreen"
         component={AddNewEventScreen}
