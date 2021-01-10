@@ -18,6 +18,7 @@ export const ProfileWrapper = styled.View`
 export const ProfileImage = styled.Image`
   width: 175px;
   height: 175px;
+  margin-top: 10px;
   margin-right: auto;
   margin-left: auto;
   border-radius: 100px;
@@ -32,6 +33,15 @@ export const ProfileUsernameStyled = styled.Text`
   margin-top: 10px;
 `;
 
+export const NumberOfFriendsStyled = styled.Text`
+  color: ${({ theme }) => theme.blackish};
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+`;
+
 export const ProfileBio = styled.Text`
   color: ${({ theme }) => theme.blackish};
   font-weight: bold;
@@ -41,9 +51,16 @@ export const ProfileBio = styled.Text`
   margin-top: 10px;
 `;
 
-//Edit Button
+//Buttons
 export const EditProfileButtonStyled = styled(Icon)`
   color: ${({ theme }) => theme.blueish};
+  padding-left: 20px;
+  margin-bottom: 10px;
+`;
+
+export const SignOutButtonStyled = styled(Icon)`
+  color: ${({ theme }) => theme.blueish};
+  margin-right: 10px;
   padding-left: 20px;
   margin-bottom: 10px;
 `;
