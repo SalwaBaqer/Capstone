@@ -37,18 +37,6 @@ const Signup = ({ navigation }) => {
         placeholderTextColor="#A6AEC1"
         autoCapitalize="none"
       />
-      {/* <AuthTextInput
-        onChangeText={(firstName) => setUser({ ...user, firstName })}
-        placeholder="First Name"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
-      /> */}
-      {/* <AuthTextInput
-        onChangeText={(lastName) => setUser({ ...user, lastName })}
-        placeholder="Last Name"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
-      /> */}
       <AuthTextInput
         onChangeText={(email) => setUser({ ...user, email })}
         placeholder="email"
