@@ -7,7 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { theme } from "../../styles";
 
 //Components
-import AddNewEventScreen from "../../screens/AddNewEventScreen";
+import AddNewEventScreen from "../AddNewEventScreen";
 import ProfileStackScreen from "../Stacks/ProfileStackScreen";
 
 const Tab = createBottomTabNavigator();

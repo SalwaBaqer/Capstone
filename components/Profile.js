@@ -5,6 +5,7 @@ import { Left, Right, Spinner, Item } from "native-base";
 
 //Components
 import MySchedule from "./MySchedule";
+import List from "./events/List";
 
 //Buttons
 import EditProfileButton from "./buttons/EditProfileButton";
@@ -45,7 +46,8 @@ const Profile = ({ navigation }) => {
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
         <ProfileBio>{myProfile.bio}</ProfileBio>
       </ProfileWrapper>
-      <MySchedule />
+      {/* <MySchedule /> */}
+      <List />
     </>
   );
 };

@@ -5,15 +5,22 @@ import { observer } from "mobx-react";
 
 //stores
 import eventStore from "../../stores/eventStore";
+import authStore from "../../stores/authStore";
 
 //components
 import Item from "./Item";
+import { Spinner } from "native-base";
+import { ScrollView } from "react-native-gesture-handler";
 
 const List = () => {
-  const mylist = eventStore.events.map((event) => <Item event={event} />);
+  if (eventStore.loading) <Spinner />;
+  const mylist = eventStore.events
+    .filter((event) => event.userId == authStore.user.id)
+    .map((event) => <Item event={event} key={event.id} />);
+
   console.log(mylist);
 
-  return <>{mylist}</>;
+  return <ScrollView>{mylist}</ScrollView>;
 };
 
 export default observer(List);

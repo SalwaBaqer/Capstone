@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 //Components
 import Profile from "../Profile";
 import EditProfile from "../EditProfile";
+import EditEventScreen from "../EditEventScreen";
 
 const ProfileStack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const ProfileStackScreen = () => {
           headerBackTitleVisible: null,
         }}
       />
+      {/* <ProfileStack.Screen name="EditEventScreen" component={EditEventScreen} /> */}
     </ProfileStack.Navigator>
   );
 };
