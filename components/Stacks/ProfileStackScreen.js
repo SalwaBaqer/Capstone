@@ -4,8 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 //Components
 import Profile from "../Profile";
 import EditProfile from "../EditProfile";
-import EditEventScreen from "../EditEventScreen";
-import EventDetailScreen from "../EventDetailScreen";
+import EditEventScreen from "../events/EditEventScreen";
+import EventDetailScreen from "../events/EventDetailScreen";
 
 const ProfileStack = createStackNavigator();
 

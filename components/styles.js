@@ -1,11 +1,11 @@
 import styled from "styled-components/native";
 
 export const InputField = styled.TextInput`
-  height: 40;
-  width: 400;
+  height: 40px;
+  width: 400px;
   border-color: gray;
-  border-bottom-width: 1;
-  margin-bottom: 10;
+  border-bottom-width: 1px;
+  margin-bottom: 10px;
 `;
 
 export const LabelStyled = styled.Text`
@@ -19,8 +19,8 @@ export const ButtonStyled = styled.TouchableOpacity`
   margin-left: auto;
   align-items: center;
   background-color: #009688;
-  border-radius: 10;
-  width: 200;
+  border-radius: 10px;
+  width: 200px;
   padding-vertical: 12px;
   padding-horizontal: 8px;
 `;

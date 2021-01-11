@@ -7,7 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { theme } from "../../styles";
 
 //Components
-import AddNewEventScreen from "../AddNewEventScreen";
+import AddNewEventScreen from "../events/AddNewEventScreen";
 import ProfileStackScreen from "../Stacks/ProfileStackScreen";
 import ExploreStackScreen from "../Stacks/ExploreStackScreen";
 
