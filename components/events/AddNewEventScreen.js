@@ -1,6 +1,11 @@
 //react
-import { View } from "native-base";
+import { View, Text, ListItem } from "native-base";
 import React, { useState, useEffect } from "react";
+
+//Image Picker
+import { Button, Image, Platform } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
 
 //react-native
 import { Switch } from "react-native";
@@ -9,14 +14,9 @@ import { Switch } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 //Calendar
-import { Calendar } from "react-native-calendars";
-
-//image picker
-import { Button, Image, Platform } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 //stores
-import eventStore from "../stores/eventStore";
+import eventStore from "../../stores/eventStore";
 
 //styles
 import {
@@ -24,28 +24,32 @@ import {
   ButtonStyled,
   TextButtonStyled,
   LabelStyled,
-} from "./styles";
+} from "../styles";
 
-const EditEventScreen = ({ navigation, route }) => {
+const AddNewEventScreen = ({ navigation }) => {
   //event state
-
-  const { oldEvent } = route.params;
-  const [event, setEvent] = useState(oldEvent);
+  const [event, setEvent] = useState({
+    label: "",
+    date: "",
+    image: "",
+    name: "",
+    isPrivate: true,
+    // tag: "",
+  });
 
   //toggle switch state
-  const [isEnabled, setIsEnabled] = useState(event.isPrivate);
+  const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     setEvent({ ...event, IsPrivate: isEnabled });
   };
 
-  //handle edit
-  const handleEdit = () => {
-    eventStore.editEvent(event);
-    navigation.navigate("ProfileScreen");
+  //handle add
+  const handleAdd = () => {
+    eventStore.addEvent(event);
+    // navigation.navigate("Profile");
   };
 
-  //image picker handling
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -83,10 +87,9 @@ const EditEventScreen = ({ navigation, route }) => {
       });
     }
   };
+
   return (
-    <View
-      style={{ marginTop: 2, marginRight: 20, marginLeft: 20, marginBottom: 2 }}
-    >
+    <View style={{ marginTop: 50, marginRight: 20, marginLeft: 20 }}>
       <LabelStyled>Private</LabelStyled>
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
@@ -99,10 +102,8 @@ const EditEventScreen = ({ navigation, route }) => {
       <InputField
         autoCapitalize="none"
         multiline="true"
-        value={event.name}
         onChangeText={(value) => setEvent({ ...event, name: value })}
       />
-
       <LabelStyled>Label</LabelStyled>
       <DropDownPicker
         items={[
@@ -116,7 +117,7 @@ const EditEventScreen = ({ navigation, route }) => {
           { label: "Technology", value: "Technology" },
           { label: "Work", value: "Work" },
         ]}
-        defaultValue={"Work"}
+        defaultValue="Work"
         containerStyle={{ height: 40 }}
         onChangeItem={(item) => setEvent({ ...event, label: item.value })}
       />
@@ -134,10 +135,11 @@ const EditEventScreen = ({ navigation, route }) => {
             console.log("selected day", value);
         }}
         markedDates={{
-          "2021-01-16": { selected: true, marked: true, selectedColor: "blue" },
-          "2021-01-17": { marked: true },
-          "2021-01-18": { marked: true, dotColor: "red", activeOpacity: 0 },
-          "2021-01-19": { disabled: true, disableTouchEvent: true },
+          [event.date]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDotColor: "orange",
+          },
         }}
         // Handler which gets executed on day long press. Default = undefined
         onDayLongPress={(day) => {
@@ -199,22 +201,23 @@ const EditEventScreen = ({ navigation, route }) => {
           textDayHeaderFontSize: 16,
         }}
       />
-      <LabelStyled>Tag</LabelStyled>
-      <InputField
-        autoCapitalize="none"
-        // value={event.tag}
-        onChangeText={(value) => setEvent({ ...event, tag: value })}
-      />
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      <Image
-        source={{ uri: event.image.uri }}
-        style={{ width: 20, height: 20 }}
-      />
+      <Text>
+        {event.image && (
+          <Image
+            source={{ uri: event.image.uri }}
+            style={{
+              width: 70,
+              height: 70,
+            }}
+          />
+        )}
+      </Text>
       <ButtonStyled>
-        <TextButtonStyled onPress={handleEdit}>Edit</TextButtonStyled>
+        <TextButtonStyled onPress={handleAdd}>Add</TextButtonStyled>
       </ButtonStyled>
     </View>
   );
 };
 
-export default EditEventScreen;
+export default AddNewEventScreen;

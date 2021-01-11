@@ -1,15 +1,15 @@
 //Libraries
 import React from "react";
-import { Text } from "react-native";
 
 //Components
 import SearchBar from "./SearchBar";
+import ExploreEvents from "./events/ExploreEvents";
 
-const Explore = () => {
+const Explore = ({ navigation }) => {
   return (
     <>
       <SearchBar />
-      <Text>Explore Screen!</Text>
+      <ExploreEvents navigation={navigation} />
     </>
   );
 };
