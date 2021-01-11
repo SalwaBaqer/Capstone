@@ -135,10 +135,11 @@ const AddNewEventScreen = ({ navigation }) => {
             console.log("selected day", value);
         }}
         markedDates={{
-          "2021-01-16": { selected: true, marked: true, selectedColor: "blue" },
-          "2021-01-17": { marked: true },
-          "2021-01-18": { marked: true, dotColor: "red", activeOpacity: 0 },
-          "2021-01-19": { disabled: true, disableTouchEvent: true },
+          [event.date]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDotColor: "orange",
+          },
         }}
         // Handler which gets executed on day long press. Default = undefined
         onDayLongPress={(day) => {
@@ -200,11 +201,6 @@ const AddNewEventScreen = ({ navigation }) => {
           textDayHeaderFontSize: 16,
         }}
       />
-      {/* <LabelStyled>Tag</LabelStyled>
-      <InputField
-        autoCapitalize="none"
-        onChangeText={(value) => setEvent({ ...event, tag: value })}
-      /> */}
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <Text>
         {event.image && (

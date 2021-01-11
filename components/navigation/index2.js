@@ -21,7 +21,7 @@ const MyTabs = () => {
           let iconName;
 
           if (route.name === "Explore") {
-            iconName = focused ? "search" : "search-outline";
+            iconName = focused ? "compass" : "compass-outline";
           } else if (route.name === "AddNewEventScreen") {
             iconName = focused ? "add" : "add";
           } else iconName = focused ? "person" : "person-outline";
