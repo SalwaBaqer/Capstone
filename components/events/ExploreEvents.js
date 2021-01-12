@@ -13,7 +13,7 @@ import { Spinner } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 
 const ExploreEvents = ({ navigation }) => {
-  if (eventStore.loading) <Spinner />;
+  if (eventStore.loading) return <Spinner />;
   if (!authStore.user) return <Spinner />;
 
   const explorelist = eventStore.events

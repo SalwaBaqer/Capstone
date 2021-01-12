@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
 import Explore from "../Explore";
-import EventDetailScreen from "../events/EditEventScreen";
+import EventDetailScreen from "../events/EventDetailScreen";
 
 const ExploreStack = createStackNavigator();
 

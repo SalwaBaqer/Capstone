@@ -1,6 +1,11 @@
 import styled from "styled-components/native";
 
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 export const ItemWrapper = styled.View`
   margin-right: auto;
@@ -35,6 +40,14 @@ export const Dotsiconstyled = styled(MaterialCommunityIcons)`
 `;
 
 export const MaterialIconstyled = styled(MaterialIcons)`
+  margin-left: 90%;
+  margin-top: 1%;
+`;
+export const Ioniconstyled = styled(Ionicons)`
+  margin-left: 90%;
+  margin-top: 1%;
+`;
+export const AntDesignstyled = styled(AntDesign)`
   margin-left: 90%;
   margin-top: 1%;
 `;

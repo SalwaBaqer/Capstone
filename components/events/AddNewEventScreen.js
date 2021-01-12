@@ -38,16 +38,16 @@ const AddNewEventScreen = ({ navigation }) => {
   });
 
   //toggle switch state
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isEnabled, setIsEnabled] = useState(event.isPrivate);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     setEvent({ ...event, IsPrivate: isEnabled });
   };
 
   //handle add
-  const handleAdd = () => {
-    eventStore.addEvent(event);
-    // navigation.navigate("Profile");
+  const handleAdd = async () => {
+    await eventStore.addEvent(event);
+    navigation.navigate("Profile");
   };
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const AddNewEventScreen = ({ navigation }) => {
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
         thumbColor={event.IsPrivate ? "#f0f7fc" : "#f4f3f4"}
-        value={event.IsPrivate}
+        value={isEnabled}
         onValueChange={toggleSwitch}
       />
 
