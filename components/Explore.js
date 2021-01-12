@@ -8,8 +8,9 @@ import authStore from "../stores/authStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
+import ExploreEvents from "./events/ExploreEvents";
 
-const Explore = () => {
+const Explore = ({ navigation }) => {
   const [search, updateSearch] = useState("");
 
   const filteredUsernames = authStore.users.filter((user) =>
@@ -33,11 +34,7 @@ const Explore = () => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <View>
-          <Text>Random EEEEVEENTS</Text>
-          <Text>Random EEEEVEENTS</Text>
-          <Text>Random EEEEVEENTS</Text>
-        </View>
+        <ExploreEvents navigation={navigation} />
       )}
     </>
   );
