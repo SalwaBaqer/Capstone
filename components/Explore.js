@@ -1,15 +1,44 @@
 //Libraries
-import React from "react";
+import React, { useState } from "react";
+import { List, View } from "native-base";
 import { Text } from "react-native";
+import { SearchBar } from "react-native-elements";
+//Stores
+import authStore from "../stores/authStore";
 
 //Components
-import SearchBar from "./SearchBar";
+import UsernameItem from "./UsernameItem";
 
 const Explore = () => {
+  const [search, updateSearch] = useState("");
+
+  const filteredUsernames = authStore.users.filter((user) =>
+    user.username.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const usernameList = filteredUsernames.map((user) => (
+    <UsernameItem user={user} key={user.id} />
+  ));
   return (
     <>
-      <SearchBar />
-      <Text>Explore Screen!</Text>
+      <SearchBar
+        placeholder="Search for user..."
+        returnKeyType="search"
+        onChangeText={updateSearch}
+        value={search}
+        style={{ backgroundColor: "white", color: "black" }}
+      />
+      {search !== "" ? (
+        <View>
+          <List>{usernameList}</List>
+        </View>
+      ) : (
+        <View>
+          <Text>Random EEEEVEENTS</Text>
+          <Text>Random EEEEVEENTS</Text>
+          <Text>Random EEEEVEENTS</Text>
+        </View>
+      )}
     </>
   );
 };
