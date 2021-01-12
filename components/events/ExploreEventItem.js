@@ -8,10 +8,20 @@ import { Title } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
 
 //styles
-import { ItemWrapper } from "./styles";
+import { Ioniconstyled, AntDesignstyled, ItemWrapper } from "./styles";
+
+//store
+import friendStore from "../../stores/friendStore";
 
 const Item = ({ event, navigation }) => {
-  const [menu, setMenu] = useState(true);
+  const [addFriend, setAddFriend] = useState(true);
+
+  const handleAddFriend = () => {
+    if (addFriend) {
+      friendStore.SendFriendReq(event.userId);
+      setAddFriend(false);
+    } else setAddFriend(true);
+  };
 
   return (
     //for detail page
@@ -20,6 +30,22 @@ const Item = ({ event, navigation }) => {
       onPress={() => navigation.navigate("EventDetailScreen", { event: event })}
     >
       <ItemWrapper>
+        {addFriend ? (
+          <Ioniconstyled
+            name={"md-person-add"}
+            size={20}
+            color="#2596be"
+            onPress={handleAddFriend}
+          />
+        ) : (
+          <AntDesignstyled
+            name={"clockcircle"}
+            size={20}
+            color="#2596be"
+            onPress={handleAddFriend}
+          />
+        )}
+
         <Title>{event.name}</Title>
         <Title>{event.label}</Title>
         <Title>{event.date}</Title>

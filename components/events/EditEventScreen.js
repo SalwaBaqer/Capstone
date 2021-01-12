@@ -30,6 +30,8 @@ const EditEventScreen = ({ navigation, route }) => {
   //event state
 
   const { oldEvent } = route.params;
+  const _event = route.params.event;
+  console.log("event in editscreen", _event);
   const [event, setEvent] = useState(oldEvent);
 
   //toggle switch state
