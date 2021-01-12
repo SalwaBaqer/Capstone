@@ -10,6 +10,7 @@ import { theme } from "../../styles";
 import AddNewEventScreen from "../events/AddNewEventScreen";
 import ProfileStackScreen from "../Stacks/ProfileStackScreen";
 import ExploreStackScreen from "../Stacks/ExploreStackScreen";
+import ActivityStackScreen from "../Stacks/ActivityStackScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,7 @@ const MyTabs = () => {
         component={AddNewEventScreen}
         options={{ tabBarLabel: () => null }}
       />
+      <Tab.Screen name="Activity" component={ActivityStackScreen} />
       <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   );
