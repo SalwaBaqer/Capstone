@@ -4,13 +4,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
 import Explore from "../Explore";
+import SearchBar from "../SearchBar";
 import EventDetailScreen from "../events/EventDetailScreen";
 
 const ExploreStack = createStackNavigator();
 
 const ExploreStackScreen = () => {
   return (
-    <ExploreStack.Navigator>
+    <ExploreStack.Navigator initialRouteName="ExploreScreen" header={SearchBar}>
       <ExploreStack.Screen
         name="ExploreScreen"
         component={Explore}
