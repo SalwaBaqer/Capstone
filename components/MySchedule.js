@@ -1,16 +1,15 @@
 //Libraries
 import React, { useState } from "react";
-import { Agenda } from "react-native-calendars";
-import { Card } from "react-native-paper";
-import { Text, Right, ListItem, Left } from "native-base";
-import { observer } from "mobx-react";
-//react-native
-import { Title } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
+import { Text, Right } from "native-base";
+import { Card } from "react-native-paper";
+import { Agenda } from "react-native-calendars";
+import { observer } from "mobx-react";
 
 //Stores
 import authStore from "../stores/authStore";
 import eventStore from "../stores/eventStore";
+// import profileStore from "../stores/profileStore";
 
 //styles
 import {
@@ -24,15 +23,12 @@ import {
   TextStyled,
 } from "../styles";
 
-//Stores
-// import profileStore from "../stores/profileStore";
-
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, explore }) => {
+const MySchedule = ({ navigation, exploreEvents }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
 
@@ -46,19 +42,18 @@ const MySchedule = ({ navigation, explore }) => {
     eventStore.deleteEvent(item.id);
   };
 
-  //Just signed in user events display
   const loadItems = (day) => {
-    // Signed in user Events displayed in Profile Screen
+    // Signed in user Events only
     const profileEvents = eventStore.events.filter(
       (event) => event.userId === authStore.user.id
     );
 
-    // Passed a param from Explore Screen to show "Everyone's events"
-    //explore = eventStore.events
-    const events = explore
-      ? explore.filter((event) => event.date.split("T")[0] === day.dateString)
-      : // Or
-        profileEvents.filter(
+    // exploreEvents param -> Everyone's events except Signed user
+    const events = exploreEvents
+      ? exploreEvents.filter(
+          (event) => event.date.split("T")[0] === day.dateString
+        )
+      : profileEvents.filter(
           (event) => event.date.split("T")[0] === day.dateString
         );
 
@@ -117,7 +112,7 @@ const MySchedule = ({ navigation, explore }) => {
                 <RenderItemImageStyled source={{ uri: item.image }} />
               </TouchableOpacity>
               {/* <Text>{itemProfile.username}</Text> */}
-              {explore ? (
+              {exploreEvents ? (
                 <></>
               ) : menu ? (
                 <Dotsiconstyled

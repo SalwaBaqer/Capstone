@@ -23,7 +23,7 @@ const Explore = ({ navigation }) => {
     <UsernameItem user={user} key={user.id} />
   ));
 
-  const explore = eventStore.events.filter(
+  const exploreEvents = eventStore.events.filter(
     (event) => event.userId !== authStore.user.id && !event.isPrivate
   );
 
@@ -41,7 +41,7 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <MySchedule navigation={navigation} explore={explore} />
+        <MySchedule navigation={navigation} exploreEvents={exploreEvents} />
         // <ExploreEvents navigation={navigation} />
       )}
     </>
