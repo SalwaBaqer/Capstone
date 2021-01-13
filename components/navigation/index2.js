@@ -11,6 +11,7 @@ import AddNewEventScreen from "../events/AddNewEventScreen";
 import ProfileStackScreen from "../Stacks/ProfileStackScreen";
 import ExploreStackScreen from "../Stacks/ExploreStackScreen";
 import ActivityStackScreen from "../Stacks/ActivityStackScreen";
+import TimelineStackScreen from "../Stacks/TimelineStackScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +24,8 @@ const MyTabs = () => {
 
           if (route.name === "Explore") {
             iconName = focused ? "compass" : "compass-outline";
+          } else if (route.name === "Timeline") {
+            iconName = focused ? "newspaper" : "newspaper-outline";
           } else if (route.name === "AddNewEventScreen") {
             iconName = focused ? "add" : "add";
           } else if (route.name === "Profile") {
@@ -41,6 +44,7 @@ const MyTabs = () => {
         },
       }}
     >
+      <Tab.Screen name="Timeline" component={TimelineStackScreen} />
       <Tab.Screen name="Explore" component={ExploreStackScreen} />
       <Tab.Screen
         name="AddNewEventScreen"
