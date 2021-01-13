@@ -25,28 +25,31 @@ import {
   NumberOfFriendsStyled,
 } from "../styles";
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, route }) => {
   if (!authStore.user) return <Spinner />;
-  profileStore.getProfileById(authStore.user.id);
+  const userProfile = profileStore.getProfileById(
+    route.params?.userId ? route.params.userId : authStore.user.id
+  );
+  console.log(userProfile);
 
   if (profileStore.loading) return <Spinner />;
 
-  const myProfile = profileStore.profiles;
+  // const myProfile = profileStore.profiles;
 
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <Item>
           <Left>
-            <EditProfileButton oldProfile={myProfile} />
+            <EditProfileButton oldProfile={userProfile} />
           </Left>
           <Right>
             <SignoutButton navigation={navigation} />
           </Right>
         </Item>
-        <ProfileImage source={{ uri: myProfile.image }} />
+        <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
-        <ProfileBio>{myProfile.bio}</ProfileBio>
+        <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
       <MySchedule navigation={navigation} />

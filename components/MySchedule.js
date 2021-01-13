@@ -24,16 +24,19 @@ import {
   TextStyled,
 } from "../styles";
 
+//Stores
+// import profileStore from "../stores/profileStore";
+
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation }) => {
+const MySchedule = ({ navigation, explore }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
 
-  const handleEdit = () => {
+  const handleEdit = (item) => {
     setMenu(true);
     navigation.navigate("EditEventScreen", { oldEvent: item });
   };
@@ -45,12 +48,19 @@ const MySchedule = ({ navigation }) => {
 
   //Just signed in user events display
   const loadItems = (day) => {
+    // Signed in user Events displayed in Profile Screen
     const profileEvents = eventStore.events.filter(
       (event) => event.userId === authStore.user.id
     );
-    const events = profileEvents.filter(
-      (event) => event.date.split("T")[0] === day.dateString
-    );
+
+    // Passed a param from Explore Screen to show "Everyone's events"
+    //explore = eventStore.events
+    const events = explore
+      ? explore.filter((event) => event.date.split("T")[0] === day.dateString)
+      : // Or
+        profileEvents.filter(
+          (event) => event.date.split("T")[0] === day.dateString
+        );
 
     setTimeout(() => {
       for (let i = 0; i < events.length; i++) {
@@ -64,10 +74,12 @@ const MySchedule = ({ navigation }) => {
               label: events[j].label,
               image: events[j].image,
               height: Math.max(50, Math.floor(Math.random() * 150)),
+              userId: events[j].userId,
             });
           }
         }
       }
+
       const newItems = {};
       Object.keys(items).forEach((key) => {
         newItems[key] = items[key];
@@ -77,6 +89,11 @@ const MySchedule = ({ navigation }) => {
   };
 
   const renderItem = (item) => {
+    // console.log("item user id value =", item.userId);
+    // if (profileStore.loading) return <Spinner />;
+    // const itemProfile = profileStore.getProfileById(item.userId);
+
+    // console.log("item profile id", itemProfile);
     return (
       <RednerItemButton
         onPress={() =>
@@ -88,9 +105,21 @@ const MySchedule = ({ navigation }) => {
             <RenderItemStyled>
               <Text style={{ marginRight: 15 }}>{item.name}</Text>
               <Text>{item.label}</Text>
-              <RenderItemImageStyled source={{ uri: item.image }} />
-              <Text>{authStore.user.username}</Text>
-              {menu ? (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(
+                    "Profile",
+                    { screen: "ProfileScreen" },
+                    { userId: item.userId }
+                  )
+                }
+              >
+                <RenderItemImageStyled source={{ uri: item.image }} />
+              </TouchableOpacity>
+              {/* <Text>{itemProfile.username}</Text> */}
+              {explore ? (
+                <></>
+              ) : menu ? (
                 <Dotsiconstyled
                   name="dots-horizontal"
                   size={24}
