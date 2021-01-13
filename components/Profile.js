@@ -1,11 +1,11 @@
 //Libraries
 import React from "react";
-import { Text } from "react-native";
+import { Text } from "react-native"; // unused import
 import { observer } from "mobx-react";
 import { Left, Right, Spinner, Item } from "native-base";
 
 //Components
-import MySchedule from "./MySchedule";
+import MySchedule from "./MySchedule"; // unused import
 import List from "./events/List";
 
 //Buttons

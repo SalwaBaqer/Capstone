@@ -18,12 +18,13 @@ import {
 } from "../styles";
 
 const EditProfile = ({ navigation, route }) => {
+  // can you think of a way to simplify the code here?
   const [profile, setProfile] = useState({
     image: route.params?.oldProfile.image,
     username: route.params?.oldProfile.username,
     bio: route.params?.oldProfile.bio,
   });
-  console.log(route.params);
+  console.log(route.params); // remove console logs before pushing
 
   const handleSubmit = async () => {
     await profileStore.updateProfile(profile);
