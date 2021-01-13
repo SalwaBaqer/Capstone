@@ -1,10 +1,13 @@
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Card, Avatar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const UsernameItem = ({ user }) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
       <Card>
         <Card.Content>
           <View>

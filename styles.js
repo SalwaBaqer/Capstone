@@ -1,5 +1,11 @@
 import styled from "styled-components/native";
 import { Icon, Button } from "native-base";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 export const theme = {
   Maincolor: "#FF5A5F", // redish main font color
@@ -9,6 +15,53 @@ export const theme = {
   grey: "#767676",
   blueish: "#00A699",
 };
+
+//MySchedule
+export const AgendaStyled = styled.View`
+  flex: 1;
+`;
+
+export const RednerItemButton = styled.TouchableOpacity`
+  margin-right: 10;
+  margin-top: 17;
+`;
+
+export const RenderItemStyled = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const RenderItemImageStyled = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+`;
+
+export const RenderEmptyDateStyled = styled.View`
+  height: 15px;
+  flex: 1;
+  padding-top: 30px;
+`;
+
+export const Dotsiconstyled = styled(MaterialCommunityIcons)`
+  margin-bottom: 5px;
+`;
+
+export const MaterialIconstyled = styled(MaterialIcons)`
+  margin-bottom: 5px;
+`;
+
+export const Ioniconstyled = styled(Ionicons)`
+  margin-bottom: 5px;
+`;
+export const AntDesignstyled = styled(AntDesign)`
+  margin-bottom: 5px;
+`;
+
+export const TextStyled = styled.Text`
+  margin-bottom: 5px;
+`;
 
 //Profile
 export const ProfileWrapper = styled.View`

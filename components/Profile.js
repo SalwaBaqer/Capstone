@@ -15,6 +15,7 @@ import SignoutButton from "./buttons/SignoutButton";
 //Stores
 import authStore from "../stores/authStore";
 import profileStore from "../stores/profileStore";
+import eventStore from "../stores/eventStore";
 
 //Styles
 import {
@@ -25,32 +26,38 @@ import {
   NumberOfFriendsStyled,
 } from "../styles";
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, route }) => {
   if (!authStore.user) return <Spinner />;
-  profileStore.getProfileById(authStore.user.id);
+  const userProfile = profileStore.getProfileById(
+    route.params?.userId ? route.params.userId : authStore.user.id
+  );
 
   if (profileStore.loading) return <Spinner />;
 
-  const myProfile = profileStore.profiles;
+  const profileEvents = eventStore.events.filter(
+    (event) => event.userId === authStore.user.id
+  );
+
+  console.log(profileEvents);
 
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <Item>
           <Left>
-            <EditProfileButton oldProfile={myProfile} />
+            <EditProfileButton oldProfile={userProfile} />
           </Left>
           <Right>
             <SignoutButton navigation={navigation} />
           </Right>
         </Item>
-        <ProfileImage source={{ uri: myProfile.image }} />
+        <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
-        <ProfileBio>{myProfile.bio}</ProfileBio>
+        <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      {/* <MySchedule /> */}
-      <List navigation={navigation} />
+      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
+      {/* <List navigation={navigation} /> */}
     </>
   );
 };

@@ -30,8 +30,8 @@ const EditEventScreen = ({ navigation, route }) => {
   //event state
 
   const { oldEvent } = route.params;
-  const _event = route.params.event;
-  console.log("event in editscreen", _event);
+  // const _event = route.params.event;
+  // console.log("event in editscreen", _event);
   const [event, setEvent] = useState(oldEvent);
 
   //toggle switch state
@@ -137,10 +137,11 @@ const EditEventScreen = ({ navigation, route }) => {
             console.log("selected day", value);
         }}
         markedDates={{
-          "2021-01-16": { selected: true, marked: true, selectedColor: "blue" },
-          "2021-01-17": { marked: true },
-          "2021-01-18": { marked: true, dotColor: "red", activeOpacity: 0 },
-          "2021-01-19": { disabled: true, disableTouchEvent: true },
+          [event.date]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDotColor: "orange",
+          },
         }}
         // Handler which gets executed on day long press. Default = undefined
         onDayLongPress={(day) => {
@@ -210,6 +211,8 @@ const EditEventScreen = ({ navigation, route }) => {
       />
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <Image
+        // source={{ uri: event.image.uri }}
+
         source={{ uri: event.image.uri }}
         style={{ width: 20, height: 20 }}
       />

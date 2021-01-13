@@ -1,6 +1,5 @@
 //Libraries
-import { makeAutoObservable } from "mobx";
-import { runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 //Stores
 import instance from "./instance";

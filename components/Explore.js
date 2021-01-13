@@ -5,10 +5,12 @@ import { Text } from "react-native";
 import { SearchBar } from "react-native-elements";
 //Stores
 import authStore from "../stores/authStore";
+import eventStore from "../stores/eventStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
 import ExploreEvents from "./events/ExploreEvents";
+import MySchedule from "./MySchedule";
 
 const Explore = ({ navigation }) => {
   const [search, updateSearch] = useState("");
@@ -20,6 +22,13 @@ const Explore = ({ navigation }) => {
   const usernameList = filteredUsernames.map((user) => (
     <UsernameItem user={user} key={user.id} />
   ));
+
+  const exploreEvents = eventStore.events.filter(
+    (event) => event.userId !== authStore.user.id && !event.isPrivate
+  );
+
+  const sideBar = true;
+
   return (
     <>
       <SearchBar
@@ -34,7 +43,12 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <ExploreEvents navigation={navigation} />
+        <MySchedule
+          navigation={navigation}
+          exploreEvents={exploreEvents}
+          sideBar={sideBar}
+        />
+        // <ExploreEvents navigation={navigation} />
       )}
     </>
   );

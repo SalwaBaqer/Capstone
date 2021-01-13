@@ -1,5 +1,5 @@
 import instance from "./instance";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 class EventStore {
   events = [];
@@ -36,8 +36,10 @@ class EventStore {
   //delete event
   deleteEvent = async (eventId) => {
     try {
+      // console.log(eventId);
       const response = await instance.delete(`/events/${eventId}`);
-      this.events = this.events.filter((event) => event.id != eventId);
+      this.events = this.events.filter((event) => event.id !== eventId);
+      this.fetchEvents();
     } catch (error) {
       console.error("eventStore --> deleteevent", error);
     }
