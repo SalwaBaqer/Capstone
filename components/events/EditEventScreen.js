@@ -211,6 +211,8 @@ const EditEventScreen = ({ navigation, route }) => {
       />
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <Image
+        // source={{ uri: event.image.uri }}
+
         source={{ uri: event.image.uri }}
         style={{ width: 20, height: 20 }}
       />

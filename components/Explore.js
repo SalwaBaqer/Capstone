@@ -27,6 +27,8 @@ const Explore = ({ navigation }) => {
     (event) => event.userId !== authStore.user.id && !event.isPrivate
   );
 
+  const sideBar = true;
+
   return (
     <>
       <SearchBar
@@ -41,7 +43,11 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <MySchedule navigation={navigation} exploreEvents={exploreEvents} />
+        <MySchedule
+          navigation={navigation}
+          exploreEvents={exploreEvents}
+          sideBar={sideBar}
+        />
         // <ExploreEvents navigation={navigation} />
       )}
     </>

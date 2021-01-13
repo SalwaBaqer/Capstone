@@ -15,6 +15,7 @@ import SignoutButton from "./buttons/SignoutButton";
 //Stores
 import authStore from "../stores/authStore";
 import profileStore from "../stores/profileStore";
+import eventStore from "../stores/eventStore";
 
 //Styles
 import {
@@ -30,9 +31,14 @@ const Profile = ({ navigation, route }) => {
   const userProfile = profileStore.getProfileById(
     route.params?.userId ? route.params.userId : authStore.user.id
   );
-  console.log(userProfile);
 
   if (profileStore.loading) return <Spinner />;
+
+  const profileEvents = eventStore.events.filter(
+    (event) => event.userId === authStore.user.id
+  );
+
+  console.log(profileEvents);
 
   return (
     <>
@@ -50,7 +56,7 @@ const Profile = ({ navigation, route }) => {
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      <MySchedule navigation={navigation} />
+      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
       {/* <List navigation={navigation} /> */}
     </>
   );

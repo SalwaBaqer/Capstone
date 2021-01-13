@@ -7,7 +7,6 @@ import { Agenda } from "react-native-calendars";
 import { observer } from "mobx-react";
 
 //Stores
-import authStore from "../stores/authStore";
 import eventStore from "../stores/eventStore";
 import friendStore from "../stores/friendStore";
 // import profileStore from "../stores/profileStore";
@@ -22,6 +21,7 @@ import {
   Dotsiconstyled,
   MaterialIconstyled,
   Ioniconstyled,
+  AntDesignstyled,
   TextStyled,
 } from "../styles";
 
@@ -30,12 +30,12 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, exploreEvents }) => {
+const MySchedule = ({ navigation, exploreEvents, sideBar }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
   const [addFriend, setAddFriend] = useState(true);
 
-  const handleAddFriend = () => {
+  const handleAddFriend = (item) => {
     if (addFriend) {
       friendStore.SendFriendReq(item.userId);
       setAddFriend(false);
@@ -47,50 +47,35 @@ const MySchedule = ({ navigation, exploreEvents }) => {
     navigation.navigate("EditEventScreen", { oldEvent: item });
   };
 
-  const handleDelete = () => {
+  const handleDelete = (item) => {
     setMenu(true);
     eventStore.deleteEvent(item.id);
   };
 
   const loadItems = (day) => {
-    // Signed in user Events only
-    const profileEvents = eventStore.events.filter(
-      (event) => event.userId === authStore.user.id
+    const events = exploreEvents.filter(
+      (event) => event.date.split("T")[0] === day.dateString
     );
 
-    // exploreEvents param -> Everyone's events except Signed user
-    const events = exploreEvents
-      ? exploreEvents.filter(
-          (event) => event.date.split("T")[0] === day.dateString
-        )
-      : profileEvents.filter(
-          (event) => event.date.split("T")[0] === day.dateString
-        );
-
-    setTimeout(() => {
-      for (let i = 0; i < events.length; i++) {
-        const time = day.timestamp;
-        const strTime = timeToString(time);
-        if (!items[strTime]) {
-          items[strTime] = [];
-          for (let j = 0; j < events.length; j++) {
-            items[strTime].push({
-              name: events[j].name,
-              label: events[j].label,
-              image: events[j].image,
-              height: Math.max(50, Math.floor(Math.random() * 150)),
-              userId: events[j].userId,
-            });
-          }
+    for (let i = 0; i < events.length; i++) {
+      const time = day.timestamp;
+      const strTime = timeToString(time);
+      if (!items[strTime]) {
+        items[strTime] = [];
+        for (let j = 0; j < events.length; j++) {
+          items[strTime].push({
+            ...events[j],
+            height: Math.max(50, Math.floor(Math.random() * 150)),
+          });
         }
       }
+    }
 
-      const newItems = {};
-      Object.keys(items).forEach((key) => {
-        newItems[key] = items[key];
-      });
-      setItems(newItems);
-    }, 1000);
+    const newItems = {};
+    Object.keys(items).forEach((key) => {
+      newItems[key] = items[key];
+    });
+    setItems(newItems);
   };
 
   const renderItem = (item) => {
@@ -117,7 +102,7 @@ const MySchedule = ({ navigation, exploreEvents }) => {
                 <RenderItemImageStyled source={{ uri: item.image }} />
               </TouchableOpacity>
               {/* <Text>{itemProfile.username}</Text> */}
-              {exploreEvents ? (
+              {sideBar ? (
                 <>
                   {addFriend ? (
                     <Ioniconstyled
@@ -131,7 +116,7 @@ const MySchedule = ({ navigation, exploreEvents }) => {
                       name={"clockcircle"}
                       size={20}
                       color="#2596be"
-                      onPress={handleAddFriend}
+                      onPress={() => handleAddFriend(item)}
                     />
                   )}
                 </>
@@ -149,13 +134,13 @@ const MySchedule = ({ navigation, exploreEvents }) => {
                     name="edit"
                     size={24}
                     color="blue"
-                    onPress={handleEdit}
+                    onPress={() => handleEdit(item)}
                   />
                   <MaterialIconstyled
                     name="delete"
                     size={24}
                     color="red"
-                    onPress={handleDelete}
+                    onPress={() => handleDelete(item)}
                   />
                 </Right>
               )}
