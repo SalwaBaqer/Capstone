@@ -10,6 +10,34 @@ export const theme = {
   blueish: "#00A699",
 };
 
+//MySchedule
+export const AgendaStyled = styled.View`
+  flex: 1;
+`;
+
+export const RednerItemButton = styled.TouchableOpacity`
+  margin-right: 10;
+  margin-top: 17;
+`;
+
+export const RenderItemStyled = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const RenderItemImageStyled = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+`;
+
+export const RenderEmptyDateStyled = styled.View`
+  height: 15px;
+  flex: 1;
+  padding-top: 30px;
+`;
+
 //Profile
 export const ProfileWrapper = styled.View`
   margin-top: 50px;
