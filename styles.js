@@ -1,5 +1,11 @@
 import styled from "styled-components/native";
 import { Icon, Button } from "native-base";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons,
+  AntDesign,
+} from "@expo/vector-icons";
 
 export const theme = {
   Maincolor: "#FF5A5F", // redish main font color
@@ -36,6 +42,25 @@ export const RenderEmptyDateStyled = styled.View`
   height: 15px;
   flex: 1;
   padding-top: 30px;
+`;
+
+export const Dotsiconstyled = styled(MaterialCommunityIcons)`
+  margin-bottom: 5px;
+`;
+
+export const MaterialIconstyled = styled(MaterialIcons)`
+  margin-bottom: 5px;
+`;
+
+export const Ioniconstyled = styled(Ionicons)`
+  margin-bottom: 5px;
+`;
+export const AntDesignstyled = styled(AntDesign)`
+  margin-bottom: 5px;
+`;
+
+export const TextStyled = styled.Text`
+  margin-bottom: 5px;
 `;
 
 //Profile

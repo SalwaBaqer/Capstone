@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import { Agenda } from "react-native-calendars";
 import { Card } from "react-native-paper";
-import { Text } from "native-base";
+import { Text, Right, ListItem, Left } from "native-base";
 import { observer } from "mobx-react";
+//react-native
+import { Title } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 
 //Stores
 import authStore from "../stores/authStore";
@@ -16,6 +19,9 @@ import {
   RenderItemStyled,
   RenderItemImageStyled,
   RenderEmptyDateStyled,
+  Dotsiconstyled,
+  MaterialIconstyled,
+  TextStyled,
 } from "../styles";
 
 const timeToString = (time) => {
@@ -23,8 +29,19 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = () => {
+const MySchedule = ({ navigation }) => {
   const [items, setItems] = useState({});
+  const [menu, setMenu] = useState(true);
+
+  const handleEdit = () => {
+    setMenu(true);
+    navigation.navigate("EditEventScreen", { oldEvent: item });
+  };
+
+  const handleDelete = () => {
+    setMenu(true);
+    eventStore.deleteEvent(item.id);
+  };
 
   //Just signed in user events display
   const loadItems = (day) => {
@@ -34,8 +51,6 @@ const MySchedule = () => {
     const events = profileEvents.filter(
       (event) => event.date.split("T")[0] === day.dateString
     );
-    console.log("day", day);
-    console.log(" day datestring", day.dateString);
 
     setTimeout(() => {
       for (let i = 0; i < events.length; i++) {
@@ -63,14 +78,42 @@ const MySchedule = () => {
 
   const renderItem = (item) => {
     return (
-      <RednerItemButton>
+      <RednerItemButton
+        onPress={() =>
+          navigation.navigate("EventDetailScreen", { event: item })
+        }
+      >
         <Card>
           <Card.Content>
             <RenderItemStyled>
-              <Text>{item.name}</Text>
+              <Text style={{ marginRight: 15 }}>{item.name}</Text>
               <Text>{item.label}</Text>
               <RenderItemImageStyled source={{ uri: item.image }} />
               <Text>{authStore.user.username}</Text>
+              {menu ? (
+                <Dotsiconstyled
+                  name="dots-horizontal"
+                  size={24}
+                  color="gray"
+                  onPress={() => setMenu(false)}
+                />
+              ) : (
+                <Right>
+                  <TextStyled onPress={() => setMenu(true)}>Cancel</TextStyled>
+                  <MaterialIconstyled
+                    name="edit"
+                    size={24}
+                    color="blue"
+                    onPress={handleEdit}
+                  />
+                  <MaterialIconstyled
+                    name="delete"
+                    size={24}
+                    color="red"
+                    onPress={handleDelete}
+                  />
+                </Right>
+              )}
             </RenderItemStyled>
           </Card.Content>
         </Card>

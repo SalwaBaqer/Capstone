@@ -49,8 +49,8 @@ const Profile = ({ navigation }) => {
         <ProfileBio>{myProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      {/* <MySchedule /> */}
-      <List navigation={navigation} />
+      <MySchedule navigation={navigation} />
+      {/* <List navigation={navigation} /> */}
     </>
   );
 };
