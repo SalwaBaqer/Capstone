@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState } from "react";
 import { List, View } from "native-base";
-import { Text } from "react-native";
+import { Text } from "react-native"; // unused import
 import { SearchBar } from "react-native-elements";
 //Stores
 import authStore from "../stores/authStore";

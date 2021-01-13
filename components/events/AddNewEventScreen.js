@@ -1,11 +1,11 @@
 //react
-import { View, Text, ListItem } from "native-base";
+import { View, Text, ListItem } from "native-base"; // unused imports
 import React, { useState, useEffect } from "react";
 
 //Image Picker
 import { Button, Image, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
+import Constants from "expo-constants"; // unused imports
 
 //react-native
 import { Switch } from "react-native";
@@ -14,7 +14,7 @@ import { Switch } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 //Calendar
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { Calendar, CalendarList, Agenda } from "react-native-calendars"; // unused imports
 //stores
 import eventStore from "../../stores/eventStore";
 
@@ -88,6 +88,8 @@ const AddNewEventScreen = ({ navigation }) => {
     }
   };
 
+  // see if you can make this code smaller. This is low priority, but if you get the chance, see how you can make this return below smaller and easier to read.
+
   return (
     <View style={{ marginTop: 50, marginRight: 20, marginLeft: 20 }}>
       <LabelStyled>Private</LabelStyled>
@@ -107,11 +109,12 @@ const AddNewEventScreen = ({ navigation }) => {
       <LabelStyled>Label</LabelStyled>
       <DropDownPicker
         items={[
+          // should probably move this array of labels to above the return, and use it here.
           { label: "Exercise", value: "Exercise" },
           { label: "Fun", value: "Fun" },
           { label: "Food", value: "Food" },
           { label: "Social", value: "Social" },
-          { label: "Madetation", value: "Madetation" },
+          { label: "Madetation", value: "Madetation" }, // Meditation**
           { label: "Therapy", value: "Therapy" },
           { label: "Travel", value: "Travel" },
           { label: "Technology", value: "Technology" },
