@@ -3,7 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
-import Activity from "../Activity";
+import Activity from "../activity/Activity";
 
 const ActivityStack = createStackNavigator();
 

@@ -25,7 +25,9 @@ const MyTabs = () => {
             iconName = focused ? "compass" : "compass-outline";
           } else if (route.name === "AddNewEventScreen") {
             iconName = focused ? "add" : "add";
-          } else iconName = focused ? "person" : "person-outline";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "person" : "person-outline";
+          } else iconName = focused ? "notifications" : "notifications-outline";
 
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;

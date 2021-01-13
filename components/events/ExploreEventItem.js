@@ -20,7 +20,10 @@ const Item = ({ event, navigation }) => {
     if (addFriend) {
       friendStore.SendFriendReq(event.userId);
       setAddFriend(false);
-    } else setAddFriend(true);
+    } else {
+      friendStore.WithdrawFriendReq(event.userId);
+      setAddFriend(true);
+    }
   };
 
   return (
@@ -33,14 +36,14 @@ const Item = ({ event, navigation }) => {
         {addFriend ? (
           <Ioniconstyled
             name={"md-person-add"}
-            size={20}
+            size={30}
             color="#2596be"
             onPress={handleAddFriend}
           />
         ) : (
           <AntDesignstyled
             name={"clockcircle"}
-            size={20}
+            size={30}
             color="#2596be"
             onPress={handleAddFriend}
           />
