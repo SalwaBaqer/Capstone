@@ -34,8 +34,6 @@ const Profile = ({ navigation, route }) => {
 
   if (profileStore.loading) return <Spinner />;
 
-  // const myProfile = profileStore.profiles;
-
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>

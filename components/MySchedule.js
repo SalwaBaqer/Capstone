@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 //Stores
 import authStore from "../stores/authStore";
 import eventStore from "../stores/eventStore";
+import friendStore from "../stores/friendStore";
 // import profileStore from "../stores/profileStore";
 
 //styles
@@ -20,6 +21,7 @@ import {
   RenderEmptyDateStyled,
   Dotsiconstyled,
   MaterialIconstyled,
+  Ioniconstyled,
   TextStyled,
 } from "../styles";
 
@@ -31,6 +33,14 @@ const timeToString = (time) => {
 const MySchedule = ({ navigation, exploreEvents }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
+  const [addFriend, setAddFriend] = useState(true);
+
+  const handleAddFriend = () => {
+    if (addFriend) {
+      friendStore.SendFriendReq(item.userId);
+      setAddFriend(false);
+    } else setAddFriend(true);
+  };
 
   const handleEdit = (item) => {
     setMenu(true);
@@ -84,11 +94,6 @@ const MySchedule = ({ navigation, exploreEvents }) => {
   };
 
   const renderItem = (item) => {
-    // console.log("item user id value =", item.userId);
-    // if (profileStore.loading) return <Spinner />;
-    // const itemProfile = profileStore.getProfileById(item.userId);
-
-    // console.log("item profile id", itemProfile);
     return (
       <RednerItemButton
         onPress={() =>
@@ -113,7 +118,23 @@ const MySchedule = ({ navigation, exploreEvents }) => {
               </TouchableOpacity>
               {/* <Text>{itemProfile.username}</Text> */}
               {exploreEvents ? (
-                <></>
+                <>
+                  {addFriend ? (
+                    <Ioniconstyled
+                      name={"md-person-add"}
+                      size={20}
+                      color="#2596be"
+                      onPress={handleAddFriend}
+                    />
+                  ) : (
+                    <AntDesignstyled
+                      name={"clockcircle"}
+                      size={20}
+                      color="#2596be"
+                      onPress={handleAddFriend}
+                    />
+                  )}
+                </>
               ) : menu ? (
                 <Dotsiconstyled
                   name="dots-horizontal"
