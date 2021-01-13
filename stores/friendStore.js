@@ -1,5 +1,6 @@
 //mobx
 import { makeAutoObservable } from "mobx";
+import authStore from "./authStore";
 
 //instance
 import instance from "./instance";
@@ -16,6 +17,7 @@ class FriendStore {
     try {
       const response = await instance.post(`/friend/sendRequest/${user2Id}`);
       this.friends.push(response.data);
+      console.log("send req ", this.friends);
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -25,7 +27,12 @@ class FriendStore {
   WithdrawFriendReq = async (user2Id) => {
     try {
       const response = await instance.put(`/friend/withdrawRequest/${user2Id}`);
-      this.friends.push(response.data);
+      console.log("user2Id", user2Id, " authStore id", authStore.user.id);
+      this.friends = this.friends.filter(
+        (friend) =>
+          friend.user2Id === user2Id && friend.actionUser === authStore.user.id
+      );
+      console.log("friends withdraw", this.friends);
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
