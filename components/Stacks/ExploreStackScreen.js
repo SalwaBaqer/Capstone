@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Explore from "../Explore";
 import SearchBar from "../SearchBar";
 import EventDetailScreen from "../events/EventDetailScreen";
+import ExploreProfile from "../ExploreProfile";
 
 const ExploreStack = createStackNavigator();
 
@@ -15,6 +16,11 @@ const ExploreStackScreen = () => {
       <ExploreStack.Screen
         name="ExploreScreen"
         component={Explore}
+        // options={{ headerShown: false }}
+      />
+      <ExploreStack.Screen
+        name="ExploreProfileScreen"
+        component={ExploreProfile}
         // options={{ headerShown: false }}
       />
 

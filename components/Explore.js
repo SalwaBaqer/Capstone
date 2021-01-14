@@ -48,7 +48,6 @@ const Explore = ({ navigation }) => {
           exploreEvents={exploreEvents}
           sideBar={sideBar}
         />
-        // <ExploreEvents navigation={navigation} />
       )}
     </>
   );

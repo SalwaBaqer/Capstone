@@ -21,15 +21,16 @@ import {
 } from "../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const { user } = route.params;
+
   if (!authStore.user) return <Spinner />;
-  const userProfile = profileStore.getProfileById(
-    route.params?.userId ? route.params.userId : authStore.user.id
-  );
+
+  const userProfile = profileStore.getProfileById(user.id);
 
   if (profileStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter(
-    (event) => event.userId === authStore.user.id
+    (event) => event.userId === user.id
   );
 
   console.log(profileEvents);
@@ -38,7 +39,7 @@ const ExploreProfile = ({ navigation, route }) => {
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <ProfileImage source={{ uri: userProfile.image }} />
-        <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
+        <ProfileUsernameStyled>{user.username}</ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
