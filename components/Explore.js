@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState } from "react";
 import { List, View } from "native-base";
-import { Text } from "react-native";
+import { observer } from "mobx-react";
 import { SearchBar } from "react-native-elements";
 //Stores
 import authStore from "../stores/authStore";
@@ -9,7 +9,6 @@ import eventStore from "../stores/eventStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
-import ExploreEvents from "./events/ExploreEvents";
 import MySchedule from "./MySchedule";
 
 const Explore = ({ navigation }) => {
@@ -27,8 +26,6 @@ const Explore = ({ navigation }) => {
     (event) => event.userId !== authStore.user.id && !event.isPrivate
   );
 
-  const sideBar = true;
-
   return (
     <>
       <SearchBar
@@ -43,14 +40,10 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <MySchedule
-          navigation={navigation}
-          exploreEvents={exploreEvents}
-          sideBar={sideBar}
-        />
+        <MySchedule navigation={navigation} exploreEvents={exploreEvents} />
       )}
     </>
   );
 };
 
-export default Explore;
+export default observer(Explore);

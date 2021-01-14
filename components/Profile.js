@@ -1,12 +1,10 @@
 //Libraries
 import React from "react";
-import { Text } from "react-native";
 import { observer } from "mobx-react";
 import { Left, Right, Spinner, Item } from "native-base";
 
 //Components
 import MySchedule from "./MySchedule";
-import List from "./events/List";
 
 //Buttons
 import EditProfileButton from "./buttons/EditProfileButton";
@@ -38,6 +36,8 @@ const Profile = ({ navigation }) => {
     (event) => event.userId === authStore.user.id
   );
 
+  // const sideBar = true;
+
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
@@ -49,12 +49,16 @@ const Profile = ({ navigation }) => {
             <SignoutButton navigation={navigation} />
           </Right>
         </Item>
-        <ProfileImage source={{ uri: myProfile.image }} />
+        <ProfileImage source={{ uri: authStore.user.image }} />
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
-        <ProfileBio>{myProfile.bio}</ProfileBio>
+        <ProfileBio>{authStore.user.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
+      <MySchedule
+        navigation={navigation}
+        exploreEvents={profileEvents}
+        // sideBar={sideBar}
+      />
     </>
   );
 };
