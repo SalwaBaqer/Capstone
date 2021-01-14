@@ -19,11 +19,11 @@ const ActivityList = ({ navigation }) => {
     (friend) => friend.user2Id === authStore.user.id && friend.status === 0
   );
 
-  const user = authStore.users.filter(
-    (user) => user.id === friendList[0].actionUser
-  );
+  // const user = authStore.users.filter(
+  //   (user) => user.id === friendList[0].actionUser
+  // );
 
-  console.log("action user ", user);
+  // console.log("action user ", user);
 
   return <ScrollView></ScrollView>;
 };

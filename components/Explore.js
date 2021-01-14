@@ -1,6 +1,6 @@
 //Libraries
 import React, { useState } from "react";
-import { List, View } from "native-base";
+import { List, View, Spinner } from "native-base";
 import { observer } from "mobx-react";
 import { SearchBar } from "react-native-elements";
 //Stores
@@ -12,6 +12,8 @@ import UsernameItem from "./UsernameItem";
 import MySchedule from "./MySchedule";
 
 const Explore = ({ navigation }) => {
+  if (!authStore.user) return <Spinner />;
+
   const [search, updateSearch] = useState("");
 
   const filteredUsernames = authStore.users.filter((user) =>

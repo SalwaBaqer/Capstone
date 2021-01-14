@@ -27,10 +27,9 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, exploreEvents }) => {
+const MySchedule = ({ navigation, exploreEvents, timeline }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
-  // const { sideBar } = route.params;
 
   const handleEdit = (item) => {
     setMenu(true);
@@ -82,9 +81,12 @@ const MySchedule = ({ navigation, exploreEvents }) => {
               <Text>{item.label}</Text>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("ExploreProfileScreen", {
-                    userId: item.userId,
-                  })
+                  navigation.navigate(
+                    timeline ? "TimelineProfileScreen" : "ExploreProfileScreen",
+                    {
+                      userId: item.userId,
+                    }
+                  )
                 }
               >
                 <RenderItemImageStyled source={{ uri: item.image }} />
