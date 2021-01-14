@@ -7,10 +7,22 @@ import instance from "./instance";
 
 class FriendStore {
   friends = [];
+  loading = true;
 
   constructor() {
     makeAutoObservable(this);
   } //end constructor
+
+  //fetch friends
+  fetchFriends = async () => {
+    try {
+      const response = await instance.get(`/friend`);
+      this.friends = response.data;
+      this.loading = false;
+    } catch (error) {
+      console.error("friendStore --> FetchFriends", error);
+    }
+  }; //end fetch friends
 
   //send friend request
   SendFriendReq = async (user2Id) => {
@@ -72,5 +84,5 @@ class FriendStore {
 } //end class
 
 const friendStore = new FriendStore();
-
+friendStore.fetchFriends();
 export default friendStore;
