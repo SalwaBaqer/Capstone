@@ -95,7 +95,7 @@ const EditEventScreen = ({ navigation, route }) => {
         trackColor={{ false: "#767577", true: "#3492eb" }}
         thumbColor={event.IsPrivate ? "#f0f7fc" : "#f4f3f4"}
         onValueChange={toggleSwitch}
-        value={event.isPrivate}
+        value={isEnabled}
       />
 
       <LabelStyled>Title</LabelStyled>
