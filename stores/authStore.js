@@ -27,8 +27,8 @@ class AuthStore {
     this.user = decode(token);
   };
 
-  //*************delete it if you are not using it************* BY SALWA AND HIBA
-  getUserbyId = (userId) => this.users.find((user) => user.userId === userId);
+  getUserbyId = (userId) => this.users.find((user) => user.id === userId);
+
 
   signup = async (userData) => {
     try {

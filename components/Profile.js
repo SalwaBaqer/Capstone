@@ -1,12 +1,10 @@
 //Libraries
 import React from "react";
-import { Text } from "react-native";
 import { observer } from "mobx-react";
 import { Left, Right, Spinner, Item } from "native-base";
 
 //Components
 import MySchedule from "./MySchedule";
-import List from "./events/List";
 
 //Buttons
 import EditProfileButton from "./buttons/EditProfileButton";
@@ -26,38 +24,41 @@ import {
   NumberOfFriendsStyled,
 } from "../styles";
 
-const Profile = ({ navigation, route }) => {
+const Profile = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
-  const userProfile = profileStore.getProfileById(
-    route.params?.userId ? route.params.userId : authStore.user.id
-  );
+
+  const myProfile = profileStore.getProfileById(authStore.user.id);
 
   if (profileStore.loading) return <Spinner />;
 
+  //Show Signed in user events --> My Schedule
   const profileEvents = eventStore.events.filter(
     (event) => event.userId === authStore.user.id
   );
 
-  console.log(profileEvents);
+  // const sideBar = true;
 
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <Item>
           <Left>
-            <EditProfileButton oldProfile={userProfile} />
+            <EditProfileButton oldProfile={myProfile} />
           </Left>
           <Right>
             <SignoutButton navigation={navigation} />
           </Right>
         </Item>
-        <ProfileImage source={{ uri: userProfile.image }} />
+        <ProfileImage source={{ uri: authStore.user.image }} />
         <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
-        <ProfileBio>{userProfile.bio}</ProfileBio>
+        <ProfileBio>{authStore.user.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
-      {/* <List navigation={navigation} /> */}
+      <MySchedule
+        navigation={navigation}
+        exploreEvents={profileEvents}
+        // sideBar={sideBar}
+      />
     </>
   );
 };

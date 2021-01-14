@@ -9,7 +9,6 @@ import { observer } from "mobx-react";
 //Stores
 import eventStore from "../stores/eventStore";
 import friendStore from "../stores/friendStore";
-// import profileStore from "../stores/profileStore";
 
 //styles
 import {
@@ -20,8 +19,6 @@ import {
   RenderEmptyDateStyled,
   Dotsiconstyled,
   MaterialIconstyled,
-  Ioniconstyled,
-  AntDesignstyled,
   TextStyled,
 } from "../styles";
 
@@ -30,17 +27,10 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, exploreEvents, sideBar }) => {
+const MySchedule = ({ navigation, exploreEvents }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
-  const [addFriend, setAddFriend] = useState(true);
-
-  const handleAddFriend = (item) => {
-    if (addFriend) {
-      friendStore.SendFriendReq(item.userId);
-      setAddFriend(false);
-    } else setAddFriend(true);
-  };
+  // const { sideBar } = route.params;
 
   const handleEdit = (item) => {
     setMenu(true);
@@ -92,35 +82,14 @@ const MySchedule = ({ navigation, exploreEvents, sideBar }) => {
               <Text>{item.label}</Text>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate(
-                    "Profile",
-                    { screen: "ProfileScreen" },
-                    { userId: item.userId }
-                  )
+                  navigation.navigate("ExploreProfileScreen", {
+                    userId: item.userId,
+                  })
                 }
               >
                 <RenderItemImageStyled source={{ uri: item.image }} />
               </TouchableOpacity>
-              {/* <Text>{itemProfile.username}</Text> */}
-              {sideBar ? (
-                <>
-                  {addFriend ? (
-                    <Ioniconstyled
-                      name={"md-person-add"}
-                      size={20}
-                      color="#2596be"
-                      onPress={handleAddFriend}
-                    />
-                  ) : (
-                    <AntDesignstyled
-                      name={"clockcircle"}
-                      size={20}
-                      color="#2596be"
-                      onPress={() => handleAddFriend(item)}
-                    />
-                  )}
-                </>
-              ) : menu ? (
+              {menu ? (
                 <Dotsiconstyled
                   name="dots-horizontal"
                   size={24}

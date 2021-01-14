@@ -11,6 +11,7 @@ import UsernameItem from "./UsernameItem";
 const SearchPage = () => {
   const [search, updateSearch] = useState("");
 
+  //Don't show authstore.user
   const filteredUsernames = authStore.users.filter((user) =>
     user.username.toLowerCase().includes(search.toLowerCase())
   );

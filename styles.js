@@ -53,10 +53,18 @@ export const MaterialIconstyled = styled(MaterialIcons)`
 `;
 
 export const Ioniconstyled = styled(Ionicons)`
+  margin-top: 10px;
   margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 50px;
 `;
 export const AntDesignstyled = styled(AntDesign)`
+  margin-top: 10px;
   margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 50px;
 `;
 
 export const TextStyled = styled.Text`
