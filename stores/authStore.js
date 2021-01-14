@@ -27,7 +27,7 @@ class AuthStore {
     this.user = decode(token);
   };
 
-  getUserbyId = (userId) => this.users.find((user) => user.userId === userId);
+  getUserbyId = (userId) => this.users.find((user) => user.id === userId);
 
   signup = async (userData) => {
     try {
