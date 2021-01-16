@@ -50,7 +50,9 @@ const Profile = ({ navigation }) => {
           </Right>
         </Item>
         <ProfileImage source={{ uri: authStore.user.image }} />
-        <ProfileUsernameStyled>{authStore.user.username}</ProfileUsernameStyled>
+        <ProfileUsernameStyled>
+          @{authStore.user.username}
+        </ProfileUsernameStyled>
         <ProfileBio>{authStore.user.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>

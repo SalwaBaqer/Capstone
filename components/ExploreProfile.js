@@ -7,6 +7,7 @@ import { Button, Spinner, Text } from "native-base";
 import MySchedule from "./MySchedule";
 
 //Stores
+import authStore from "../stores/authStore";
 import profileStore from "../stores/profileStore";
 import eventStore from "../stores/eventStore";
 import friendStore from "../stores/friendStore";
@@ -26,8 +27,12 @@ import { Title } from "react-native-paper";
 
 const ExploreProfile = ({ navigation, route }) => {
   const [isPending, setIsPending] = useState(false);
-  const { user } = route.params; //from search bar
-  const { userId } = route.params; //from explore itmes
+  const { user } = route.params;
+  const { userId } = route.params;
+
+  const itemUser = authStore.getUserbyId(userId);
+
+  profileStore.getProfileById(userId ? userId : user.id);
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
@@ -69,8 +74,11 @@ const ExploreProfile = ({ navigation, route }) => {
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>
-          {userId ? userId.username : user.id.username}
+          @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
+        {/* <ProfileUsernameStyled>
+          {userId ? userId.username : user.id.username}
+        </ProfileUsernameStyled> */}
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
         <>

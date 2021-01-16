@@ -21,6 +21,7 @@ import {
   MaterialIconstyled,
   TextStyled,
 } from "../styles";
+import authStore from "../stores/authStore";
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -68,6 +69,8 @@ const MySchedule = ({ navigation, exploreEvents, timeline }) => {
   };
 
   const renderItem = (item) => {
+    const itemUsername = authStore.getUserbyId(item.userId);
+
     return (
       <RednerItemButton
         onPress={() =>
@@ -78,7 +81,8 @@ const MySchedule = ({ navigation, exploreEvents, timeline }) => {
           <Card.Content>
             <RenderItemStyled>
               <Text style={{ marginRight: 15 }}>{item.name}</Text>
-              <Text>{item.label}</Text>
+              {/* <Text>{item.label}</Text> */}
+              <RenderItemImageStyled source={{ uri: item.image }} />
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate(
@@ -89,7 +93,7 @@ const MySchedule = ({ navigation, exploreEvents, timeline }) => {
                   )
                 }
               >
-                <RenderItemImageStyled source={{ uri: item.image }} />
+                <Text>@{itemUsername.username}</Text>
               </TouchableOpacity>
               {menu ? (
                 <Dotsiconstyled

@@ -7,6 +7,7 @@ import { Spinner, Text } from "native-base";
 import MySchedule from "../MySchedule";
 
 //Stores
+import authStore from "../../stores/authStore";
 import profileStore from "../../stores/profileStore";
 import eventStore from "../../stores/eventStore";
 import friendStore from "../../stores/friendStore";
@@ -25,6 +26,8 @@ import {
 const TimelineProfile = ({ navigation, route }) => {
   const [addFriend, setAddFriend] = useState(true);
   const { userId } = route.params;
+
+  const itemUser = authStore.getUserbyId(userId);
 
   profileStore.getProfileById(userId);
 
@@ -46,7 +49,7 @@ const TimelineProfile = ({ navigation, route }) => {
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
         <ProfileImage source={{ uri: userProfile.image }} />
-        <ProfileUsernameStyled>{userId.username}</ProfileUsernameStyled>
+        <ProfileUsernameStyled>@{itemUser.username}</ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
         {addFriend ? (
