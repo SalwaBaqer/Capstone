@@ -27,9 +27,14 @@ class FriendStore {
   //send friend request
   SendFriendReq = async (user2Id) => {
     try {
+      // const foundUser = this.friends.find(
+      //   (friend) => friend.user2Id === user2Id
+      // );
+      // if (!foundUser) {
+      console.log("add");
       const response = await instance.post(`/friend/sendRequest/${user2Id}`);
       this.friends.push(response.data);
-      console.log("send req ", this.friends);
+      // }
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -39,12 +44,10 @@ class FriendStore {
   WithdrawFriendReq = async (user2Id) => {
     try {
       const response = await instance.put(`/friend/withdrawRequest/${user2Id}`);
-      console.log("user2Id", user2Id, " authStore id", authStore.user.id);
       this.friends = this.friends.filter(
         (friend) =>
           friend.user2Id === user2Id && friend.actionUser === authStore.user.id
       );
-      console.log("friends withdraw", this.friends);
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -67,8 +70,13 @@ class FriendStore {
   }; //end decline incoming requests
 
   //delete firend
-  DeleteFriend = async () => {
+  DeleteFriend = async (user2Id) => {
     try {
+      await instance.delete(`/friend/deleteFriend/${user2Id}`);
+      this.friends = this.friends.filter(
+        (friend) =>
+          friend.user2Id === user2Id && friend.actionUser === authStore.user.id
+      );
     } catch (error) {
       console.error("friendStore --> DeleteFriend", error);
     }
