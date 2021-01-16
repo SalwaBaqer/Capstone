@@ -8,7 +8,6 @@ import { observer } from "mobx-react";
 
 //Stores
 import eventStore from "../stores/eventStore";
-import friendStore from "../stores/friendStore";
 
 //styles
 import {

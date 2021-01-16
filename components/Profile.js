@@ -36,8 +36,6 @@ const Profile = ({ navigation }) => {
     (event) => event.userId === authStore.user.id
   );
 
-  // const sideBar = true;
-
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
@@ -56,11 +54,7 @@ const Profile = ({ navigation }) => {
         <ProfileBio>{authStore.user.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      <MySchedule
-        navigation={navigation}
-        exploreEvents={profileEvents}
-        // sideBar={sideBar}
-      />
+      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
     </>
   );
 };
