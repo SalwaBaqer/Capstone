@@ -4,12 +4,12 @@ import { List, View, Spinner } from "native-base";
 import { observer } from "mobx-react";
 import { SearchBar } from "react-native-elements";
 //Stores
-import authStore from "../stores/authStore";
-import eventStore from "../stores/eventStore";
+import authStore from "../../stores/authStore";
+import eventStore from "../../stores/eventStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
-import Schedule from "./Schedule";
+import Schedule from "../Schedule";
 
 const Explore = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;

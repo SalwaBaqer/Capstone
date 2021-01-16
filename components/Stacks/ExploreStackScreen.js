@@ -3,32 +3,29 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
-import Explore from "../Explore";
-import SearchBar from "../SearchBar";
+import SearchPage from "../explore/SearchPage";
+import Explore from "../explore/Explore";
+import ExploreProfile from "../explore/ExploreProfile";
 import EventDetailScreen from "../events/EventDetailScreen";
-import ExploreProfile from "../ExploreProfile";
 
 const ExploreStack = createStackNavigator();
 
 const ExploreStackScreen = () => {
   return (
-    <ExploreStack.Navigator initialRouteName="ExploreScreen" header={SearchBar}>
-      <ExploreStack.Screen
-        name="ExploreScreen"
-        component={Explore}
-        // options={{ headerShown: false }}
-      />
+    <ExploreStack.Navigator
+      initialRouteName="ExploreScreen"
+      header={SearchPage}
+    >
+      <ExploreStack.Screen name="ExploreScreen" component={Explore} />
       <ExploreStack.Screen
         name="ExploreProfileScreen"
         component={ExploreProfile}
-        // options={{ headerShown: false }}
       />
 
       <ExploreStack.Screen
         name="EventDetailScreen"
         component={EventDetailScreen}
         options={{
-          headerTitle: null,
           headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,

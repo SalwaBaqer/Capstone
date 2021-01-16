@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Spinner, Text } from "native-base";
+import { Spinner } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
@@ -73,4 +73,4 @@ const TimelineProfile = ({ navigation, route }) => {
   );
 };
 
-export default TimelineProfile;
+export default observer(TimelineProfile);

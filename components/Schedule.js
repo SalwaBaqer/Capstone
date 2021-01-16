@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 
 //Stores
 import eventStore from "../stores/eventStore";
+import authStore from "../stores/authStore";
 
 //styles
 import {
@@ -20,7 +21,6 @@ import {
   MaterialIconstyled,
   TextStyled,
 } from "../styles";
-import authStore from "../stores/authStore";
 
 const timeToString = (time) => {
   const date = new Date(time);

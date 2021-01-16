@@ -1,16 +1,16 @@
 //Libraries
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Button, Spinner, Text } from "native-base";
+import { Spinner } from "native-base";
 
 //Components
-import Schedule from "./Schedule";
+import Schedule from "../Schedule";
 
 //Stores
-import authStore from "../stores/authStore";
-import profileStore from "../stores/profileStore";
-import eventStore from "../stores/eventStore";
-import friendStore from "../stores/friendStore";
+import authStore from "../../stores/authStore";
+import profileStore from "../../stores/profileStore";
+import eventStore from "../../stores/eventStore";
+import friendStore from "../../stores/friendStore";
 
 //Styles
 import {
@@ -21,9 +21,7 @@ import {
   NumberOfFriendsStyled,
   Ioniconstyled,
   AntDesignstyled,
-} from "../styles";
-import authStore from "../stores/authStore";
-import { Title } from "react-native-paper";
+} from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
   const [isPending, setIsPending] = useState(false);
@@ -76,9 +74,6 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
-        {/* <ProfileUsernameStyled>
-          {userId ? userId.username : user.id.username}
-        </ProfileUsernameStyled> */}
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
         <>
