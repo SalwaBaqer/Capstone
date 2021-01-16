@@ -80,7 +80,6 @@ const Schedule = ({ navigation, exploreEvents, timeline }) => {
           <Card.Content>
             <RenderItemStyled>
               <Text style={{ marginRight: 15 }}>{item.name}</Text>
-              {/* <Text>{item.label}</Text> */}
               <RenderItemImageStyled source={{ uri: item.image }} />
               <TouchableOpacity
                 onPress={() =>

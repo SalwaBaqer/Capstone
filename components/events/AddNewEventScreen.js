@@ -1,6 +1,7 @@
 //react
 import { View, Text, ListItem } from "native-base";
 import React, { useState, useEffect } from "react";
+import { observer } from "mobx-react";
 
 //Image Picker
 import { Button, Image, Platform } from "react-native";
@@ -220,4 +221,4 @@ const AddNewEventScreen = ({ navigation }) => {
   );
 };
 
-export default AddNewEventScreen;
+export default observer(AddNewEventScreen);
