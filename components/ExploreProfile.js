@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { Button, Spinner, Text } from "native-base";
 
 //Components
-import MySchedule from "./MySchedule";
+import Schedule from "./Schedule";
 
 //Stores
 import authStore from "../stores/authStore";
@@ -106,7 +106,7 @@ const ExploreProfile = ({ navigation, route }) => {
           )}
         </>
       </ProfileWrapper>
-      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
+      <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import MySchedule from "../MySchedule";
+import Schedule from "../Schedule";
 import { observer } from "mobx-react";
 import { Spinner } from "native-base";
 
@@ -22,7 +22,7 @@ const Timeline = ({ navigation }) => {
 
   return (
     <>
-      <MySchedule
+      <Schedule
         navigation={navigation}
         exploreEvents={exploreEvents}
         timeline={timeline}

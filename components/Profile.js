@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { Left, Right, Spinner, Item } from "native-base";
 
 //Components
-import MySchedule from "./MySchedule";
+import Schedule from "./Schedule";
 
 //Buttons
 import EditProfileButton from "./buttons/EditProfileButton";
@@ -54,7 +54,7 @@ const Profile = ({ navigation }) => {
         <ProfileBio>{authStore.user.bio}</ProfileBio>
         <NumberOfFriendsStyled># Friends</NumberOfFriendsStyled>
       </ProfileWrapper>
-      <MySchedule navigation={navigation} exploreEvents={profileEvents} />
+      <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>
   );
 };

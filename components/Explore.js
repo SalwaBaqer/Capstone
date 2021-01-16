@@ -9,7 +9,7 @@ import eventStore from "../stores/eventStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
-import MySchedule from "./MySchedule";
+import Schedule from "./Schedule";
 
 const Explore = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
@@ -42,7 +42,7 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <MySchedule navigation={navigation} exploreEvents={exploreEvents} />
+        <Schedule navigation={navigation} exploreEvents={exploreEvents} />
       )}
     </>
   );

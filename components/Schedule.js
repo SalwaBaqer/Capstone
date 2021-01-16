@@ -27,7 +27,7 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, exploreEvents, timeline }) => {
+const Schedule = ({ navigation, exploreEvents, timeline }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
 
@@ -149,4 +149,4 @@ const MySchedule = ({ navigation, exploreEvents, timeline }) => {
   );
 };
 
-export default observer(MySchedule);
+export default observer(Schedule);
