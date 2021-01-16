@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Spinner, Text } from "native-base";
+import { Button, Spinner, Text } from "native-base";
 
 //Components
 import MySchedule from "./MySchedule";
@@ -21,26 +21,47 @@ import {
   Ioniconstyled,
   AntDesignstyled,
 } from "../styles";
+import authStore from "../stores/authStore";
+import { Title } from "react-native-paper";
 
 const ExploreProfile = ({ navigation, route }) => {
-  const [addFriend, setAddFriend] = useState(true);
-  const { user } = route.params;
-  const { userId } = route.params;
+  const [isPending, setIsPending] = useState(false);
+  const { user } = route.params; //from search bar
+  const { userId } = route.params; //from explore itmes
 
-  profileStore.getProfileById(userId ? userId : user.id);
-
+  const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
 
-  if (profileStore.loading) return <Spinner />;
+  if (profileStore.loading || friendStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter((event) =>
     userId ? event.userId === userId : event.userId === user.id
   );
+
+  profileStore.getProfileById(userId ? userId : user.id);
+  //find if req exist
+  const foundreq = friendStore.friends.find(
+    (friend) => friend.user2Id === id && friend.actionUser === authStore.user.id
+  );
+
+  //handle add and withdraw friendRequest
   const handleAddFriend = () => {
-    if (addFriend) {
+    if (!isPending) {
       friendStore.SendFriendReq(userId ? userId : user.id);
-      setAddFriend(false);
-    } else setAddFriend(true);
+      setIsPending(true);
+    } else {
+      friendStore.WithdrawFriendReq(userId ? userId : user.id);
+      setIsPending(false);
+    }
+  };
+
+  //is Friend?
+  const isFriend = () => {
+    return authStore.user.friends.includes(id);
+  };
+  //handle remove friend  (unfollow)
+  const handleRemoveFriend = () => {
+    friendStore.DeleteFriend(userId ? userId : user.id);
   };
 
   return (
@@ -53,17 +74,24 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
         <>
-          {addFriend ? (
+          {isFriend ? (
             <Ioniconstyled
-              name={"md-person-add"}
-              size={20}
+              name={"ios-person-remove"}
+              size={15}
+              color="red"
+              onPress={handleRemoveFriend}
+            />
+          ) : isPending ? (
+            <AntDesignstyled
+              name={"clockcircle"}
+              size={15}
               color="#2596be"
               onPress={handleAddFriend}
             />
           ) : (
-            <AntDesignstyled
-              name={"clockcircle"}
-              size={20}
+            <Ioniconstyled
+              name={"md-person-add"}
+              size={15}
               color="#2596be"
               onPress={handleAddFriend}
             />
