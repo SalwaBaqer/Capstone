@@ -10,11 +10,9 @@ import authStore from "../../stores/authStore";
 const Timeline = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
 
-  const exploreEvents = eventStore.events.filter(
-    (event) => event.userId === authStore.user.friends[0]
+  const exploreEvents = eventStore.events.filter((event) =>
+    authStore.user.friends.includes(event.userId)
   );
-
-  console.log(exploreEvents);
 
   const timeline = true;
 
