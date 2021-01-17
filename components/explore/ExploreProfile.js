@@ -1,5 +1,5 @@
 //Libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { Spinner } from "native-base";
 
@@ -25,12 +25,11 @@ import {
 
 const ExploreProfile = ({ navigation, route }) => {
   const [isPending, setIsPending] = useState(false);
-  const { user } = route.params;
-  const { userId } = route.params;
-
   const itemUser = authStore.getUserbyId(userId);
-
   profileStore.getProfileById(userId ? userId : user.id);
+  const [isFriend, setIsFriend] = useState(false);
+  const { user } = route.params; //from search bar
+  const { userId } = route.params; //from explore itmes
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
@@ -57,14 +56,29 @@ const ExploreProfile = ({ navigation, route }) => {
       setIsPending(false);
     }
   };
+  const checkFriend = () => {
+    const checkIsFriend = friendStore.friends
+      .filter(
+        (friend) =>
+          (friend.actionUser === authStore.user.id &&
+            friend.user2Id === id &&
+            friend.status === 1) ||
+          (friend.actionUser === id &&
+            friend.user2Id === authStore.user.id &&
+            friend.status === 1)
+      )
+      .find(
+        (friend) =>
+          friend.actionUser === authStore.user.id || friend.user2Id === id
+      );
 
-  //is Friend?
-  const isFriend = () => {
-    return authStore.user.friends.includes(id);
+    return checkIsFriend;
   };
+
   //handle remove friend  (unfollow)
   const handleRemoveFriend = () => {
     friendStore.DeleteFriend(userId ? userId : user.id);
+    authStore.updateUser;
   };
 
   return (
@@ -77,7 +91,7 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
         <>
-          {isFriend ? (
+          {checkFriend() ? (
             <Ioniconstyled
               name={"ios-person-remove"}
               size={15}
