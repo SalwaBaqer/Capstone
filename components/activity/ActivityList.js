@@ -12,22 +12,42 @@ import ActivityItem from "./ActivityItem";
 
 //native
 import { ScrollView } from "react-native-gesture-handler";
-import { List, Text, Spinner } from "native-base";
+import { List, Spinner, Text } from "native-base";
 
 const ActivityList = ({ navigation }) => {
-  if (!authStore.user) return <Spinner />;
+  if (friendStore.loading) <Spinner />;
+  // We have to add a condition so that if a user doesn't have requests it shows a msg ?
 
-  const friendList = friendStore.friends.filter(
-    (friend) => friend.user2Id === authStore.user.id && friend.status === 0
-  );
-
-  // const user = authStore.users.filter(
-  //   (user) => user.id === friendList[0].actionUser
+  // Fetch Pending Friend Requests > to get username
+  const friendList = friendStore.friends
+    .filter(
+      (friend) => friend.user2Id === authStore.user.id && friend.status === 0
+    )
+    .map((friend) => ({
+      friend,
+      user: authStore.users.find((user) => user.id === friend.user1Id),
+    }));
+  // console.log(
+  //   "🚀 ~ file: ActivityList.js ~ line 30 ~ ActivityList ~ friendList",
+  //   friendList
   // );
 
-  // console.log("action user ", user);
+  const friendlist_ = friendList.map(
+    (friend) => (
+      <ActivityItem
+        friendUsername={friend.user.username}
+        friendId={friend.friend.user1Id}
+        key={friend.id}
+        navigation={navigation}
+      />
+    ) //check if key is unique
+  );
 
-  return <ScrollView></ScrollView>;
+  return (
+    <ScrollView>
+      <List>{friendlist_}</List>
+    </ScrollView>
+  );
 };
 
 export default observer(ActivityList);

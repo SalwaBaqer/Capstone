@@ -54,16 +54,18 @@ class FriendStore {
   }; //end withdraw friend request
 
   //accept incoming requests
-  AcceptFriendReq = async () => {
+  AcceptFriendReq = async (friendId) => {
     try {
+      const responce = await instance.put(`/friend/acceptRequest/${friendId}`);
     } catch (error) {
       console.error("friendStore --> AcceptFriendReq", error);
     }
   }; //end accept incoming requests
 
   //decline incoming requests
-  DeclineFriendReq = async () => {
+  DeclineFriendReq = async (friendId) => {
     try {
+      const responce = await instance.put(`/friend/declineRequest/${friendId}`);
     } catch (error) {
       console.error("friendStore --> DeclineFriendReq", error);
     }
