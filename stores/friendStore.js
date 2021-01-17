@@ -73,10 +73,12 @@ class FriendStore {
   DeleteFriend = async (user2Id) => {
     try {
       await instance.delete(`/friend/deleteFriend/${user2Id}`);
+
       this.friends = this.friends.filter(
         (friend) =>
           friend.user2Id === user2Id && friend.actionUser === authStore.user.id
       );
+      this.fetchFriends();
     } catch (error) {
       console.error("friendStore --> DeleteFriend", error);
     }

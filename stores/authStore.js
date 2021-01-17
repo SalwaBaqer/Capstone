@@ -68,6 +68,11 @@ class AuthStore {
       }
     }
   };
+
+  updateUser = () => {
+    const test = this.users.find((_user) => _user.id === this.user.id);
+    this.user.friends = test.friends;
+  };
 }
 
 const authStore = new AuthStore();
