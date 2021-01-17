@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
 //Stores
-import profileStore from "../stores/profileStore";
+import profileStore from "../../stores/profileStore";
 
 //Styling
 import {
@@ -15,13 +15,13 @@ import {
   AuthTextInput,
   AuthButton,
   AuthButtonText,
-} from "../styles";
+} from "../../styles";
 
 const EditProfile = ({ navigation, route }) => {
+  const { oldProfile } = route.params;
   const [profile, setProfile] = useState({
-    image: route.params?.oldProfile.image,
-    username: route.params?.oldProfile.username,
-    bio: route.params?.oldProfile.bio,
+    image: oldProfile.image,
+    bio: oldProfile.bio,
   });
   console.log(route.params);
 

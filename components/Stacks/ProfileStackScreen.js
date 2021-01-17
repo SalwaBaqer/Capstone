@@ -2,8 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
-import Profile from "../Profile";
-import EditProfile from "../EditProfile";
+import Profile from "../profile/Profile";
+import EditProfile from "../profile/EditProfile";
 import EditEventScreen from "../events/EditEventScreen";
 import EventDetailScreen from "../events/EventDetailScreen";
 

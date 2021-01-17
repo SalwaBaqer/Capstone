@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 
 //Stores
 import eventStore from "../stores/eventStore";
-import friendStore from "../stores/friendStore";
+import authStore from "../stores/authStore";
 
 //styles
 import {
@@ -27,10 +27,9 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const MySchedule = ({ navigation, exploreEvents }) => {
+const Schedule = ({ navigation, exploreEvents, timeline }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
-  // const { sideBar } = route.params;
 
   const handleEdit = (item) => {
     setMenu(true);
@@ -69,6 +68,8 @@ const MySchedule = ({ navigation, exploreEvents }) => {
   };
 
   const renderItem = (item) => {
+    const itemUsername = authStore.getUserbyId(item.userId);
+
     return (
       <RednerItemButton
         onPress={() =>
@@ -79,15 +80,18 @@ const MySchedule = ({ navigation, exploreEvents }) => {
           <Card.Content>
             <RenderItemStyled>
               <Text style={{ marginRight: 15 }}>{item.name}</Text>
-              <Text>{item.label}</Text>
+              <RenderItemImageStyled source={{ uri: item.image }} />
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("ExploreProfileScreen", {
-                    userId: item.userId,
-                  })
+                  navigation.navigate(
+                    timeline ? "TimelineProfileScreen" : "ExploreProfileScreen",
+                    {
+                      userId: item.userId,
+                    }
+                  )
                 }
               >
-                <RenderItemImageStyled source={{ uri: item.image }} />
+                <Text>@{itemUsername.username}</Text>
               </TouchableOpacity>
               {menu ? (
                 <Dotsiconstyled
@@ -144,4 +148,4 @@ const MySchedule = ({ navigation, exploreEvents }) => {
   );
 };
 
-export default observer(MySchedule);
+export default observer(Schedule);

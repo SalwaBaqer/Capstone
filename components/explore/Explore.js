@@ -1,17 +1,19 @@
 //Libraries
 import React, { useState } from "react";
-import { List, View } from "native-base";
+import { List, View, Spinner } from "native-base";
 import { observer } from "mobx-react";
 import { SearchBar } from "react-native-elements";
 //Stores
-import authStore from "../stores/authStore";
-import eventStore from "../stores/eventStore";
+import authStore from "../../stores/authStore";
+import eventStore from "../../stores/eventStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
-import MySchedule from "./MySchedule";
+import Schedule from "../Schedule";
 
 const Explore = ({ navigation }) => {
+  if (!authStore.user) return <Spinner />;
+
   const [search, updateSearch] = useState("");
 
   const filteredUsernames = authStore.users.filter((user) =>
@@ -40,7 +42,7 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <MySchedule navigation={navigation} exploreEvents={exploreEvents} />
+        <Schedule navigation={navigation} exploreEvents={exploreEvents} />
       )}
     </>
   );

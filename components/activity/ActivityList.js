@@ -12,18 +12,20 @@ import ActivityItem from "./ActivityItem";
 
 //native
 import { ScrollView } from "react-native-gesture-handler";
-import { List, Text } from "native-base";
+import { List, Text, Spinner } from "native-base";
 
 const ActivityList = ({ navigation }) => {
+  if (!authStore.user) return <Spinner />;
+
   const friendList = friendStore.friends.filter(
     (friend) => friend.user2Id === authStore.user.id && friend.status === 0
   );
 
-  const user = authStore.users.filter(
-    (user) => user.id === friendList[0].actionUser
-  );
+  // const user = authStore.users.filter(
+  //   (user) => user.id === friendList[0].actionUser
+  // );
 
-  console.log("action user ", user);
+  // console.log("action user ", user);
 
   return <ScrollView></ScrollView>;
 };

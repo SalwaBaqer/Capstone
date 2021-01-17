@@ -1,6 +1,7 @@
 //react
 import { View } from "native-base";
 import React, { useState, useEffect } from "react";
+import { observer } from "mobx-react";
 
 //react-native
 import { Switch } from "react-native";
@@ -223,4 +224,4 @@ const EditEventScreen = ({ navigation, route }) => {
   );
 };
 
-export default EditEventScreen;
+export default observer(EditEventScreen);

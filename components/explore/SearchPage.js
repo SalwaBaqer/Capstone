@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SearchBar } from "react-native-elements";
 
 //Stores
-import authStore from "../stores/authStore";
+import authStore from "../../stores/authStore";
 
 //Components
 import UsernameItem from "./UsernameItem";
@@ -11,7 +11,6 @@ import UsernameItem from "./UsernameItem";
 const SearchPage = () => {
   const [search, updateSearch] = useState("");
 
-  //Don't show authstore.user
   const filteredUsernames = authStore.users.filter((user) =>
     user.username.toLowerCase().includes(search.toLowerCase())
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Icon, Button } from "native-base";
+import { Icon } from "native-base";
 import {
   MaterialCommunityIcons,
   MaterialIcons,
