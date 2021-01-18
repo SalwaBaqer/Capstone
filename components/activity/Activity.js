@@ -6,7 +6,7 @@ import ActivityList from "./ActivityList";
 const Activity = () => {
   return (
     <>
-      <Title>...Under Construction...</Title>
+      <Title>Activity Screen!</Title>
       <ActivityList />
     </>
   );
