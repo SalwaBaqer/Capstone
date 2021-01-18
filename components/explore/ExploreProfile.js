@@ -24,9 +24,11 @@ import {
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const [isPending, setIsPending] = useState(false);
+  if (!authStore.user) return <Spinner />;
+
   const { user } = route.params; //from search bar
   const { userId } = route.params; //from explore itmes
-  const [isPending, setIsPending] = useState(false);
   const itemUser = authStore.getUserbyId(userId);
   profileStore.getProfileById(userId ? userId : user.id);
 
@@ -39,7 +41,6 @@ const ExploreProfile = ({ navigation, route }) => {
     userId ? event.userId === userId : event.userId === user.id
   );
 
-  profileStore.getProfileById(userId ? userId : user.id);
   //find if req exist
   const foundreq = friendStore.friends.find(
     (friend) => friend.user2Id === id && friend.actionUser === authStore.user.id

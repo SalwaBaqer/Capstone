@@ -23,6 +23,7 @@ import {
   ProfileBio,
   NumberOfFriendsStyled,
 } from "../../styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Profile = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
@@ -54,7 +55,12 @@ const Profile = ({ navigation }) => {
           @{authStore.user.username}
         </ProfileUsernameStyled>
         <ProfileBio>{authStore.user.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
+        <TouchableOpacity>
+          <NumberOfFriendsStyled>
+            {authStore.user.friends.length}
+            {authStore.user.friends.length < 2 ? " Friend" : " Friends"}
+          </NumberOfFriendsStyled>
+        </TouchableOpacity>
       </ProfileWrapper>
       <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>
