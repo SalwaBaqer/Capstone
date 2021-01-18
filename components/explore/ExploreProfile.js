@@ -24,12 +24,12 @@ import {
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const { user } = route.params; //from search bar
+  const { userId } = route.params; //from explore items
   const [isPending, setIsPending] = useState(false);
   const itemUser = authStore.getUserbyId(userId);
   profileStore.getProfileById(userId ? userId : user.id);
   const [isFriend, setIsFriend] = useState(false);
-  const { user } = route.params; //from search bar
-  const { userId } = route.params; //from explore itmes
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
