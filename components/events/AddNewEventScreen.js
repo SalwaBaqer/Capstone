@@ -47,14 +47,19 @@ const AddNewEventScreen = ({ navigation }) => {
   });
 
   //search state
-  const [search, updateSearch] = useState(event.tag);
+  const [search, updateSearch] = useState("");
+
+  const tagChanger = (value) => {
+    updateSearch(value);
+    setEvent({ ...event, tag: value });
+  };
 
   const filteredUsernames = authStore.users.filter((user) =>
     user.username.toLowerCase().includes(search.toLowerCase())
   );
 
   const usernameList = filteredUsernames.map((user) => (
-    <UsernameItem user={user} key={user.id} />
+    <UsernameItem user={user} key={user.id} tagChanger={tagChanger} />
   ));
   //toggle switch state
   const [isEnabled, setIsEnabled] = useState(event.isPrivate);
@@ -120,11 +125,11 @@ const AddNewEventScreen = ({ navigation }) => {
       {search !== "" && <ScrollView>{usernameList}</ScrollView>}
       <InputField
         placeholder="Search for user..."
-        onChangeText={updateSearch} //How do i set update search to event tag value???
+        // onChangeText={(value) => setEvent({ ...event, tag: value })}
+        onChangeText={tagChanger}
         value={search}
         autoCapitalize="none"
         // multiline="true"
-        // onChangeText={(value) => setEvent({ ...event, tag: value })}
       />
       <LabelStyled>Title</LabelStyled>
       <InputField

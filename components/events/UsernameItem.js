@@ -2,9 +2,9 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 
-const UsernameItem = ({ user }) => {
+const UsernameItem = ({ user, tagChanger }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => tagChanger(user.username)}>
       <Card>
         <Card.Content>
           <View>
