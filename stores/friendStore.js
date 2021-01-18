@@ -57,6 +57,7 @@ class FriendStore {
   AcceptFriendReq = async (friendId) => {
     try {
       const responce = await instance.put(`/friend/acceptRequest/${friendId}`);
+      this.fetchFriends();
     } catch (error) {
       console.error("friendStore --> AcceptFriendReq", error);
     }
@@ -66,6 +67,7 @@ class FriendStore {
   DeclineFriendReq = async (friendId) => {
     try {
       const responce = await instance.put(`/friend/declineRequest/${friendId}`);
+      this.fetchFriends();
     } catch (error) {
       console.error("friendStore --> DeclineFriendReq", error);
     }

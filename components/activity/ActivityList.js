@@ -27,21 +27,15 @@ const ActivityList = ({ navigation }) => {
       friend,
       user: authStore.users.find((user) => user.id === friend.user1Id),
     }));
-  // console.log(
-  //   "🚀 ~ file: ActivityList.js ~ line 30 ~ ActivityList ~ friendList",
-  //   friendList
-  // );
 
-  const friendlist_ = friendList.map(
-    (friend) => (
-      <ActivityItem
-        friendUsername={friend.user.username}
-        friendId={friend.friend.user1Id}
-        key={friend.id}
-        navigation={navigation}
-      />
-    ) //check if key is unique
-  );
+  const friendlist_ = friendList.map((friend) => (
+    <ActivityItem
+      friendUsername={friend.user.username}
+      friendId={friend.friend.user1Id}
+      key={friend.user.id}
+      navigation={navigation}
+    />
+  ));
 
   return (
     <ScrollView>
