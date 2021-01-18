@@ -42,8 +42,9 @@ const AddNewEventScreen = ({ navigation }) => {
     date: "",
     image: "",
     name: "",
-    isPrivate: true,
+    isPrivate: false,
     tag: "",
+
   });
 
   //search state
@@ -62,15 +63,16 @@ const AddNewEventScreen = ({ navigation }) => {
     <UsernameItem user={user} key={user.id} tagChanger={tagChanger} />
   ));
   //toggle switch state
-  const [isEnabled, setIsEnabled] = useState(event.isPrivate);
+  const [isEnabled, setIsEnabled] = useState(true);
+
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
-    setEvent({ ...event, IsPrivate: isEnabled });
   };
 
   //handle add
   const handleAdd = async () => {
-    await eventStore.addEvent(event);
+    const newEvent = { ...event, isPrivate: isEnabled };
+    await eventStore.addEvent(newEvent);
     navigation.navigate("Profile");
   };
 
@@ -117,7 +119,7 @@ const AddNewEventScreen = ({ navigation }) => {
       <LabelStyled>Private</LabelStyled>
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
-        thumbColor={event.IsPrivate ? "#f0f7fc" : "#f4f3f4"}
+        thumbColor={isEnabled ? "#f0f7fc" : "#f4f3f4"}
         value={isEnabled}
         onValueChange={toggleSwitch}
       />
