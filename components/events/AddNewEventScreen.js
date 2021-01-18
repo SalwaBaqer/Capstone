@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 
 //Image Picker
-import { Button, Image, Platform } from "react-native";
+import { Button, Image, Platform, ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
@@ -15,9 +15,17 @@ import { Switch } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 //Calendar
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { Calendar } from "react-native-calendars";
+
+//Searchbar
+import { SearchBar } from "react-native-elements";
+
 //stores
 import eventStore from "../../stores/eventStore";
+import authStore from "../../stores/authStore";
+
+//Components
+import UsernameItem from "./UsernameItem";
 
 //styles
 import {
@@ -35,9 +43,25 @@ const AddNewEventScreen = ({ navigation }) => {
     image: "",
     name: "",
     isPrivate: false,
-    // tag: "",
+    tag: "",
+
   });
 
+  //search state
+  const [search, updateSearch] = useState("");
+
+  const tagChanger = (value) => {
+    updateSearch(value);
+    setEvent({ ...event, tag: value });
+  };
+
+  const filteredUsernames = authStore.users.filter((user) =>
+    user.username.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const usernameList = filteredUsernames.map((user) => (
+    <UsernameItem user={user} key={user.id} tagChanger={tagChanger} />
+  ));
   //toggle switch state
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -99,7 +123,16 @@ const AddNewEventScreen = ({ navigation }) => {
         value={isEnabled}
         onValueChange={toggleSwitch}
       />
-
+      <LabelStyled>Tag</LabelStyled>
+      {search !== "" && <ScrollView>{usernameList}</ScrollView>}
+      <InputField
+        placeholder="Search for user..."
+        // onChangeText={(value) => setEvent({ ...event, tag: value })}
+        onChangeText={tagChanger}
+        value={search}
+        autoCapitalize="none"
+        // multiline="true"
+      />
       <LabelStyled>Title</LabelStyled>
       <InputField
         autoCapitalize="none"
