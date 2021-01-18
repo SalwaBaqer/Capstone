@@ -10,6 +10,7 @@ import MySchedule from "./MySchedule";
 import profileStore from "../stores/profileStore";
 import eventStore from "../stores/eventStore";
 import friendStore from "../stores/friendStore";
+import authStore from "../stores/authStore";
 
 //Styles
 import {
@@ -24,9 +25,10 @@ import {
 } from "../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
-  const [addFriend, setAddFriend] = useState(true);
-  const { user } = route.params;
+  const { user } = route.params; //from search bar
   const { userId } = route.params;
+  const [addFriend, setAddFriend] = useState(true);
+  const [blockUser, setBlockUser] = useState(true);
 
   profileStore.getProfileById(userId ? userId : user.id);
 
@@ -45,7 +47,12 @@ const ExploreProfile = ({ navigation, route }) => {
   };
 
   const handleBlock = () => {
-    friendStore.BlockUser(userId ? userId : user.id);
+    if (blockUser) {
+      friendStore.BlockUser(userId ? userId : user.id);
+      setBlockUser(false);
+    } else {
+      setBlockUser(true);
+    }
   };
 
   return (
@@ -55,31 +62,39 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileUsernameStyled>
           {userId ? userId.username : user.id.username}
         </ProfileUsernameStyled>
-        <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
-        <>
-          {addFriend ? (
-            <Ioniconstyled
-              name={"md-person-add"}
-              size={20}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          ) : (
-            <AntDesignstyled
-              name={"clockcircle"}
-              size={20}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          )}
-          <EntypoIconStyled
-            name={"block"}
-            size={20}
-            color="#2596be"
-            onPress={handleBlock}
-          />
-        </>
+        {authStore.user.blockedBy.includes(user.id) ? (
+          <Text>You've been blocked by the user. Click here to Learn more</Text>
+        ) : (
+          <>
+            <ProfileBio>{userProfile.bio}</ProfileBio>
+            <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
+            <>
+              {addFriend ? (
+                <Ioniconstyled
+                  name={"md-person-add"}
+                  size={20}
+                  color="#2596be"
+                  onPress={handleAddFriend}
+                />
+              ) : (
+                <AntDesignstyled
+                  name={"clockcircle"}
+                  size={20}
+                  color="#2596be"
+                  onPress={handleAddFriend}
+                />
+              )}
+              {blockUser ? (
+                <EntypoIconStyled
+                  name={"block"}
+                  size={20}
+                  color="#2596be"
+                  onPress={handleBlock}
+                />
+              ) : null}
+            </>
+          </>
+        )}
       </ProfileWrapper>
       <MySchedule navigation={navigation} exploreEvents={profileEvents} />
     </>
