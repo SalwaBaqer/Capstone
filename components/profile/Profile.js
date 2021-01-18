@@ -27,14 +27,16 @@ import {
 const Profile = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
 
-  const myProfile = profileStore.getProfileById(1);
-  console.log(myProfile);
+  const myProfile = profileStore.getProfileById(authStore.user.profileId);
+  console.log(profileStore.getProfileById(1));
 
   if (profileStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter(
     (event) => event.userId === authStore.user.id
   );
+
+  if (eventStore.loading) return <Spinner />;
 
   return (
     <>

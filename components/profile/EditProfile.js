@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import { Button, Image, Platform } from "react-native";
+import { Spinner } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
@@ -16,12 +17,13 @@ import {
   AuthButton,
   AuthButtonText,
 } from "../../styles";
+import authStore from "../../stores/authStore";
 
-const EditProfile = ({ navigation, route }) => {
-  const { oldProfile } = route.params;
+const EditProfile = ({ navigation }) => {
+  // const { oldProfile } = route.params;
   const [profile, setProfile] = useState({
-    image: oldProfile.image,
-    bio: oldProfile.bio,
+    image: authStore.user.image,
+    bio: authStore.user.bio,
   });
   console.log(route.params);
 
@@ -29,6 +31,8 @@ const EditProfile = ({ navigation, route }) => {
     await profileStore.updateProfile(profile);
     navigation.navigate("ProfileScreen");
   };
+
+  if (profileStore.loading) return <Spinner />;
 
   useEffect(() => {
     (async () => {

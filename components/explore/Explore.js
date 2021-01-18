@@ -28,6 +28,8 @@ const Explore = ({ navigation }) => {
     (event) => event.userId !== authStore.user.id && !event.isPrivate
   );
 
+  const explore = true;
+
   return (
     <>
       <SearchBar
