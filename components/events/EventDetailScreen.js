@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Title } from "react-native-paper";
 import { Image } from "react-native";
-import { Right } from "native-base";
 
 // mobx
 import { observer } from "mobx-react";
@@ -57,7 +56,7 @@ const EventDetailScreen = ({ navigation, route }) => {
       <Title>{event.name}</Title>
       <Title>{event.label}</Title>
       <Title>{event.date}</Title>
-      <Title>{event.tag}</Title>
+      <Title>with @{event.tag}</Title>
       <Image
         source={{ uri: event.image }}
         style={{ width: 100, height: 100 }}

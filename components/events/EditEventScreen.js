@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 
 //react-native
-import { Switch } from "react-native";
+import { Button, Image, Platform, Switch, ScrollView } from "react-native";
 
 //dropdown menu
 import DropDownPicker from "react-native-dropdown-picker";
@@ -13,11 +13,15 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { Calendar } from "react-native-calendars";
 
 //image picker
-import { Button, Image, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
 
 //stores
 import eventStore from "../../stores/eventStore";
+import authStore from "../../stores/authStore";
+
+//Components
+import UsernameItem from "./UsernameItem";
 
 //styles
 import {
@@ -29,11 +33,24 @@ import {
 
 const EditEventScreen = ({ navigation, route }) => {
   //event state
-
   const { oldEvent } = route.params;
-  // const _event = route.params.event;
-  // console.log("event in editscreen", _event);
   const [event, setEvent] = useState(oldEvent);
+
+  //search state
+  const [search, updateSearch] = useState("");
+
+  const tagChanger = (value) => {
+    updateSearch(value);
+    setEvent({ ...event, tag: value });
+  };
+
+  const filteredUsernames = authStore.users.filter((user) =>
+    user.username.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const usernameList = filteredUsernames.map((user) => (
+    <UsernameItem user={user} key={user.id} tagChanger={tagChanger} />
+  ));
 
   //toggle switch state
   const [isEnabled, setIsEnabled] = useState(event.isPrivate);
@@ -43,8 +60,8 @@ const EditEventScreen = ({ navigation, route }) => {
   };
 
   //handle edit
-  const handleEdit = () => {
-    eventStore.editEvent(event);
+  const handleEdit = async () => {
+    await eventStore.editEvent(event);
     navigation.navigate("ProfileScreen");
   };
 
@@ -91,14 +108,22 @@ const EditEventScreen = ({ navigation, route }) => {
       style={{ marginTop: 2, marginRight: 20, marginLeft: 20, marginBottom: 2 }}
     >
       <LabelStyled>Private</LabelStyled>
-
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
         thumbColor={event.IsPrivate ? "#f0f7fc" : "#f4f3f4"}
         onValueChange={toggleSwitch}
         value={isEnabled}
       />
-
+      <LabelStyled>Tag</LabelStyled>
+      {search !== "" && <ScrollView>{usernameList}</ScrollView>}
+      <InputField
+        placeholder="Search for user..."
+        // onChangeText={(value) => setEvent({ ...event, tag: value })}
+        onChangeText={tagChanger}
+        value={search}
+        autoCapitalize="none"
+        // multiline="true"
+      />
       <LabelStyled>Title</LabelStyled>
       <InputField
         autoCapitalize="none"
@@ -203,12 +228,6 @@ const EditEventScreen = ({ navigation, route }) => {
           textMonthFontSize: 16,
           textDayHeaderFontSize: 16,
         }}
-      />
-      <LabelStyled>Tag</LabelStyled>
-      <InputField
-        autoCapitalize="none"
-        // value={event.tag}
-        onChangeText={(value) => setEvent({ ...event, tag: value })}
       />
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <Image

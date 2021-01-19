@@ -15,6 +15,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { List, Spinner, Text } from "native-base";
 
 const ActivityList = ({ navigation }) => {
+  if (!authStore.user) return <Spinner />;
+
   if (friendStore.loading) <Spinner />;
   // We have to add a condition so that if a user doesn't have requests it shows a msg ?
 

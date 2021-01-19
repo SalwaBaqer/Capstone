@@ -24,22 +24,26 @@ import {
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const [isPending, setIsPending] = useState(false);
+  if (!authStore.user) return <Spinner />;
+
   const { user } = route.params; //from search bar
   const { userId } = route.params; //from explore itmes
-  const [isPending, setIsPending] = useState(false);
   const itemUser = authStore.getUserbyId(userId);
+
   profileStore.getProfileById(userId ? userId : user.id);
+
+  if (profileStore.loading) return <Spinner />;
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
 
-  if (profileStore.loading || friendStore.loading) return <Spinner />;
+  if (friendStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter((event) =>
     userId ? event.userId === userId : event.userId === user.id
   );
 
-  profileStore.getProfileById(userId ? userId : user.id);
   //find if req exist
   const foundreq = friendStore.friends.find(
     (friend) => friend.user2Id === id && friend.actionUser === authStore.user.id
@@ -88,7 +92,15 @@ const ExploreProfile = ({ navigation, route }) => {
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
+        <NumberOfFriendsStyled>
+          {userId
+            ? itemUser.friends.length < 2
+              ? `${itemUser.friends.length} Friend`
+              : `${itemUser.friends.length} Friends`
+            : user.friends.length < 2
+            ? `${user.friends.length} Friend`
+            : `${user.friends.length} Friends`}
+        </NumberOfFriendsStyled>
         <>
           {checkFriend() ? (
             <Ioniconstyled
