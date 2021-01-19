@@ -237,8 +237,8 @@ const AddNewEventScreen = ({ navigation }) => {
           <Image
             source={{ uri: event.image.uri }}
             style={{
-              width: 70,
-              height: 70,
+              width: 30,
+              height: 30,
             }}
           />
         )}
