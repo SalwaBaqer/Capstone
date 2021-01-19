@@ -21,25 +21,31 @@ import {
   NumberOfFriendsStyled,
   Ioniconstyled,
   AntDesignstyled,
+  EntypoIconStyled,
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const [isPending, setIsPending] = useState(false);
+  const [blockUser, setBlockUser] = useState(true);
+  if (!authStore.user) return <Spinner />;
+
   const { user } = route.params; //from search bar
   const { userId } = route.params; //from explore itmes
-  const [isPending, setIsPending] = useState(false);
   const itemUser = authStore.getUserbyId(userId);
+
   profileStore.getProfileById(userId ? userId : user.id);
+
+  if (profileStore.loading) return <Spinner />;
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
 
-  if (profileStore.loading || friendStore.loading) return <Spinner />;
+  if (friendStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter((event) =>
     userId ? event.userId === userId : event.userId === user.id
   );
 
-  profileStore.getProfileById(userId ? userId : user.id);
   //find if req exist
   const foundreq = friendStore.friends.find(
     (friend) => friend.user2Id === id && friend.actionUser === authStore.user.id
@@ -80,6 +86,15 @@ const ExploreProfile = ({ navigation, route }) => {
     authStore.updateUser;
   };
 
+  const handleBlock = () => {
+    if (blockUser) {
+      friendStore.BlockUser(userId ? userId : user.id);
+      setBlockUser(false);
+    } else {
+      setBlockUser(true);
+    }
+  };
+
   return (
     <>
       <ProfileWrapper style={{ marginBottom: 20 }}>
@@ -87,32 +102,54 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
-        <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
-        <>
-          {checkFriend() ? (
-            <Ioniconstyled
-              name={"ios-person-remove"}
-              size={15}
-              color="red"
-              onPress={handleRemoveFriend}
-            />
-          ) : isPending ? (
-            <AntDesignstyled
-              name={"clockcircle"}
-              size={15}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          ) : (
-            <Ioniconstyled
-              name={"md-person-add"}
-              size={15}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          )}
-        </>
+        {authStore.user.blockedBy.includes(user.id) ? (
+          <Text>You've been blocked by the user. Click here to Learn more</Text>
+        ) : (
+          <>
+            <ProfileBio>{userProfile.bio}</ProfileBio>
+            <NumberOfFriendsStyled>
+              {userId
+                ? itemUser.friends.length < 2
+                  ? `${itemUser.friends.length} Friend`
+                  : `${itemUser.friends.length} Friends`
+                : user.friends.length < 2
+                ? `${user.friends.length} Friend`
+                : `${user.friends.length} Friends`}
+            </NumberOfFriendsStyled>
+            <>
+              {checkFriend() ? (
+                <Ioniconstyled
+                  name={"ios-person-remove"}
+                  size={15}
+                  color="red"
+                  onPress={handleRemoveFriend}
+                />
+              ) : isPending ? (
+                <AntDesignstyled
+                  name={"clockcircle"}
+                  size={15}
+                  color="#2596be"
+                  onPress={handleAddFriend}
+                />
+              ) : (
+                <Ioniconstyled
+                  name={"md-person-add"}
+                  size={15}
+                  color="#2596be"
+                  onPress={handleAddFriend}
+                />
+              )}
+              {blockUser ? (
+                <EntypoIconStyled
+                  name={"block"}
+                  size={20}
+                  color="#2596be"
+                  onPress={handleBlock}
+                />
+              ) : null}
+            </>
+          </>
+        )}
       </ProfileWrapper>
       <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>
