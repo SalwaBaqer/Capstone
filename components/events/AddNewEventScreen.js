@@ -44,7 +44,6 @@ const AddNewEventScreen = ({ navigation }) => {
     name: "",
     isPrivate: false,
     tag: "",
-
   });
 
   //search state
@@ -136,7 +135,7 @@ const AddNewEventScreen = ({ navigation }) => {
       <LabelStyled>Title</LabelStyled>
       <InputField
         autoCapitalize="none"
-        multiline="true"
+        // multiline="true"
         onChangeText={(value) => setEvent({ ...event, name: value })}
       />
       <LabelStyled>Label</LabelStyled>

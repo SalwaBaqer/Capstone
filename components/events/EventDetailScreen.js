@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Title } from "react-native-paper";
 import { Image } from "react-native";
-import { Right } from "native-base";
 
 // mobx
 import { observer } from "mobx-react";

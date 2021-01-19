@@ -18,8 +18,6 @@ import authStore from "../../stores/authStore";
 const Signup = ({ navigation }) => {
   const [user, setUser] = useState({
     username: "",
-    // firstName: "",
-    // lastName: "",
     email: "",
     password: "",
   });

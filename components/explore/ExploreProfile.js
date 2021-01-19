@@ -89,7 +89,9 @@ const ExploreProfile = ({ navigation, route }) => {
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
+        <NumberOfFriendsStyled>
+          {userId ? itemUser.friends.length : user.friends.length} Friends
+        </NumberOfFriendsStyled>
         <>
           {checkFriend() ? (
             <Ioniconstyled

@@ -59,6 +59,7 @@ const Profile = ({ navigation }) => {
           <NumberOfFriendsStyled>
             {authStore.user.friends.length}
             {authStore.user.friends.length < 2 ? " Friend" : " Friends"}
+            {authStore.user.friends.length < 1 ?? "Friends"}
           </NumberOfFriendsStyled>
         </TouchableOpacity>
       </ProfileWrapper>

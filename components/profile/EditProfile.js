@@ -25,7 +25,6 @@ const EditProfile = ({ navigation }) => {
     image: authStore.user.image,
     bio: authStore.user.bio,
   });
-  console.log(route.params);
 
   const handleSubmit = async () => {
     await profileStore.updateProfile(profile);

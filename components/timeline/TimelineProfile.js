@@ -24,7 +24,7 @@ import {
 } from "../../styles";
 
 const TimelineProfile = ({ navigation, route }) => {
-  const [addFriend, setAddFriend] = useState(true);
+  const [isPending, setIsPending] = useState(false);
   const { userId } = route.params;
 
   const itemUser = authStore.getUserbyId(userId);
@@ -38,11 +38,39 @@ const TimelineProfile = ({ navigation, route }) => {
   const profileEvents = eventStore.events.filter(
     (event) => event.userId === userId
   );
+
+  //handle add and withdraw friendRequest
   const handleAddFriend = () => {
-    if (addFriend) {
-      friendStore.SendFriendReq(userId);
-      setAddFriend(false);
-    } else setAddFriend(true);
+    if (!isPending) {
+      friendStore.SendFriendReq(userId ? userId : user.id);
+      setIsPending(true);
+    } else {
+      friendStore.WithdrawFriendReq(userId ? userId : user.id);
+      setIsPending(false);
+    }
+  };
+  const checkFriend = () => {
+    const checkIsFriend = friendStore.friends
+      .filter(
+        (friend) =>
+          (friend.actionUser === authStore.user.id &&
+            friend.user2Id === userId &&
+            friend.status === 1) ||
+          (friend.actionUser === userId &&
+            friend.user2Id === authStore.user.id &&
+            friend.status === 1)
+      )
+      .find(
+        (friend) =>
+          friend.actionUser === authStore.user.id || friend.user2Id === userId
+      );
+
+    return checkIsFriend;
+  };
+  //handle remove friend  (unfollow)
+  const handleRemoveFriend = () => {
+    friendStore.DeleteFriend(userId);
+    authStore.updateUser;
   };
 
   return (
@@ -51,22 +79,34 @@ const TimelineProfile = ({ navigation, route }) => {
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>@{itemUser.username}</ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled># of Friends</NumberOfFriendsStyled>
-        {addFriend ? (
-          <Ioniconstyled
-            name={"md-person-add"}
-            size={20}
-            color="#2596be"
-            onPress={handleAddFriend}
-          />
-        ) : (
-          <AntDesignstyled
-            name={"clockcircle"}
-            size={20}
-            color="#2596be"
-            onPress={handleAddFriend}
-          />
-        )}
+        <NumberOfFriendsStyled>
+          {itemUser.friends.length}
+          {itemUser.friends.length < 2 ? " Friend" : " Friends"}
+        </NumberOfFriendsStyled>
+        <>
+          {checkFriend() ? (
+            <Ioniconstyled
+              name={"ios-person-remove"}
+              size={15}
+              color="red"
+              onPress={handleRemoveFriend}
+            />
+          ) : isPending ? (
+            <AntDesignstyled
+              name={"clockcircle"}
+              size={15}
+              color="#2596be"
+              onPress={handleAddFriend}
+            />
+          ) : (
+            <Ioniconstyled
+              name={"md-person-add"}
+              size={15}
+              color="#2596be"
+              onPress={handleAddFriend}
+            />
+          )}
+        </>
       </ProfileWrapper>
       <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>
