@@ -93,7 +93,13 @@ const ExploreProfile = ({ navigation, route }) => {
         </ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled>
-          {userId ? itemUser.friends.length : user.friends.length} Friends
+          {userId
+            ? itemUser.friends.length < 2
+              ? `${itemUser.friends.length} Friend`
+              : `${itemUser.friends.length} Friends`
+            : user.friends.length < 2
+            ? `${user.friends.length} Friend`
+            : `${user.friends.length} Friends`}
         </NumberOfFriendsStyled>
         <>
           {checkFriend() ? (
