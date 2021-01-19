@@ -89,8 +89,9 @@ class FriendStore {
   }; //end delete firend
 
   //block user
-  BlockUser = async () => {
+  BlockUser = async (user2Id) => {
     try {
+      const response = await instance.put(`/friend/blockUser/${user2Id}`);
     } catch (error) {
       console.error("friendStore --> BlockUser", error);
     }
