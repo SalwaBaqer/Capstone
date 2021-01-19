@@ -12,9 +12,10 @@ import UsernameItem from "./UsernameItem";
 import Schedule from "../Schedule";
 
 const Explore = ({ navigation }) => {
-  if (!authStore.user) return <Spinner />;
-
   const [search, updateSearch] = useState("");
+
+  if (!authStore.user) return <Spinner />;
+  if (eventStore.loading) return <Spinner />;
 
   const filteredUsernames = authStore.users.filter((user) =>
     user.username.toLowerCase().includes(search.toLowerCase())
@@ -42,7 +43,11 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <Schedule navigation={navigation} exploreEvents={exploreEvents} />
+        <Schedule
+          navigation={navigation}
+          exploreEvents={exploreEvents}
+          isExplore={true}
+        />
       )}
     </>
   );

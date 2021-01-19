@@ -21,7 +21,7 @@ class ProfileStore {
         this.loading = false;
       });
     } catch (error) {
-      console.error("Profilestore -> fetchProfiles -> error", error);
+      console.error("Profilestore -> getProfileById -> error", error);
     }
   };
 

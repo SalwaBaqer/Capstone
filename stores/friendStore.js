@@ -27,14 +27,8 @@ class FriendStore {
   //send friend request
   SendFriendReq = async (user2Id) => {
     try {
-      // const foundUser = this.friends.find(
-      //   (friend) => friend.user2Id === user2Id
-      // );
-      // if (!foundUser) {
-      console.log("add");
       const response = await instance.post(`/friend/sendRequest/${user2Id}`);
       this.friends.push(response.data);
-      // }
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -89,8 +83,10 @@ class FriendStore {
   }; //end delete firend
 
   //block user
-  BlockUser = async () => {
+  BlockUser = async (user2Id) => {
     try {
+      const response = await instance.put(`/friend/blockUser/${user2Id}`);
+      this.fetchFriends();
     } catch (error) {
       console.error("friendStore --> BlockUser", error);
     }

@@ -15,6 +15,7 @@ import ActivityItem from "./ActivityItem";
 import { ScrollView } from "react-native-gesture-handler";
 import { List, Spinner } from "native-base";
 
+
 const ActivityList = () => {
   if (friendStore.loading) <Spinner />;
 
