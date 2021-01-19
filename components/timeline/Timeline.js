@@ -22,6 +22,7 @@ const Timeline = ({ navigation }) => {
         navigation={navigation}
         exploreEvents={exploreEvents}
         timeline={timeline}
+        isExplore={true}
       />
     </>
   );
