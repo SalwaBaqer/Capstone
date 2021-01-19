@@ -56,12 +56,13 @@ const EditEventScreen = ({ navigation, route }) => {
   const [isEnabled, setIsEnabled] = useState(event.isPrivate);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
-    setEvent({ ...event, IsPrivate: isEnabled });
   };
 
   //handle edit
-  const handleEdit = async () => {
-    await eventStore.editEvent(event);
+
+  const handleEdit = () => {
+    const newEvent = { ...event, IsPrivate: isEnabled };
+    eventStore.editEvent(newEvent);
     navigation.navigate("ProfileScreen");
   };
 
@@ -237,7 +238,7 @@ const EditEventScreen = ({ navigation, route }) => {
         style={{ width: 20, height: 20 }}
       />
       <ButtonStyled>
-        <TextButtonStyled onPress={handleEdit}>Edit</TextButtonStyled>
+        <TextButtonStyled onPress={handleEdit}>Save</TextButtonStyled>
       </ButtonStyled>
     </View>
   );

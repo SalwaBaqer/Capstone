@@ -58,7 +58,7 @@ const AddNewEventScreen = ({ navigation }) => {
     <UsernameItem user={user} key={user.id} tagChanger={tagChanger} />
   ));
   //toggle switch state
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);

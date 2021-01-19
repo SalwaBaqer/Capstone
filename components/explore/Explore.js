@@ -43,7 +43,11 @@ const Explore = ({ navigation }) => {
           <List>{usernameList}</List>
         </View>
       ) : (
-        <Schedule navigation={navigation} exploreEvents={exploreEvents} />
+        <Schedule
+          navigation={navigation}
+          exploreEvents={exploreEvents}
+          isExplore={true}
+        />
       )}
     </>
   );
