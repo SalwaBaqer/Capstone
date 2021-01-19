@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
-import { Spinner } from "native-base";
+import { Spinner, Text } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
