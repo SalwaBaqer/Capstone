@@ -25,15 +25,17 @@ import {
 
 const TimelineProfile = ({ navigation, route }) => {
   const [isPending, setIsPending] = useState(false);
+  if (!authStore.user) return <Spinner />;
+
   const { userId } = route.params;
 
   const itemUser = authStore.getUserbyId(userId);
 
   profileStore.getProfileById(userId);
 
-  const userProfile = profileStore.profiles;
-
   if (profileStore.loading) return <Spinner />;
+
+  const userProfile = profileStore.profiles;
 
   const profileEvents = eventStore.events.filter(
     (event) => event.userId === userId

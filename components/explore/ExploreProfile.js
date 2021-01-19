@@ -30,12 +30,15 @@ const ExploreProfile = ({ navigation, route }) => {
   const { user } = route.params; //from search bar
   const { userId } = route.params; //from explore itmes
   const itemUser = authStore.getUserbyId(userId);
+
   profileStore.getProfileById(userId ? userId : user.id);
+
+  if (profileStore.loading) return <Spinner />;
 
   const id = userId ? userId : user.id;
   const userProfile = profileStore.profiles;
 
-  if (profileStore.loading || friendStore.loading) return <Spinner />;
+  if (friendStore.loading) return <Spinner />;
 
   const profileEvents = eventStore.events.filter((event) =>
     userId ? event.userId === userId : event.userId === user.id

@@ -29,7 +29,6 @@ const Profile = ({ navigation }) => {
   if (!authStore.user) return <Spinner />;
 
   const myProfile = profileStore.getProfileById(authStore.user.profileId);
-  console.log(profileStore.getProfileById(1));
 
   if (profileStore.loading) return <Spinner />;
 

@@ -1,15 +1,10 @@
 //react
-import { View, Text, ListItem } from "native-base";
+import { View, Text } from "native-base";
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 
-//Image Picker
-import { Button, Image, Platform, ScrollView } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
-
 //react-native
-import { Switch } from "react-native";
+import { Button, Image, Platform, Switch, ScrollView } from "react-native";
 
 //dropdown menu
 import DropDownPicker from "react-native-dropdown-picker";
@@ -17,8 +12,9 @@ import DropDownPicker from "react-native-dropdown-picker";
 //Calendar
 import { Calendar } from "react-native-calendars";
 
-//Searchbar
-import { SearchBar } from "react-native-elements";
+//Image Picker
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
 
 //stores
 import eventStore from "../../stores/eventStore";
