@@ -8,7 +8,7 @@ const UsernameItem = ({ user, tagChanger }) => {
       <Card>
         <Card.Content>
           <View>
-            <Text style={{ fontSize: 20 }}>@{user.username}</Text>
+            <Text style={{ fontSize: 15 }}>@{user.username}</Text>
           </View>
         </Card.Content>
       </Card>

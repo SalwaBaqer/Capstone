@@ -23,15 +23,11 @@ export const ItemWrapper = styled.View`
 `;
 
 export const DetailWrapper = styled.View`
-  margin-right: auto;
-  margin-left: auto;
+  margin-top: 100px;
+  margin-left: 13px;
   font-size: 20px;
   font-weight: bold;
-  align-items: center;
-  justify-content: center;
-  background-color: #f8edeb;
   width: 100%;
-  flex: 1;
 `;
 
 export const Dotsiconstyled = styled(MaterialCommunityIcons)`
@@ -55,4 +51,11 @@ export const AntDesignstyled = styled(AntDesign)`
 export const TextStyled = styled.Text`
   margin-left: 86%;
   margin-top: 1%;
+`;
+
+export const IoniconstyledLeft = styled(Ionicons)`
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
 `;

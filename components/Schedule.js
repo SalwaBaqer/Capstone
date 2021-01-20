@@ -111,17 +111,13 @@ const Schedule = ({ navigation, exploreEvents, timeline, isExplore }) => {
                     <MaterialIconstyled
                       name="edit"
                       size={24}
-
                       color={theme.blueish}
-
                       onPress={() => handleEdit(item)}
                     />
                     <MaterialIconstyled
                       name="delete"
                       size={24}
-              
                       color={theme.redish}
-
                       onPress={() => handleDelete(item)}
                     />
                   </Right>
@@ -155,6 +151,21 @@ const Schedule = ({ navigation, exploreEvents, timeline, isExplore }) => {
         maxDate={"2021-12-31"}
         renderItem={renderItem}
         renderEmptyDate={renderEmptyDate}
+        theme={{
+          agendaDayTextColor: theme.Maincolor,
+          agendaDayNumColor: theme.blackish,
+          agendaTodayColor: theme.Maincolor,
+          agendaKnobColor: theme.blackish,
+
+          //from calendar
+          selectedColor: theme.Maincolor,
+          textSectionTitleColor: theme.blackish,
+          selectedDayBackgroundColor: theme.Maincolor,
+          selectedDayTextColor: "#ffffff",
+          todayTextColor: theme.blackish,
+          dotColor: theme.Maincolor,
+          selectedDotColor: theme.Maincolor,
+        }}
       />
     </AgendaStyled>
   );

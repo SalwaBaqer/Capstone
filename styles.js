@@ -9,13 +9,13 @@ import {
 } from "@expo/vector-icons";
 
 export const theme = {
-  Maincolor: "#FF5A5F", // redish main font color
+  Maincolor: "#9381ff", // redish main font color
   backgroundColor: "#f5fffa", // white main background color
   black: "black",
   blackish: "#484848",
-  grey: "#767676",
-  blueish: "#00A699",
-  redish: "#FF5A5F",
+  grey: "#99aab5",
+  blueish: "#9381ff",
+  redish: "#f23d3a",
 };
 
 //MySchedule
@@ -74,11 +74,8 @@ export const AntDesignstyled = styled(AntDesign)`
 `;
 
 export const EntypoIconStyled = styled(Entypo)`
-  margin-top: 10px;
-  margin-bottom: 5px;
-  margin-right: auto;
-  margin-left: auto;
-  font-size: 50px;
+  font-size: 30px;
+  margin-left: 90%;
 `;
 
 export const TextStyled = styled.Text`
@@ -137,13 +134,13 @@ export const ProfileBio = styled.Text`
 
 //Buttons
 export const EditProfileButtonStyled = styled(Icon)`
-  color: ${({ theme }) => theme.blueish};
+  color: ${({ theme }) => theme.Maincolor};
   padding-left: 20px;
   margin-bottom: 10px;
 `;
 
 export const SignOutButtonStyled = styled(Icon)`
-  color: ${({ theme }) => theme.blueish};
+  color: ${({ theme }) => theme.Maincolor};
   margin-right: 10px;
   padding-left: 20px;
   margin-bottom: 10px;
