@@ -11,7 +11,11 @@ import { ListItem, Text } from "native-base";
 import friendStore from "../../stores/friendStore";
 
 //styles
-import { ButtonStyledAccept, ButtonStyledDecline } from "./styles";
+import {
+  ButtonStyledAccept,
+  ButtonStyledDecline,
+  ButtonStyledDetails,
+} from "./styles";
 
 const ActivityItem = ({
   friendUsername,
@@ -48,13 +52,13 @@ const ActivityItem = ({
       ) : (
         <>
           <Text>{username} tagged you on an event!</Text>
-          <ButtonStyledAccept
+          <ButtonStyledDetails
             onPress={() =>
               navigation.navigate("EventDetailScreen", { event: event })
             }
           >
             <Text>Show Details</Text>
-          </ButtonStyledAccept>
+          </ButtonStyledDetails>
         </>
       )}
     </ListItem>

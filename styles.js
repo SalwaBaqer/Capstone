@@ -5,6 +5,7 @@ import {
   MaterialIcons,
   Ionicons,
   AntDesign,
+  Entypo,
 } from "@expo/vector-icons";
 
 export const theme = {
@@ -65,6 +66,14 @@ export const Ioniconstyled = styled(Ionicons)`
   font-size: 50px;
 `;
 export const AntDesignstyled = styled(AntDesign)`
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 50px;
+`;
+
+export const EntypoIconStyled = styled(Entypo)`
   margin-top: 10px;
   margin-bottom: 5px;
   margin-right: auto;

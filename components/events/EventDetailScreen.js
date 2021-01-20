@@ -55,7 +55,6 @@ const EventDetailScreen = ({ navigation, route }) => {
       )}
       <Title>{event.name}</Title>
       <Title>{event.label}</Title>
-      <Title>{event.date}</Title>
       <Title>with @{event.tag}</Title>
       <Image
         source={{ uri: event.image }}

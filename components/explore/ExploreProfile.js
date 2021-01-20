@@ -1,7 +1,7 @@
 //Libraries
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
-import { Spinner } from "native-base";
+import { Spinner, Text } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
@@ -21,10 +21,12 @@ import {
   NumberOfFriendsStyled,
   Ioniconstyled,
   AntDesignstyled,
+  EntypoIconStyled,
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
   const [isPending, setIsPending] = useState(false);
+  const [blockUser, setBlockUser] = useState(true);
   if (!authStore.user) return <Spinner />;
 
   const { user } = route.params; //from search bar
@@ -44,21 +46,18 @@ const ExploreProfile = ({ navigation, route }) => {
     userId ? event.userId === userId : event.userId === user.id
   );
 
-  //find if req exist
-  const foundreq = friendStore.friends.find(
-    (friend) => friend.user2Id === id && friend.actionUser === authStore.user.id
-  );
-
   //handle add and withdraw friendRequest
   const handleAddFriend = () => {
-    if (!isPending) {
-      friendStore.SendFriendReq(userId ? userId : user.id);
-      setIsPending(true);
-    } else {
-      friendStore.WithdrawFriendReq(userId ? userId : user.id);
-      setIsPending(false);
-    }
+    friendStore.SendFriendReq(userId ? userId : user.id);
+    setIsPending(true);
   };
+
+  //handle withdraw
+  const handleWithDrawFriend = () => {
+    friendStore.WithdrawFriendReq(userId ? userId : user.id);
+    setIsPending(false);
+  };
+  //isFriend ?
   const checkFriend = () => {
     const checkIsFriend = friendStore.friends
       .filter(
@@ -78,10 +77,32 @@ const ExploreProfile = ({ navigation, route }) => {
     return checkIsFriend;
   };
 
+  //is request pending
+  const checkPending = () => {
+    const checkIsPending = friendStore.friends.find(
+      (friend) =>
+        friend.actionUser === authStore.user.id &&
+        friend.user2Id === id &&
+        friend.status === 0
+    );
+    let check = false;
+    if (checkIsPending) check = true;
+
+    return check;
+  };
   //handle remove friend  (unfollow)
   const handleRemoveFriend = () => {
     friendStore.DeleteFriend(userId ? userId : user.id);
     authStore.updateUser;
+  };
+
+  const handleBlock = () => {
+    if (blockUser) {
+      friendStore.BlockUser(userId ? userId : user.id);
+      setBlockUser(false);
+    } else {
+      setBlockUser(true);
+    }
   };
 
   return (
@@ -91,40 +112,54 @@ const ExploreProfile = ({ navigation, route }) => {
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
-        <ProfileBio>{userProfile.bio}</ProfileBio>
-        <NumberOfFriendsStyled>
-          {userId
-            ? itemUser.friends.length < 2
-              ? `${itemUser.friends.length} Friend`
-              : `${itemUser.friends.length} Friends`
-            : user.friends.length < 2
-            ? `${user.friends.length} Friend`
-            : `${user.friends.length} Friends`}
-        </NumberOfFriendsStyled>
-        <>
-          {checkFriend() ? (
-            <Ioniconstyled
-              name={"ios-person-remove"}
-              size={15}
-              color="red"
-              onPress={handleRemoveFriend}
-            />
-          ) : isPending ? (
-            <AntDesignstyled
-              name={"clockcircle"}
-              size={15}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          ) : (
-            <Ioniconstyled
-              name={"md-person-add"}
-              size={15}
-              color="#2596be"
-              onPress={handleAddFriend}
-            />
-          )}
-        </>
+        {authStore.user.blockedBy.includes(id) ? (
+          <Text>You've been blocked by the user. Click here to Learn more</Text>
+        ) : (
+          <>
+            <ProfileBio>{userProfile.bio}</ProfileBio>
+            <NumberOfFriendsStyled>
+              {userId
+                ? itemUser.friends.length < 2
+                  ? `${itemUser.friends.length} Friend`
+                  : `${itemUser.friends.length} Friends`
+                : user.friends.length < 2
+                ? `${user.friends.length} Friend`
+                : `${user.friends.length} Friends`}
+            </NumberOfFriendsStyled>
+            <>
+              {checkFriend() ? (
+                <Ioniconstyled
+                  name={"ios-person-remove"}
+                  size={15}
+                  color="red"
+                  onPress={handleRemoveFriend}
+                />
+              ) : checkPending() ? (
+                <AntDesignstyled
+                  name={"clockcircle"}
+                  size={15}
+                  color="#2596be"
+                  onPress={handleWithDrawFriend}
+                />
+              ) : (
+                <Ioniconstyled
+                  name={"md-person-add"}
+                  size={15}
+                  color="#2596be"
+                  onPress={handleAddFriend}
+                />
+              )}
+              {blockUser ? (
+                <EntypoIconStyled
+                  name={"block"}
+                  size={20}
+                  color="#2596be"
+                  onPress={handleBlock}
+                />
+              ) : null}
+            </>
+          </>
+        )}
       </ProfileWrapper>
       <Schedule navigation={navigation} exploreEvents={profileEvents} />
     </>

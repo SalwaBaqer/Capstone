@@ -28,7 +28,7 @@ const timeToString = (time) => {
   return date.toISOString().split("T")[0];
 };
 
-const Schedule = ({ navigation, exploreEvents, timeline }) => {
+const Schedule = ({ navigation, exploreEvents, timeline, isExplore }) => {
   const [items, setItems] = useState({});
   const [menu, setMenu] = useState(true);
 
@@ -94,29 +94,35 @@ const Schedule = ({ navigation, exploreEvents, timeline }) => {
               >
                 <Text>@{itemUsername.username}</Text>
               </TouchableOpacity>
-              {menu ? (
-                <Dotsiconstyled
-                  name="dots-horizontal"
-                  size={24}
-                  color="gray"
-                  onPress={() => setMenu(false)}
-                />
+              {!isExplore ? (
+                menu ? (
+                  <Dotsiconstyled
+                    name="dots-horizontal"
+                    size={24}
+                    color="gray"
+                    onPress={() => setMenu(false)}
+                  />
+                ) : (
+                  <Right>
+                    <TextStyled onPress={() => setMenu(true)}>
+                      Cancel
+                    </TextStyled>
+                    <MaterialIconstyled
+                      name="edit"
+                      size={24}
+                      color="blue"
+                      onPress={() => handleEdit(item)}
+                    />
+                    <MaterialIconstyled
+                      name="delete"
+                      size={24}
+                      color="red"
+                      onPress={() => handleDelete(item)}
+                    />
+                  </Right>
+                )
               ) : (
-                <Right>
-                  <TextStyled onPress={() => setMenu(true)}>Cancel</TextStyled>
-                  <MaterialIconstyled
-                    name="edit"
-                    size={24}
-                    color="blue"
-                    onPress={() => handleEdit(item)}
-                  />
-                  <MaterialIconstyled
-                    name="delete"
-                    size={24}
-                    color="red"
-                    onPress={() => handleDelete(item)}
-                  />
-                </Right>
+                <></>
               )}
             </RenderItemStyled>
           </Card.Content>
