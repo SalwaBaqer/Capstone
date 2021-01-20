@@ -21,6 +21,7 @@ import {
   MaterialIconstyled,
   TextStyled,
 } from "../styles";
+import { theme } from "../styles";
 
 const timeToString = (time) => {
   const date = new Date(time);
@@ -109,13 +110,13 @@ const Schedule = ({ navigation, exploreEvents, timeline, isExplore }) => {
                     <MaterialIconstyled
                       name="edit"
                       size={24}
-                      color="blue"
+                      color={theme.blueish}
                       onPress={() => handleEdit(item)}
                     />
                     <MaterialIconstyled
                       name="delete"
                       size={24}
-                      color="red"
+                      color={theme.redish}
                       onPress={() => handleDelete(item)}
                     />
                   </Right>

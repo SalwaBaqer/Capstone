@@ -42,6 +42,7 @@ class FriendStore {
         (friend) =>
           friend.user2Id === user2Id && friend.actionUser === authStore.user.id
       );
+      this.fetchFriends();
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
