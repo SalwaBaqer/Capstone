@@ -31,13 +31,15 @@ const Explore = ({ navigation }) => {
 
   return (
     <>
-      <SearchBar
-        placeholder="Search for user..."
-        returnKeyType="search"
-        onChangeText={updateSearch}
-        value={search}
-        style={{ backgroundColor: "white", color: "black" }}
-      />
+      <View style={{ marginTop: 80 }}>
+        <SearchBar
+          placeholder="Search for user..."
+          returnKeyType="search"
+          onChangeText={updateSearch}
+          value={search}
+          style={{ backgroundColor: "white", color: "black" }}
+        />
+      </View>
       {search !== "" ? (
         <View>
           <List>{usernameList}</List>

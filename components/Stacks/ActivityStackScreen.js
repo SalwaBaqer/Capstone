@@ -13,7 +13,7 @@ const ActivityStackScreen = () => {
       <ActivityStack.Screen
         name="ActivityScreen"
         component={Activity}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
     </ActivityStack.Navigator>
   );

@@ -12,14 +12,20 @@ const TimelineStack = createStackNavigator();
 const TimelineStackScreen = () => {
   return (
     <TimelineStack.Navigator>
-      <TimelineStack.Screen name="TimelineScreen" component={Timeline} />
+      <TimelineStack.Screen
+        name="TimelineScreen"
+        component={Timeline}
+        options={{ headerShown: false }}
+      />
       <TimelineStack.Screen
         name="TimelineProfileScreen"
         component={TimelineProfile}
+        options={{ headerShown: false }}
       />
       <TimelineStack.Screen
         name="EventDetailScreen"
         component={EventDetailScreen}
+        options={{ headerShown: false }}
       />
     </TimelineStack.Navigator>
   );
