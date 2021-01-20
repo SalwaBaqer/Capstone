@@ -1,30 +1,62 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 // mobx
 import { observer } from "mobx-react";
 
-import { Button, ListItem, Text } from "native-base";
+//native
+import { ListItem, Text } from "native-base";
+
+//stores
 import friendStore from "../../stores/friendStore";
 
-const ActivityItem = ({ friendUsername, friendId, navigation }) => {
+//styles
+import { ButtonStyledAccept, ButtonStyledDecline } from "./styles";
+
+const ActivityItem = ({
+  friendUsername,
+  friendId,
+  isFriend,
+  username,
+  event,
+}) => {
+  const navigation = useNavigation();
+
   const handleAccept = async () => {
     await friendStore.AcceptFriendReq(friendId);
-    // navigation.navigate("Profile");
   };
-
   const handleDecline = async () => {
     await friendStore.DeclineFriendReq(friendId);
   };
 
   return (
     <ListItem>
-      <Text>{friendUsername} has requested to add you. </Text>
-      <Button onPress={handleAccept}>
-        <Text>Accept</Text>
-      </Button>
-      <Button onPress={handleDecline}>
-        <Text>Decline</Text>
-      </Button>
+      {isFriend ? (
+        <>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            {friendUsername}
+          </Text>
+          <Text style={{ fontSize: 16 }}> has requested to add you. </Text>
+
+          <ButtonStyledAccept onPress={handleAccept}>
+            <Text>Accept</Text>
+          </ButtonStyledAccept>
+          <ButtonStyledDecline onPress={handleDecline}>
+            <Text>Decline</Text>
+          </ButtonStyledDecline>
+        </>
+      ) : (
+        <>
+          <Text>{username} tagged you on an event!</Text>
+          <ButtonStyledAccept
+            onPress={() =>
+              navigation.navigate("EventDetailScreen", { event: event })
+            }
+          >
+            <Text>Show Details</Text>
+          </ButtonStyledAccept>
+        </>
+      )}
     </ListItem>
   );
 };

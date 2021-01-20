@@ -14,6 +14,7 @@ export const theme = {
   blackish: "#484848",
   grey: "#767676",
   blueish: "#00A699",
+  redish: "#FF5A5F",
 };
 
 //MySchedule
