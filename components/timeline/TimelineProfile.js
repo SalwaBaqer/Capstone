@@ -21,6 +21,7 @@ import {
   NumberOfFriendsStyled,
   Ioniconstyled,
   AntDesignstyled,
+  theme,
 } from "../../styles";
 
 const TimelineProfile = ({ navigation, route }) => {
@@ -91,21 +92,21 @@ const TimelineProfile = ({ navigation, route }) => {
             <Ioniconstyled
               name={"ios-person-remove"}
               size={15}
-              color="red"
+              color={theme.redish}
               onPress={handleRemoveFriend}
             />
           ) : isPending ? (
             <AntDesignstyled
               name={"clockcircle"}
               size={15}
-              color="#2596be"
+              color={theme.blueish}
               onPress={handleAddFriend}
             />
           ) : (
             <Ioniconstyled
               name={"md-person-add"}
               size={15}
-              color="#2596be"
+              color={theme.blueish}
               onPress={handleAddFriend}
             />
           )}

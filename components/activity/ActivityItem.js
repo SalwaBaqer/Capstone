@@ -17,9 +17,6 @@ import {
   ButtonStyledDetails,
 } from "./styles";
 
-
-
-
 const ActivityItem = ({
   friendUsername,
   friendId,
@@ -46,10 +43,10 @@ const ActivityItem = ({
           <Text style={{ fontSize: 16 }}> has requested to add you. </Text>
 
           <ButtonStyledAccept onPress={handleAccept}>
-            <Text>Accept</Text>
+            <Text style={{ color: "white" }}>Accept</Text>
           </ButtonStyledAccept>
           <ButtonStyledDecline onPress={handleDecline}>
-            <Text>Decline</Text>
+            <Text style={{ color: "white" }}>Decline</Text>
           </ButtonStyledDecline>
         </>
       ) : (
@@ -60,7 +57,7 @@ const ActivityItem = ({
               navigation.navigate("EventDetailScreen", { event: event })
             }
           >
-            <Text>Show Details</Text>
+            <Text style={{ color: "white" }}>Show Details</Text>
           </ButtonStyledDetails>
         </>
       )}

@@ -18,8 +18,7 @@ export const ButtonStyled = styled.TouchableOpacity`
   margin-right: auto;
   margin-left: auto;
   align-items: center;
-  background-color: #009688;
-  border-radius: 10px;
+  border-radius: 4px;
   width: 200px;
   padding-vertical: 12px;
   padding-horizontal: 8px;
@@ -27,6 +26,7 @@ export const ButtonStyled = styled.TouchableOpacity`
 
 export const TextButtonStyled = styled.Text`
   font-size: 16px;
+  color: white;
 `;
 
 export const EditEventWrapper = styled.View`

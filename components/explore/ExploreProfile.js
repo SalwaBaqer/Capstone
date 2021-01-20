@@ -1,7 +1,7 @@
 //Libraries
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Spinner, Text } from "native-base";
+import { Spinner, Text, Right, Item } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
@@ -22,9 +22,12 @@ import {
   Ioniconstyled,
   AntDesignstyled,
   EntypoIconStyled,
+  theme,
+  Dotsiconstyled,
 } from "../../styles";
 
 const ExploreProfile = ({ navigation, route }) => {
+  const [menu, setMenu] = useState(true);
   const [isPending, setIsPending] = useState(false);
   const [blockUser, setBlockUser] = useState(true);
   if (!authStore.user) return <Spinner />;
@@ -108,6 +111,31 @@ const ExploreProfile = ({ navigation, route }) => {
   return (
     <>
       <ProfileWrapper>
+        {menu ? (
+          <Dotsiconstyled
+            name="dots-horizontal"
+            size={24}
+            color="gray"
+            onPress={() => setMenu(false)}
+            style={{ marginLeft: 389 }}
+          />
+        ) : blockUser ? (
+          <>
+            <EntypoIconStyled
+              name={"block"}
+              size={20}
+              color={theme.redish}
+              onPress={handleBlock}
+            />
+            <Text
+              onPress={() => setMenu(true)}
+              style={{ marginLeft: 370, marginTop: 10 }}
+            >
+              Cancel
+            </Text>
+          </>
+        ) : null}
+
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
@@ -131,32 +159,24 @@ const ExploreProfile = ({ navigation, route }) => {
                 <Ioniconstyled
                   name={"ios-person-remove"}
                   size={15}
-                  color="red"
+                  color={theme.redish}
                   onPress={handleRemoveFriend}
                 />
               ) : checkPending() ? (
                 <AntDesignstyled
                   name={"clockcircle"}
                   size={15}
-                  color="#2596be"
+                  color={theme.blueish}
                   onPress={handleWithDrawFriend}
                 />
               ) : (
                 <Ioniconstyled
                   name={"md-person-add"}
                   size={15}
-                  color="#2596be"
+                  color={theme.blueish}
                   onPress={handleAddFriend}
                 />
               )}
-              {blockUser ? (
-                <EntypoIconStyled
-                  name={"block"}
-                  size={20}
-                  color="#2596be"
-                  onPress={handleBlock}
-                />
-              ) : null}
             </>
           </>
         )}

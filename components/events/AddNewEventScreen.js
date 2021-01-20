@@ -1,5 +1,5 @@
 //react
-import { View, Text } from "native-base";
+import { Text } from "native-base";
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 
@@ -14,7 +14,6 @@ import { Calendar } from "react-native-calendars";
 
 //Image Picker
 import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
 
 //stores
 import eventStore from "../../stores/eventStore";
@@ -30,6 +29,8 @@ import {
   TextButtonStyled,
   LabelStyled,
 } from "../styles";
+
+import { theme } from "../../styles";
 
 //Add Event View
 import { AddEventWrapper } from "../../styles";
@@ -125,16 +126,13 @@ const AddNewEventScreen = ({ navigation }) => {
       {search !== "" && <ScrollView>{usernameList}</ScrollView>}
       <InputField
         placeholder="Search for user..."
-        // onChangeText={(value) => setEvent({ ...event, tag: value })}
         onChangeText={tagChanger}
         value={search}
         autoCapitalize="none"
-        // multiline="true"
       />
       <LabelStyled>Title</LabelStyled>
       <InputField
         autoCapitalize="none"
-        // multiline="true"
         onChangeText={(value) => setEvent({ ...event, name: value })}
       />
       <LabelStyled>Label</LabelStyled>
@@ -208,21 +206,22 @@ const AddNewEventScreen = ({ navigation }) => {
         }}
         // Specify theme properties to override specific styles for calendar parts. Default = {}
         theme={{
+          selectedColor: theme.Maincolor,
           backgroundColor: "#ffffff",
           calendarBackground: "#ffffff",
-          textSectionTitleColor: "red",
+          textSectionTitleColor: theme.Maincolor,
           textSectionTitleDisabledColor: "#d9e1e8",
-          selectedDayBackgroundColor: "#00adf5",
+          selectedDayBackgroundColor: theme.Maincolor,
           selectedDayTextColor: "#ffffff",
-          todayTextColor: "#00adf5",
+          todayTextColor: theme.Maincolor,
           dayTextColor: "#2d4150",
           textDisabledColor: "#d9e1e8",
-          dotColor: "#00adf5",
-          selectedDotColor: "#ffffff",
-          arrowColor: "orange",
+          dotColor: theme.Maincolor,
+          selectedDotColor: theme.Maincolor,
+          arrowColor: theme.Maincolor,
           disabledArrowColor: "#d9e1e8",
-          monthTextColor: "blue",
-          indicatorColor: "blue",
+          monthTextColor: theme.blackish,
+          indicatorColor: theme.blackish,
           textDayFontFamily: "HelveticaNeue-Medium",
           textMonthFontFamily: "HelveticaNeue-Medium",
           textDayHeaderFontFamily: "HelveticaNeue-Medium",
@@ -246,7 +245,7 @@ const AddNewEventScreen = ({ navigation }) => {
           />
         )}
       </Text>
-      <ButtonStyled>
+      <ButtonStyled style={{ backgroundColor: theme.Maincolor }}>
         <TextButtonStyled onPress={handleAdd}>Add</TextButtonStyled>
       </ButtonStyled>
     </AddEventWrapper>
