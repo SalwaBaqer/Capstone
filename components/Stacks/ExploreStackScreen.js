@@ -16,10 +16,15 @@ const ExploreStackScreen = () => {
       initialRouteName="ExploreScreen"
       header={SearchPage}
     >
-      <ExploreStack.Screen name="ExploreScreen" component={Explore} />
+      <ExploreStack.Screen
+        name="ExploreScreen"
+        component={Explore}
+        options={{ headerShown: false }}
+      />
       <ExploreStack.Screen
         name="ExploreProfileScreen"
         component={ExploreProfile}
+        options={{ headerShown: false }}
       />
 
       <ExploreStack.Screen
@@ -29,6 +34,7 @@ const ExploreStackScreen = () => {
           headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
+          headerShown: false,
         }}
       />
     </ExploreStack.Navigator>

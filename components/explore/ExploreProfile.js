@@ -106,6 +106,7 @@ const ExploreProfile = ({ navigation, route }) => {
     } else {
       setBlockUser(true);
     }
+    setMenu(true);
   };
 
   return (

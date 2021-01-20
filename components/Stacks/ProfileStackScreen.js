@@ -24,6 +24,7 @@ const ProfileStackScreen = () => {
           headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
+          headerShown: false,
         }}
       />
       <ProfileStack.Screen
@@ -34,6 +35,7 @@ const ProfileStackScreen = () => {
           headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
+          headerShown: false,
         }}
       />
       <ProfileStack.Screen
@@ -44,6 +46,7 @@ const ProfileStackScreen = () => {
           headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
+          headerShown: false,
         }}
       />
     </ProfileStack.Navigator>

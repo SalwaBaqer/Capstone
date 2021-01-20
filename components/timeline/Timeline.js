@@ -1,7 +1,7 @@
 import React from "react";
 import Schedule from "../Schedule";
 import { observer } from "mobx-react";
-import { Spinner } from "native-base";
+import { Spinner, View } from "native-base";
 
 //Stores
 import eventStore from "../../stores/eventStore";
@@ -18,6 +18,7 @@ const Timeline = ({ navigation }) => {
 
   return (
     <>
+      <View style={{ marginTop: 70 }}></View>
       <Schedule
         navigation={navigation}
         exploreEvents={exploreEvents}

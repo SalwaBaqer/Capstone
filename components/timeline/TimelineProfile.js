@@ -1,7 +1,7 @@
 //Libraries
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Spinner } from "native-base";
+import { Spinner, Text } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
@@ -22,10 +22,14 @@ import {
   Ioniconstyled,
   AntDesignstyled,
   theme,
+  Dotsiconstyled,
+  EntypoIconStyled,
 } from "../../styles";
 
 const TimelineProfile = ({ navigation, route }) => {
+  const [menu, setMenu] = useState(true);
   const [isPending, setIsPending] = useState(false);
+  const [blockUser, setBlockUser] = useState(true);
   if (!authStore.user) return <Spinner />;
 
   const { userId } = route.params;
@@ -52,6 +56,7 @@ const TimelineProfile = ({ navigation, route }) => {
       setIsPending(false);
     }
   };
+  //is Friend?
   const checkFriend = () => {
     const checkIsFriend = friendStore.friends
       .filter(
@@ -76,9 +81,44 @@ const TimelineProfile = ({ navigation, route }) => {
     authStore.updateUser;
   };
 
+  //block user
+  const handleBlock = () => {
+    if (blockUser) {
+      friendStore.BlockUser(userId);
+      setBlockUser(false);
+    } else {
+      setBlockUser(true);
+    }
+    setMenu(true);
+  };
+
   return (
     <>
       <ProfileWrapper>
+        {menu ? (
+          <Dotsiconstyled
+            name="dots-horizontal"
+            size={24}
+            color="gray"
+            onPress={() => setMenu(false)}
+            style={{ marginLeft: 389 }}
+          />
+        ) : blockUser ? (
+          <>
+            <EntypoIconStyled
+              name={"block"}
+              size={20}
+              color={theme.redish}
+              onPress={handleBlock}
+            />
+            <Text
+              onPress={() => setMenu(true)}
+              style={{ marginLeft: 370, marginTop: 10 }}
+            >
+              Cancel
+            </Text>
+          </>
+        ) : null}
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>@{itemUser.username}</ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
