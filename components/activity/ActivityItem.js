@@ -4,8 +4,16 @@ import { useNavigation } from "@react-navigation/native";
 // mobx
 import { observer } from "mobx-react";
 
-import { Button, ListItem, Text } from "native-base";
+//native
+import { ListItem, Text } from "native-base";
+
+//stores
 import friendStore from "../../stores/friendStore";
+
+
+//styles
+import { ButtonStyledAccept, ButtonStyledDecline } from "./styles";
+
 
 const ActivityItem = ({
   friendUsername,
@@ -25,15 +33,20 @@ const ActivityItem = ({
 
   return (
     <ListItem>
+
       {isFriend ? (
         <>
-          <Text>{friendUsername} has requested to add you. </Text>
-          <Button onPress={handleAccept}>
-            <Text>Accept</Text>
-          </Button>
-          <Button onPress={handleDecline}>
-            <Text>Decline</Text>
-          </Button>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+        {friendUsername}{" "}
+      </Text>
+      <Text style={{ fontSize: 16 }}> has requested to add you. </Text>
+
+      <ButtonStyledAccept onPress={handleAccept}>
+        <Text>Accept</Text>
+      </ButtonStyledAccept>
+      <ButtonStyledDecline onPress={handleDecline}>
+        <Text>Decline</Text>
+      </ButtonStyledDecline>
         </>
       ) : (
         <>
@@ -47,6 +60,7 @@ const ActivityItem = ({
           </Button>
         </>
       )}
+
     </ListItem>
   );
 };

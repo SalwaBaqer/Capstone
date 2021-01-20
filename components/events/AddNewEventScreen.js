@@ -141,7 +141,7 @@ const AddNewEventScreen = ({ navigation }) => {
           { label: "Fun", value: "Fun" },
           { label: "Food", value: "Food" },
           { label: "Social", value: "Social" },
-          { label: "Madetation", value: "Madetation" },
+          { label: "Meditation", value: "Meditation" },
           { label: "Therapy", value: "Therapy" },
           { label: "Travel", value: "Travel" },
           { label: "Technology", value: "Technology" },
