@@ -22,7 +22,6 @@ const ProfileStackScreen = () => {
         component={EditProfile}
         options={{
           headerTitle: null,
-          headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
         }}

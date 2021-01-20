@@ -1,5 +1,5 @@
 //mobx
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import authStore from "./authStore";
 
 //instance
@@ -17,8 +17,10 @@ class FriendStore {
   fetchFriends = async () => {
     try {
       const response = await instance.get(`/friend`);
-      this.friends = response.data;
-      this.loading = false;
+      runInAction(() => {
+        this.friends = response.data;
+        this.loading = false;
+      });
     } catch (error) {
       console.error("friendStore --> FetchFriends", error);
     }
@@ -28,7 +30,10 @@ class FriendStore {
   SendFriendReq = async (user2Id) => {
     try {
       const response = await instance.post(`/friend/sendRequest/${user2Id}`);
-      this.friends.push(response.data);
+      runInAction(() => {
+        this.friends.push(response.data);
+      });
+      // }
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -38,11 +43,13 @@ class FriendStore {
   WithdrawFriendReq = async (user2Id) => {
     try {
       const response = await instance.put(`/friend/withdrawRequest/${user2Id}`);
-      this.friends = this.friends.filter(
-        (friend) =>
-          friend.user2Id === user2Id && friend.actionUser === authStore.user.id
-      );
-      this.fetchFriends();
+      runInAction(() => {
+        this.friends = this.friends.filter(
+          (friend) =>
+            friend.user2Id === user2Id &&
+            friend.actionUser === authStore.user.id
+        );
+      });
     } catch (error) {
       console.error("friendStore --> SendFriendReq", error);
     }
@@ -52,7 +59,9 @@ class FriendStore {
   AcceptFriendReq = async (friendId) => {
     try {
       const responce = await instance.put(`/friend/acceptRequest/${friendId}`);
-      this.fetchFriends();
+      runInAction(() => {
+        this.fetchFriends();
+      });
     } catch (error) {
       console.error("friendStore --> AcceptFriendReq", error);
     }
@@ -62,7 +71,9 @@ class FriendStore {
   DeclineFriendReq = async (friendId) => {
     try {
       const responce = await instance.put(`/friend/declineRequest/${friendId}`);
-      this.fetchFriends();
+      runInAction(() => {
+        this.fetchFriends();
+      });
     } catch (error) {
       console.error("friendStore --> DeclineFriendReq", error);
     }
@@ -72,12 +83,14 @@ class FriendStore {
   DeleteFriend = async (user2Id) => {
     try {
       await instance.delete(`/friend/deleteFriend/${user2Id}`);
-
-      this.friends = this.friends.filter(
-        (friend) =>
-          friend.user2Id === user2Id && friend.actionUser === authStore.user.id
-      );
-      this.fetchFriends();
+      runInAction(() => {
+        this.friends = this.friends.filter(
+          (friend) =>
+            friend.user2Id === user2Id &&
+            friend.actionUser === authStore.user.id
+        );
+        this.fetchFriends();
+      });
     } catch (error) {
       console.error("friendStore --> DeleteFriend", error);
     }
@@ -87,7 +100,9 @@ class FriendStore {
   BlockUser = async (user2Id) => {
     try {
       const response = await instance.put(`/friend/blockUser/${user2Id}`);
-      this.fetchFriends();
+      runInAction(() => {
+        this.fetchFriends();
+      });
     } catch (error) {
       console.error("friendStore --> BlockUser", error);
     }

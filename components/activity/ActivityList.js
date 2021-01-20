@@ -16,7 +16,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import { List, Spinner } from "native-base";
 
 const ActivityList = () => {
-  if (friendStore.loading) <Spinner />;
+  if (!authStore.user) return <Spinner />;
+
+  if (friendStore.loading) return <Spinner />;
 
   // Friend Requests
   const friendList = friendStore.friends
@@ -36,17 +38,17 @@ const ActivityList = () => {
       username: authStore.users.find((user) => user.id === event.userId)
         .username,
     }));
-  const friendlist_ = friendList.map((friend) => (
+  const friendlist_ = friendList.map((friend, index) => (
     <ActivityItem
       friendUsername={friend.user.username}
       friendId={friend.friend.user1Id}
-      key={friend.user.id}
+      key={index}
       isFriend={true}
     />
   ));
 
-  const taggedByUsername_ = taggedByUsername.map((event) => (
-    <ActivityItem username={event.username} event={event} key={event.id} />
+  const taggedByUsername_ = taggedByUsername.map((event, index) => (
+    <ActivityItem username={event.username} event={event} key={index} />
   ));
 
   return (

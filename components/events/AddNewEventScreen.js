@@ -31,6 +31,9 @@ import {
   LabelStyled,
 } from "../styles";
 
+//Add Event View
+import { AddEventWrapper } from "../../styles";
+
 const AddNewEventScreen = ({ navigation }) => {
   //event state
   const [event, setEvent] = useState({
@@ -110,7 +113,7 @@ const AddNewEventScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ marginTop: 50, marginRight: 20, marginLeft: 20 }}>
+    <AddEventWrapper>
       <LabelStyled>Private</LabelStyled>
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
@@ -246,7 +249,7 @@ const AddNewEventScreen = ({ navigation }) => {
       <ButtonStyled>
         <TextButtonStyled onPress={handleAdd}>Add</TextButtonStyled>
       </ButtonStyled>
-    </View>
+    </AddEventWrapper>
   );
 };
 

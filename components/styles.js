@@ -28,3 +28,10 @@ export const ButtonStyled = styled.TouchableOpacity`
 export const TextButtonStyled = styled.Text`
   font-size: 16px;
 `;
+
+export const EditEventWrapper = styled.View`
+  margin-top: 2;
+  margin-right: 20;
+  margin-left: 20;
+  margin-bottom: 2;
+`;

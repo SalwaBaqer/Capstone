@@ -2,12 +2,21 @@ import styled from "styled-components/native";
 import { theme } from "../../styles";
 
 export const ButtonStyledAccept = styled.TouchableOpacity`
-  margin-left: 4%;
   align-items: center;
   background-color: ${theme.blueish};
   border-radius: 10px;
   width: 80px;
   padding-vertical: 12px;
+  padding-horizontal: 6px;
+`;
+
+export const ButtonStyledDetails = styled.TouchableOpacity`
+  margin-left: 9%;
+  align-items: center;
+  background-color: ${theme.blueish};
+  border-radius: 10px;
+  width: 120px;
+  padding-vertical: 10px;
   padding-horizontal: 6px;
 `;
 

@@ -29,6 +29,7 @@ import {
   ButtonStyled,
   TextButtonStyled,
   LabelStyled,
+  EditEventWrapper,
 } from "../styles";
 
 const EditEventScreen = ({ navigation, route }) => {
@@ -105,9 +106,7 @@ const EditEventScreen = ({ navigation, route }) => {
     }
   };
   return (
-    <View
-      style={{ marginTop: 2, marginRight: 20, marginLeft: 20, marginBottom: 2 }}
-    >
+    <EditEventWrapper>
       <LabelStyled>Private</LabelStyled>
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}
@@ -240,7 +239,7 @@ const EditEventScreen = ({ navigation, route }) => {
       <ButtonStyled>
         <TextButtonStyled onPress={handleEdit}>Save</TextButtonStyled>
       </ButtonStyled>
-    </View>
+    </EditEventWrapper>
   );
 };
 

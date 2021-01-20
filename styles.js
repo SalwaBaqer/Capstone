@@ -24,8 +24,8 @@ export const AgendaStyled = styled.View`
 `;
 
 export const RednerItemButton = styled.TouchableOpacity`
-  margin-right: 10;
-  margin-top: 17;
+  margin-right: 10px;
+  margin-top: 17px;
 `;
 
 export const RenderItemStyled = styled.View`
@@ -38,6 +38,10 @@ export const RenderItemImageStyled = styled.Image`
   width: 50px;
   height: 50px;
   border-radius: 40px;
+`;
+
+export const RenderItemNameStyled = styled.Text`
+  margin-right: 15px;
 `;
 
 export const RenderEmptyDateStyled = styled.View`
@@ -81,9 +85,18 @@ export const TextStyled = styled.Text`
   margin-bottom: 5px;
 `;
 
+//Add && Edit Event Screens
+
+export const AddEventWrapper = styled.View`
+  margin-top: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
+`;
+
 //Profile
 export const ProfileWrapper = styled.View`
   margin-top: 50px;
+  margin-bottom: 20px;
 `;
 
 export const ProfileImage = styled.Image`

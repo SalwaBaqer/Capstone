@@ -10,9 +10,14 @@ import { ListItem, Text } from "native-base";
 //stores
 import friendStore from "../../stores/friendStore";
 
-
 //styles
-import { ButtonStyledAccept, ButtonStyledDecline } from "./styles";
+import {
+  ButtonStyledAccept,
+  ButtonStyledDecline,
+  ButtonStyledDetails,
+} from "./styles";
+
+
 
 
 const ActivityItem = ({
@@ -33,34 +38,32 @@ const ActivityItem = ({
 
   return (
     <ListItem>
-
       {isFriend ? (
         <>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-        {friendUsername}{" "}
-      </Text>
-      <Text style={{ fontSize: 16 }}> has requested to add you. </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+            {friendUsername}
+          </Text>
+          <Text style={{ fontSize: 16 }}> has requested to add you. </Text>
 
-      <ButtonStyledAccept onPress={handleAccept}>
-        <Text>Accept</Text>
-      </ButtonStyledAccept>
-      <ButtonStyledDecline onPress={handleDecline}>
-        <Text>Decline</Text>
-      </ButtonStyledDecline>
+          <ButtonStyledAccept onPress={handleAccept}>
+            <Text>Accept</Text>
+          </ButtonStyledAccept>
+          <ButtonStyledDecline onPress={handleDecline}>
+            <Text>Decline</Text>
+          </ButtonStyledDecline>
         </>
       ) : (
         <>
           <Text>{username} tagged you on an event!</Text>
-          <Button
+          <ButtonStyledDetails
             onPress={() =>
               navigation.navigate("EventDetailScreen", { event: event })
             }
           >
             <Text>Show Details</Text>
-          </Button>
+          </ButtonStyledDetails>
         </>
       )}
-
     </ListItem>
   );
 };

@@ -77,14 +77,14 @@ const TimelineProfile = ({ navigation, route }) => {
 
   return (
     <>
-      <ProfileWrapper style={{ marginBottom: 20 }}>
+      <ProfileWrapper>
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>@{itemUser.username}</ProfileUsernameStyled>
         <ProfileBio>{userProfile.bio}</ProfileBio>
         <NumberOfFriendsStyled>
           {itemUser.friends.length < 2
             ? `${itemUser.friends.length} Friend`
-            : `${itemUser.friends.length}Friends`}
+            : `${itemUser.friends.length} Friends`}
         </NumberOfFriendsStyled>
         <>
           {checkFriend() ? (

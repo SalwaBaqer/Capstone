@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -24,7 +24,9 @@ class AuthStore {
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    this.user = decode(token);
+    runInAction(() => {
+      this.user = decode(token);
+    });
   };
 
   getUserbyId = (userId) => this.users.find((user) => user.id === userId);
@@ -52,7 +54,10 @@ class AuthStore {
   signout = async () => {
     await AsyncStorage.removeItem("myToken");
     delete instance.defaults.headers.common.Authorization;
-    this.user = null;
+    runInAction(() => {
+      this.user = null;
+    });
+
     console.log("AuthStore -> signout");
   };
 

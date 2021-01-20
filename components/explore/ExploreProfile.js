@@ -107,12 +107,12 @@ const ExploreProfile = ({ navigation, route }) => {
 
   return (
     <>
-      <ProfileWrapper style={{ marginBottom: 20 }}>
+      <ProfileWrapper>
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
         </ProfileUsernameStyled>
-        {authStore.user.blockedBy.includes(user.id) ? (
+        {authStore.user.blockedBy.includes(id) ? (
           <Text>You've been blocked by the user. Click here to Learn more</Text>
         ) : (
           <>
