@@ -29,8 +29,10 @@ import {
   ButtonStyled,
   TextButtonStyled,
   LabelStyled,
-  AddEventWrapper,
 } from "../styles";
+
+//Add Event View
+import { AddEventWrapper } from "../../styles";
 
 const AddNewEventScreen = ({ navigation }) => {
   //event state

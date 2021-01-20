@@ -21,8 +21,8 @@ export const ButtonStyled = styled.TouchableOpacity`
   background-color: #009688;
   border-radius: 10px;
   width: 200px;
-  /* padding-vertical: 12px;
-  padding-horizontal: 8px; */
+  padding-vertical: 12px;
+  padding-horizontal: 8px;
 `;
 
 export const TextButtonStyled = styled.Text`

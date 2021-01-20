@@ -26,8 +26,9 @@ class EventStore {
       const formData = new FormData();
       for (const key in newEvent) formData.append(key, newEvent[key]);
       const response = await instance.post("/events", formData);
-      this.events.push(response.data);
-      console.log(response.data);
+      runInAction(() => {
+        this.events.push(response.data);
+      });
     } catch (error) {
       console.error("eventStore --> addevent", error);
     }

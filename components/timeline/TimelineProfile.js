@@ -84,7 +84,7 @@ const TimelineProfile = ({ navigation, route }) => {
         <NumberOfFriendsStyled>
           {itemUser.friends.length < 2
             ? `${itemUser.friends.length} Friend`
-            : `${itemUser.friends.length}Friends`}
+            : `${itemUser.friends.length} Friends`}
         </NumberOfFriendsStyled>
         <>
           {checkFriend() ? (
