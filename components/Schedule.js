@@ -16,6 +16,7 @@ import {
   RednerItemButton,
   RenderItemStyled,
   RenderItemImageStyled,
+  RenderItemNameStyled,
   RenderEmptyDateStyled,
   Dotsiconstyled,
   MaterialIconstyled,
@@ -79,7 +80,7 @@ const Schedule = ({ navigation, exploreEvents, timeline }) => {
         <Card>
           <Card.Content>
             <RenderItemStyled>
-              <Text style={{ marginRight: 15 }}>{item.name}</Text>
+              <RenderItemNameStyled>{item.name}</RenderItemNameStyled>
               <RenderItemImageStyled source={{ uri: item.image }} />
               <TouchableOpacity
                 onPress={() =>

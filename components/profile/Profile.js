@@ -40,7 +40,7 @@ const Profile = ({ navigation }) => {
 
   return (
     <>
-      <ProfileWrapper style={{ marginBottom: 20 }}>
+      <ProfileWrapper>
         <Item>
           <Left>
             <EditProfileButton oldProfile={myProfile} />

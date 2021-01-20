@@ -21,10 +21,17 @@ export const ButtonStyled = styled.TouchableOpacity`
   background-color: #009688;
   border-radius: 10px;
   width: 200px;
-  padding-vertical: 12px;
-  padding-horizontal: 8px;
+  /* padding-vertical: 12px;
+  padding-horizontal: 8px; */
 `;
 
 export const TextButtonStyled = styled.Text`
   font-size: 16px;
+`;
+
+export const EditEventWrapper = styled.View`
+  margin-top: 2;
+  margin-right: 20;
+  margin-left: 20;
+  margin-bottom: 2;
 `;

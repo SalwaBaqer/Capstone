@@ -1,5 +1,5 @@
 //Libraries
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { Spinner } from "native-base";
 
@@ -86,7 +86,7 @@ const ExploreProfile = ({ navigation, route }) => {
 
   return (
     <>
-      <ProfileWrapper style={{ marginBottom: 20 }}>
+      <ProfileWrapper>
         <ProfileImage source={{ uri: userProfile.image }} />
         <ProfileUsernameStyled>
           @{userId ? itemUser.username : user.username}
