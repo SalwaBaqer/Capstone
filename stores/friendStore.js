@@ -29,11 +29,6 @@ class FriendStore {
   //send friend request
   SendFriendReq = async (user2Id) => {
     try {
-      // const foundUser = this.friends.find(
-      //   (friend) => friend.user2Id === user2Id
-      // );
-      // if (!foundUser) {
-      console.log("add");
       const response = await instance.post(`/friend/sendRequest/${user2Id}`);
       runInAction(() => {
         this.friends.push(response.data);

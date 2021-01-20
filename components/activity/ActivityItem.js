@@ -17,6 +17,9 @@ import {
   ButtonStyledDetails,
 } from "./styles";
 
+
+
+
 const ActivityItem = ({
   friendUsername,
   friendId,

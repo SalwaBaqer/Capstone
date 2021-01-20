@@ -35,7 +35,7 @@ class AuthStore {
     try {
       const res = await instance.post("/signup", userData);
       this.setUser(res.data.token);
-      console.log("AuthStore -> signup -> res.data.token", res.data.token);
+      // console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }
@@ -45,7 +45,7 @@ class AuthStore {
     try {
       const res = await instance.post("/signin", userData);
       this.setUser(res.data.token);
-      console.log("AuthStore -> signin -> res.data.token", res.data.token);
+      // console.log("AuthStore -> signin -> res.data.token", res.data.token);
     } catch (error) {
       console.log("AuthStore -> signin -> error", error);
     }
