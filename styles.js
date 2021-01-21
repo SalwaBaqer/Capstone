@@ -92,7 +92,6 @@ export const AddEventWrapper = styled.View`
 
 //Profile
 export const ProfileWrapper = styled.View`
-  margin-top: 50px;
   margin-bottom: 20px;
 `;
 
@@ -135,8 +134,10 @@ export const ProfileBio = styled.Text`
 //Buttons
 export const EditProfileButtonStyled = styled(Icon)`
   color: ${({ theme }) => theme.Maincolor};
+  margin-right: 500px;
+
   padding-left: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 `;
 
 export const SignOutButtonStyled = styled(Icon)`

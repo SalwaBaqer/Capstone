@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 //Components
 import Activity from "../activity/Activity";
+import HeaderLogo from "../HeaderLogo";
 
 const ActivityStack = createStackNavigator();
 
@@ -13,7 +14,11 @@ const ActivityStackScreen = () => {
       <ActivityStack.Screen
         name="ActivityScreen"
         component={Activity}
-        options={{ headerShown: false }}
+        options={{
+          headerTitle: <HeaderLogo />,
+          headerBackTitle: null,
+          headerBackTitleVisible: null,
+        }}
       />
     </ActivityStack.Navigator>
   );

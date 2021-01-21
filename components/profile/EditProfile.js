@@ -20,7 +20,6 @@ import {
 import authStore from "../../stores/authStore";
 
 const EditProfile = ({ navigation }) => {
-  // const { oldProfile } = route.params;
   const [profile, setProfile] = useState({
     image: authStore.user.image,
     bio: authStore.user.bio,

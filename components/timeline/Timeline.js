@@ -18,7 +18,7 @@ const Timeline = ({ navigation }) => {
 
   return (
     <>
-      <View style={{ marginTop: 70 }}></View>
+      <View></View>
       <Schedule
         navigation={navigation}
         exploreEvents={exploreEvents}

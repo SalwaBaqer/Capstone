@@ -52,7 +52,7 @@ const ActivityList = () => {
   ));
 
   return (
-    <ScrollView style={{ marginTop: 70 }}>
+    <ScrollView>
       <List>{friendlist_}</List>
       <List>{taggedByUsername_}</List>
     </ScrollView>
