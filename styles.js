@@ -196,3 +196,22 @@ export const Container = styled.View`
   flex: 1;
   background-color: #fff;
 `;
+
+export const SplashImageStyled = styled.Image`
+  width: 200px;
+  height: 200px;
+  margin-top: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  /* border-radius: 100px; */
+`;
+
+export const SplashDescription = styled.Text`
+  margin-top: 5px;
+  color: ${({ theme }) => theme.blueish};
+  font-size: 25px;
+  font-style: italic;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+`;
