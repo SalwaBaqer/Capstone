@@ -47,21 +47,18 @@ const ProfileStackScreen = ({ navigation }) => {
         component={EditEventScreen}
         options={{
           headerTitle: null,
-          headerTitle: null,
           headerBackTitle: null,
           headerBackTitleVisible: null,
-          headerShown: false,
+          // headerShown: false,
         }}
       />
       <ProfileStack.Screen
         name="EventDetailScreen"
         component={EventDetailScreen}
         options={{
-          headerTitle: null,
-          headerTitle: null,
+          headerTitle: <HeaderLogo />,
           headerBackTitle: null,
           headerBackTitleVisible: null,
-          headerShown: false,
         }}
       />
     </ProfileStack.Navigator>
