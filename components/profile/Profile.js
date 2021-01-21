@@ -1,14 +1,10 @@
 //Libraries
 import React from "react";
 import { observer } from "mobx-react";
-import { Left, Right, Spinner, Item } from "native-base";
+import { Spinner } from "native-base";
 
 //Components
 import Schedule from "../Schedule";
-
-//Buttons
-import EditProfileButton from "../buttons/EditProfileButton";
-import SignoutButton from "../buttons/SignoutButton";
 
 //Stores
 import authStore from "../../stores/authStore";
@@ -41,14 +37,6 @@ const Profile = ({ navigation }) => {
   return (
     <>
       <ProfileWrapper>
-        <Item>
-          <Left>
-            <EditProfileButton oldProfile={myProfile} />
-          </Left>
-          <Right>
-            <SignoutButton navigation={navigation} />
-          </Right>
-        </Item>
         <ProfileImage source={{ uri: authStore.user.image }} />
         <ProfileUsernameStyled>
           @{authStore.user.username}

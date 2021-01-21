@@ -106,7 +106,7 @@ const EditEventScreen = ({ navigation, route }) => {
     }
   };
   return (
-    <EditEventWrapper>
+    <EditEventWrapper style={{ marginTop: 50 }}>
       <LabelStyled>Private</LabelStyled>
       <Switch
         trackColor={{ false: "#767577", true: "#3492eb" }}

@@ -31,7 +31,7 @@ const Explore = ({ navigation }) => {
 
   return (
     <>
-      <View style={{ marginTop: 80 }}>
+      <View>
         <SearchBar
           placeholder="Search for user..."
           returnKeyType="search"

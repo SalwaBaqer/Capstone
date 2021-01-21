@@ -92,7 +92,6 @@ export const AddEventWrapper = styled.View`
 
 //Profile
 export const ProfileWrapper = styled.View`
-  margin-top: 50px;
   margin-bottom: 20px;
 `;
 
@@ -135,8 +134,10 @@ export const ProfileBio = styled.Text`
 //Buttons
 export const EditProfileButtonStyled = styled(Icon)`
   color: ${({ theme }) => theme.Maincolor};
+  margin-right: 500px;
+
   padding-left: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 `;
 
 export const SignOutButtonStyled = styled(Icon)`
@@ -195,4 +196,23 @@ export const AuthOther = styled.Text`
 export const Container = styled.View`
   flex: 1;
   background-color: #fff;
+`;
+
+export const SplashImageStyled = styled.Image`
+  width: 200px;
+  height: 200px;
+  margin-top: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  /* border-radius: 100px; */
+`;
+
+export const SplashDescription = styled.Text`
+  margin-top: 5px;
+  color: ${({ theme }) => theme.blueish};
+  font-size: 25px;
+  font-style: italic;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
 `;
